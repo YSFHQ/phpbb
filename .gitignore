@@ -1,0 +1,5 @@
+cache
+config.php
+/files/*
+*.log
+vendor
