@@ -1,0 +1,29 @@
+imports:
+    - { resource: tables.yml }
+
+services:
+    paul999.ajaxshoutbox.listener:
+        class: paul999\ajaxshoutbox\event\shoutbox_listener
+        arguments:
+            - @user
+            - @template
+            - @controller.helper
+            - @auth
+        tags:
+            - { name: event.listener }
+
+    paul999.ajaxshoutbox.controller:
+        class: paul999\ajaxshoutbox\controller\main_controller
+        arguments:
+            - @config
+            - @controller.helper
+            - @template
+            - @user
+            - @request
+            - @dbal.conn
+            - @auth
+            - @log
+            - %core.root_path%
+            - %core.php_ext%
+            - %paul999.ajaxshoutbox.tables.ajaxshoutbox%
+            - %tables.users%
