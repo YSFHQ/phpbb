@@ -1,0 +1,16 @@
+a.customcode-event, a.customcode-event-head, a.customcode-event-hide
+{
+    background-color: blue;
+    color: white;
+    border: 1px solid white;
+}
+
+a.customcode-event-head
+{
+	background-color: green;
+}
+
+a.customcode-event-hide
+{
+	background-color: red;
+}

@@ -1,0 +1,30 @@
+{
+	"name": "marttiphpbb/customcode",
+	"type": "phpbb-extension",
+	"description": "Custom Code Extension for phpBB 3.1",
+	"homepage": "https://github.com/marttiphpbb/phpbb-ext-customcode",
+	"version": "0.3.3",
+	"time": "2014-11-15",
+	"keywords": ["phpbb", "extension", "template", "custom"],
+	"license": "MIT",
+	"authors": [{
+			"name": "martti",
+			"email": "info@martti.be",
+			"homepage": "https://github.com/marttiphpbb/",
+			"role": "Developer"
+		}],
+	"require": {
+		"php": ">=5.3.3"
+	},
+	"extra": {
+		"display-name": "Custom Code",
+		"soft-require": {
+			"phpbb/phpbb": ">=3.1.0,<3.2.*@dev"
+		},
+		"version-check": {
+			"host": "marttiphpbb.github.io",
+			"directory": "/version",
+			"filename": "customcode.json"
+		}	
+	}	
+}
