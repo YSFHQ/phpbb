@@ -1,6 +1,11 @@
 #tf_new_posts {
-	width: 50%;
+	width: 35%;
 	text-align:left;
+}
+
+#tf_new_posts2 {
+  width: 35%;
+  text-align:left;
 }
 
 #tf_most_active {
@@ -12,3 +17,11 @@
 	width: 30%;
 	text-align:left;
 }
+
+#top_five td:first-child li:nth-child(n+6), #top_five td:last-child li:nth-child(n+6) {
+	display: none;
+}
+#top_five td:nth-child(2) li:nth-child(-n+5) {
+	display: none;
+}
+
