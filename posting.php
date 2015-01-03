@@ -1039,11 +1039,14 @@ if ($submit || $preview || $refresh)
 		}
 	}
 
-	// check form
-  if (($submit || $preview) /*&& !check_form_key('posting')*/) // REMOVE THIS ONCE FINISHED MIGRATING
+  // check form
+  // UNCOMMENT ONCE FINISHED MIGRATING
+  /*
+  if (($submit || $preview) && !check_form_key('posting'))
 	{
 		$error[] = $user->lang['FORM_INVALID'];
-	}
+  }
+  */
 
 	if ($submit && $mode == 'edit' && $post_data['post_visibility'] == ITEM_DELETED && !isset($_POST['soft_delete']) && $auth->acl_get('m_approve', $forum_id))
 	{
