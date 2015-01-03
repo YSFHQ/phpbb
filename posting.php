@@ -1040,7 +1040,7 @@ if ($submit || $preview || $refresh)
 	}
 
 	// check form
-	if (($submit || $preview) && !check_form_key('posting'))
+  if (($submit || $preview) /*&& !check_form_key('posting')*/) // REMOVE THIS ONCE FINISHED MIGRATING
 	{
 		$error[] = $user->lang['FORM_INVALID'];
 	}
