@@ -47,10 +47,10 @@ class leaders extends module_base
 	/** @var \phpbb\config\config */
 	protected $config;
 
-	/** @var \phpbb\db\driver */
+	/** @var \phpbb\db\driver\driver_interface */
 	protected $db;
 
-	/** @var \phpbb\template */
+	/** @var \phpbb\template\template */
 	protected $template;
 
 	/** @var string PHP file extension */
@@ -67,8 +67,8 @@ class leaders extends module_base
 	*
 	* @param \phpbb\auth\auth $auth phpBB auth service
 	* @param \phpbb\config\config $config phpBB config
-	* @param \phpbb\db\driver $db phpBB db driver
-	* @param \phpbb\template $template phpBB template
+	* @param \phpbb\db\driver\driver_interface $db phpBB db driver
+	* @param \phpbb\template\template $template phpBB template
 	* @param string $phpEx php file extension
 	* @param string $phpbb_root_path phpBB root path
 	* @param \phpbb\user $user phpBB user object
@@ -101,7 +101,7 @@ class leaders extends module_base
 			{
 				$sql = 'SELECT group_id, group_name, group_colour, group_type
 					FROM ' . GROUPS_TABLE . '
-					WHERE group_legend = 1
+					WHERE group_legend >= 1
 					ORDER BY group_name ASC';
 			}
 			else
@@ -114,7 +114,7 @@ class leaders extends module_base
 							AND ug.user_id = ' . $this->user->data['user_id'] . '
 							AND ug.user_pending = 0
 						)
-					WHERE g.group_legend = 1
+					WHERE g.group_legend >= 1
 						AND (g.group_type <> ' . GROUP_HIDDEN . ' OR ug.user_id = ' . $this->user->data['user_id'] . ')
 					ORDER BY g.group_name ASC';
 			}
@@ -132,7 +132,7 @@ class leaders extends module_base
 			}
 			$this->db->sql_freeresult($result);
 
-			if(sizeof($legends))
+			if (sizeof($legends))
 			{
 				$sql = 'SELECT
 							u.user_id AS user_id, u.username AS username, u.username_clean AS username_clean,
@@ -157,7 +157,7 @@ class leaders extends module_base
 				$this->db->sql_freeresult($result);
 			}
 
-			if(sizeof($groups))
+			if (sizeof($groups))
 			{
 				foreach($groups as $group_id => $group)
 				{

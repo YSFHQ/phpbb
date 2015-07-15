@@ -39,11 +39,23 @@ if (empty($lang) || !is_array($lang))
 
 $lang = array_merge(
 	$lang, array(
-		"AJAX_SHOUTBOX"    => "Shoutbox",
-		"SHOUTBOX_MESSAGE" => "Add message",
-		"ONLY_AJAX"        => "Sorry, posting in the shoutbox is only supported when JavaScript is enabled",
-		"AJAX_SHOUTBOX_NO_PERMISSION"   => 'No permission for the selected action',
-		'AJAX_SHOUTBOX_MESSAGE_EMPTY'   => 'Message empty',
-		'AJAX_SHOUTBOX_ERROR'           => 'Error',
+		'AJAX_SHOUTBOX'                  => 'Shoutbox',
+		'AJAX_SHOUTBOX_MESSAGE'          => 'Add message',
+		'AJAX_SHOUTBOX_ONLY_AJAX'        => 'Sorry, posting in the shoutbox is only supported when JavaScript is enabled',
+		'AJAX_SHOUTBOX_NO_PERMISSION'    => 'No permission for the selected action',
+		'AJAX_SHOUTBOX_MESSAGE_EMPTY'    => 'Message empty',
+		'AJAX_SHOUTBOX_ERROR'            => 'Error',
+		'AJAX_SHOUTBOX_MISSING_ID'       => 'Unable to delete post',
+		'AJAX_SHOUTBOX_NO_SUCH_POST'     => 'Unable to find post',
+		'AJAX_SHOUTBOX_PUSH_NOT_AVAIL'   => 'The remote push server is currently not available',
+
+		'AJAXSHOUTBOX_BOARD_DATE_FORMAT'            => 'My shoutbox date format',
+		'AJAXSHOUTBOX_BOARD_DATE_FORMAT_EXPLAIN'    => 'Specify a date format for just the shoutbox. You should not use a relative date format.',
+
+		'AJAXSHOUTBOX_UNSUPPORTED_STYLE'    => 'It seems you are using a non prosilver based style, or the style doesn’t inherit prosilver correctly.
+			<br />If you are using a style based on prosilver, make sure it inherits prosilver correctly.
+			<br />If you are using a style not based on prosilver, you will need to create a template for the shoutbox,
+				or ask the style author to provide a working template for the shoutbox.
+			<br />I don’t provide support for non prosilver styles (Including subsilver2!). This message is only shown to admins.',
 	)
 );

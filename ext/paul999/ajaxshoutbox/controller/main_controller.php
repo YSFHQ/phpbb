@@ -10,8 +10,7 @@
 
 namespace paul999\ajaxshoutbox\controller;
 
-use Buzz\Browser;
-use Buzz\Client\Curl;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 /**
  * Main controller
@@ -43,6 +42,12 @@ class main_controller
 	/** @var \phpbb\log\log  */
 	private $log;
 
+	/** @var \paul999\ajaxshoutbox\actions\Delete  */
+	private $delete;
+
+	/** @var \paul999\ajaxshoutbox\actions\Push  */
+	private $push;
+
 	/** @var  string */
 	private $table;
 
@@ -50,22 +55,26 @@ class main_controller
 	private $usertable;
 
 	/**
-	 * @param \phpbb\config\config              $config
-	 * @param \phpbb\controller\helper          $helper
-	 * @param \phpbb\template\template          $template
-	 * @param \phpbb\user                       $user
-	 * @param \phpbb\request\request            $request
-	 * @param \phpbb\db\driver\driver_interface $db
-	 * @param \phpbb\auth\auth                  $auth
-	 * @param string                            $root_path
-	 * @param string                            $php_ext
-	 * @param string                            $table
-	 * @param string                            $usertable
+	 * @param \phpbb\config\config                 $config
+	 * @param \phpbb\controller\helper             $helper
+	 * @param \phpbb\template\template             $template
+	 * @param \phpbb\user                          $user
+	 * @param \phpbb\request\request               $request
+	 * @param \phpbb\db\driver\driver_interface    $db
+	 * @param \phpbb\auth\auth                     $auth
+	 * @param \phpbb\log\log                       $log
+	 * @param \paul999\ajaxshoutbox\actions\delete $delete
+	 * @param \paul999\ajaxshoutbox\actions\push   $push
+	 * @param string                               $root_path
+	 * @param string                               $php_ext
+	 * @param string                               $table
+	 * @param string                               $usertable
 	 */
 	public function __construct(\phpbb\config\config $config, \phpbb\controller\helper $helper,
 								\phpbb\template\template $template, \phpbb\user $user, \phpbb\request\request $request,
-								\phpbb\db\driver\driver_interface $db, \phpbb\auth\auth $auth, \phpbb\log\log $log, $root_path, $php_ext,
-								$table, $usertable)
+								\phpbb\db\driver\driver_interface $db, \phpbb\auth\auth $auth, \phpbb\log\log $log,
+								\paul999\ajaxshoutbox\actions\delete $delete, \paul999\ajaxshoutbox\actions\push $push,
+								$root_path, $php_ext, $table, $usertable)
 	{
 		$this->config    = $config;
 		$this->helper    = $helper;
@@ -75,19 +84,30 @@ class main_controller
 		$this->db        = $db;
 		$this->auth      = $auth;
 		$this->log       = $log;
+		$this->delete    = $delete;
+		$this->push      = $push;
 		$this->root_path = $root_path;
 		$this->php_ext   = $php_ext;
 		$this->table     = $table;
 		$this->usertable = $usertable;
+
+		$this->user->add_lang_ext("paul999/ajaxshoutbox", "ajax_shoutbox");
 	}
 
 	/**
 	 * Validate the push connection with shoutbox-app.com
 	 *
+	 * @param $id
+	 *
+	 * @return \Symfony\Component\HttpFoundation\JsonResponse
 	 */
 	public function validate($id)
 	{
 		$result = array();
+
+		// Language used here won't be seen by the user.
+		// It is used on shoutbox-app.com to specify the result.
+		// Do not change.
 		if ($this->config['ajaxshoutbox_push_enabled']) {
 			if ($id == $this->config['ajaxshoutbox_validation_id']) {
 				$result['ok'] = 'ok';
@@ -101,33 +121,34 @@ class main_controller
 			$result['error'] = 'disabled';
 		}
 
-		$json_response = new \phpbb\json_response();
-		$json_response->send(array($result));
+		return new JsonResponse(array($result));
 	}
 
 	/**
+	 * Post a new message to the shoutbox.
 	 *
+	 * @return \Symfony\Component\HttpFoundation\JsonResponse
 	 */
 	public function post()
 	{
-		$this->user->add_lang_ext("paul999/ajaxshoutbox", "ajax_shoutbox");
-
 		// We always disallow guests to post in the shoutbox.
 		if (!$this->auth->acl_get('u_shoutbox_post') || $this->user->data['user_id'] == ANONYMOUS)
 		{
-			return $this->helper->error('AJAX_SHOUTBOX_NO_PERMISSION');
+			return $this->error('AJAX_SHOUTBOX_ERROR', 'AJAX_SHOUTBOX_NO_PERMISSION', 403);
+		}
+
+		if (!check_form_key('ajaxshoutbox_posting', 3600 * 12)) // Allow 12 hours.
+		{
+			return $this->error('AJAX_SHOUTBOX_ERROR', 'FORM_INVALID', 500);
 		}
 
 		if ($this->request->is_ajax())
 		{
-			$message = $msg     = trim(utf8_normalize_nfc($this->request->variable('text_shoutbox', '', true)));
+			$message = $msg     = trim($this->request->variable('text_shoutbox', '', true));
 
-			if (empty($message)) {
-				$json_response = new \phpbb\json_response();
-				$json_response->send(array(
-					'error' => $this->user->lang['AJAX_SHOUTBOX_MESSAGE_EMPTY'],
-					'title' => $this->user->lang['AJAX_SHOUTBOX_ERROR'],
-				));
+			if (empty($message))
+			{
+				return $this->error('AJAX_SHOUTBOX_ERROR', 'AJAX_SHOUTBOX_MESSAGE_EMPTY', 500);
 			}
 
 			$uid          = $bitfield = $options = '';
@@ -152,93 +173,60 @@ class main_controller
 			$sql    = 'INSERT INTO ' . $this->table . ' ' . $this->db->sql_build_array('INSERT', $insert);
 			$this->db->sql_query($sql);
 
-			if ($this->validatePush()) {
+			if ($this->push->canPush())
+			{
 				// User configured us to submit the shoutbox post to the iOS/Android app
-				$this->submitToApp($msg, $insert['post_time'], $this->user->data['username']);
+				$this->push->post($msg, $insert['post_time'], $this->user->data['username'], $this->db->sql_nextid());
 			}
 
-			$json_response = new \phpbb\json_response();
-			$json_response->send(array('OK'));
+			return new JsonResponse(array('OK'));
 		}
 		else
 		{
-			return $this->helper->error($this->user->lang('ONLY_AJAX'), 500);
+			return $this->error('AJAX_SHOUTBOX_ERROR', 'AJAX_SHOUTBOX_ONLY_AJAX', 500);
 		}
 	}
 
 	/**
-	 * check if the push to iOS app is enabled, and all requirements are met.
-	 * @return bool
+	 * Delete a post from the client.
+	 *
+	 * @return \Symfony\Component\HttpFoundation\JsonResponse
 	 */
-	private function validatePush()
+	public function delete()
 	{
-		if (!isset($this->config['ajaxshoutbox_push_enabled']) || !$this->config['ajaxshoutbox_push_enabled'])
-		{
-			return false;
-		}
-		if (!empty($this->config['ajaxshoutbox_api_key']))
-		{
-			return false;
-		}
-		if (empty($this->config['ajaxshoutbox_api_server']))
-		{
-			// hmmm.
-			$this->config['ajaxshoutbox_api_server'] = 'https://www.shoutbox-app.com/post'; // API is for the app only.
-		}
-		if (!function_exists('curl_version') || !function_exists('curl_init') || !function_exists('curl_exec'))
-		{
-			return false;
-		}
-		return true;
-	}
+		$id = $this->request->variable('id', 0, false, \phpbb\request\request_interface::POST);
 
-	/**
-	 * @param string $message Message that has been send
-	 * @param int $date Date in UNIX timestamp
-	 * @param string $user Username (Not the user id!)
-	 */
-	private function submitToApp($message, $date, $user)
-	{
+		if (!$id)
+		{
+			return $this->error('AJAX_SHOUTBOX_ERROR', 'AJAX_SHOUTBOX_MISSING_ID', 500);
+		}
 
-		$browser = new Browser(new Curl());
+		if (!check_form_key('ajaxshoutbox_delete_' . $id)) // Every delete form has its unique form key, based on ID.
+		{
+			return $this->error('AJAX_SHOUTBOX_ERROR', 'FORM_INVALID', 500);
+		}
+
 		try
 		{
-			$headers = array('Content-Type' => 'application/json');
-			$data = json_encode(array(
-				'message'   => $message,
-				'date'      => $date,
-				'user'      => $user,
-				'authkey'   => $this->config['ajaxshoutbox_api_key'],
-			));
-
-			/** @var \Buzz\Message\Response $response */
-			$response = $browser->post($this->config['ajaxshoutbox_api_server'], $headers, $data);
-
-			if ($response->isSuccessful())
-			{
-				$rsp = $response->getContent();
-				$rsp = @json_decode($rsp, true);
-
-				if (isset($rsp['error'])) {
-					throw new \Exception(htmlspecialchars($rsp['error'])); // ;)
-				}
-			}
+			$this->delete->delete_post($id);
 		}
-		catch (\Exception $e)
+		catch (\paul999\ajaxshoutbox\exceptions\shoutbox_exception $exception)
 		{
-			// TODO: Missing lang
-			$this->log->add('critical', $this->user->data['user_id'], $this->user->ip, 'LOG_AJAX_SHOUTBOX_ERROR', time(), array($e->getMessage()));
+			return $this->error('AJAX_SHOUTBOX_ERROR', $exception->getMessage(), 500);
 		}
+		return new JsonResponse(array('OK'));
 	}
 
 	/**
 	 * Get the last 10 shouts
+	 *
+	 * @return \Symfony\Component\HttpFoundation\JsonResponse
 	 */
 	public function getAll()
 	{
 		if (!$this->auth->acl_get('u_shoutbox_view'))
 		{
-			$this->helper->error('AJAX_SHOUTBOX_NO_PERMISSION');
+			return $this->error('AJAX_SHOUTBOX_ERROR', 'AJAX_SHOUTBOX_NO_PERMISSION', 403);
 		}
 
 		$sql    = 'SELECT c.*, u.username, u.user_colour FROM
@@ -249,19 +237,21 @@ class main_controller
 					ORDER BY post_time DESC';
 		$result = $this->db->sql_query_limit($sql, 10);
 
-		$this->returnPosts($result);
+		return $this->returnPosts($result);
 	}
 
 	/**
 	 * Get all shouts since a specific shout ID.
 	 *
 	 * @param int $id Last selected ID.
+	 *
+	 * @return \Symfony\Component\HttpFoundation\JsonResponse
 	 */
 	public function getAfter($id)
 	{
 		if (!$this->auth->acl_get('u_shoutbox_view'))
 		{
-			$this->helper->error('AJAX_SHOUTBOX_NO_PERMISSION');
+			return $this->error('AJAX_SHOUTBOX_ERROR', 'AJAX_SHOUTBOX_NO_PERMISSION', 403);
 		}
 
 		$sql    = 'SELECT c.*, u.username, u.user_colour FROM
@@ -273,22 +263,24 @@ class main_controller
 					)
 					AND c.shout_id != ' . (int) $id . '
 					AND u.user_id = c.user_id
-				ORDER BY post_time DESC';
+				ORDER BY post_time DESC, shout_id DESC';
 		$result = $this->db->sql_query($sql);
 
-		$this->returnPosts($result);
+		return $this->returnPosts($result);
 	}
 
 	/**
 	 * Get 10 shouts before the current shout ID.
 	 *
 	 * @param $id
+	 *
+	 * @return \Symfony\Component\HttpFoundation\JsonResponse
 	 */
 	public function getBefore($id)
 	{
 		if (!$this->auth->acl_get('u_shoutbox_view'))
 		{
-			$this->helper->error('AJAX_SHOUTBOX_NO_PERMISSION');
+			return $this->error('AJAX_SHOUTBOX_ERROR', 'AJAX_SHOUTBOX_NO_PERMISSION', 403);
 		}
 
 		$sql    = 'SELECT c.*, u.username, u.user_colour FROM
@@ -300,10 +292,10 @@ class main_controller
 					)
 					AND c.shout_id != ' . (int) $id . '
 					AND u.user_id = c.user_id
-				ORDER BY post_time DESC';
+				ORDER BY post_time DESC, shout_id ASC';
 		$result = $this->db->sql_query_limit($sql, 10);
 
-		$this->returnPosts($result, false);
+		return $this->returnPosts($result, false);
 	}
 
 	/**
@@ -311,6 +303,8 @@ class main_controller
 	 *
 	 * @param mixed $result return the data for the posts
 	 * @param bool  $reverse
+	 *
+	 * @return \Symfony\Component\HttpFoundation\JsonResponse
 	 */
 	private function returnPosts($result, $reverse = true)
 	{
@@ -322,10 +316,7 @@ class main_controller
 		}
 		$this->db->sql_freeresult($result);
 
-		$json_response = new \phpbb\json_response();
-		$json_response->send(
-			$reverse ? array_reverse($posts) : $posts
-		);
+		return new JsonResponse($reverse ? array_reverse($posts) : $posts);
 	}
 
 	/**
@@ -337,7 +328,8 @@ class main_controller
 	 */
 	private function getPost($row)
 	{
-		if (!defined('PHPBB_USE_BOARD_URL_PATH')) {
+		if (!defined('PHPBB_USE_BOARD_URL_PATH'))
+		{
 			define('PHPBB_USE_BOARD_URL_PATH', true); // Require full URL to smilies.
 		}
 
@@ -349,12 +341,65 @@ class main_controller
 		$username = str_replace('./../../', generate_board_url() . '/', $username); // Fix paths
 		$username = str_replace('./../', generate_board_url() . '/', $username); // Fix paths
 
-		return array(
+		$result = array(
 			'id'      => $row['shout_id'],
 			'user'    => $username,
-			'date'    => $this->user->format_date($row['post_time']),
-			// This will cause issues with non refreshing posts.
+			'date'    => $this->user->format_date($row['post_time'], $this->user->data['user_ajaxshoutbox_format']),
 			'message' => $text,
+			'delete'  => ($this->auth->acl_get('m_shoutbox_delete') || ($this->auth->acl_get('u_shoutbox_delete') && $row['user_id'] == $this->user->data['user_id'])),
+		);
+
+		return array_merge($result, $this->add_form_key('ajaxshoutbox_delete_' . $row['shout_id']));
+	}
+
+	/**
+	 * Send a error to the user.
+	 *
+	 * Important: phpBB (<= 3.1.2) handles non 200 status as error.
+	 * Due to the way this is implemented, phpBB will display the browser
+	 * generated error, instead of the user returned error.
+	 * This method will result in a 200 OK, but the correct status is in
+	 * the JsonResponse.status.
+	 *
+	 * @param string $title
+	 * @param string $message
+	 * @param integer $status
+	 *
+	 * @return \Symfony\Component\HttpFoundation\JsonResponse
+	 */
+	private function error($title, $message, $status)
+	{
+		$json = new JsonResponse(array(
+			'title'     => $this->user->lang[$title],
+			'error'     => $this->user->lang[$message],
+			'status'    => $status,
+		));
+
+		return $json;
+	}
+
+	/**
+	 * Add a secret token and returns it as array with creation_time and form_token.
+	 *
+	 * Based on phpBB's add_form_key. Compatible with check_form_key.
+	 *
+	 * IMPORTANT: The original event is not included, because the form is build before the event,
+	 * while this function returns the (Possible modified) data after the event.
+	 *
+	 * @param string $form_name The name of the form; has to match the name used in check_form_key, otherwise no
+	 *                          restrictions apply
+	 *
+	 * @return array
+	 */
+	function add_form_key($form_name)
+	{
+		$now = time();
+		$token_sid = ($this->user->data['user_id'] == ANONYMOUS && !empty($this->config['form_token_sid_guests'])) ? $this->user->session_id : '';
+		$token = sha1($now . $this->user->data['user_form_salt'] . $form_name . $token_sid);
+
+		return array(
+			'creation_time' => $now,
+			'form_token' => $token,
 		);
 	}
 }

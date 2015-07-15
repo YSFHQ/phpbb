@@ -18,7 +18,7 @@ class crizzo_aboutus_migrations extends \phpbb\db\migration\migration
 	public function update_data()
 	{
 		return array(
-			array('config.add', array('aboutus_enable', 1)),
+			array('config.add', array('aboutus_enable', false)),
 			array('config_text.add', array('aboutus_info', '')),
 			array('config_text.add', array('aboutus_info_uid', '')),
 			array('config_text.add', array('aboutus_info_bitfield', '')),

@@ -52,6 +52,7 @@ $lang = array_merge($lang, array(
 	'B3P_FILE_NOT_FOUND'			=> 'The requested file could not be found',
 	'UNABLE_TO_MOVE'				=> 'It is not possible to move the block to the selected column.',
 	'UNABLE_TO_MOVE_ROW'			=> 'It is not possible to move the block to the selected row.',
+	'UNABLE_TO_ADD_MODULE'			=> 'It is not possible to add the module to the selected column.',
 	'DELETE_MODULE_CONFIRM'			=> 'Are you sure you wish to delete the module "%1$s"?',
 	'MODULE_RESET_SUCCESS'			=> 'Successfully reset the module settings.',
 	'MODULE_RESET_CONFIRM'			=> 'Are you sure you wish to reset the settings of the module "%1$s"?',
@@ -96,23 +97,6 @@ $lang = array_merge($lang, array(
 
 	'LINK_ADDED'							=> 'The link has been successfully added',
 	'LINK_UPDATED'							=> 'The link has been successfully updated',
-
-	// Upload Module
-	'MODULE_UPLOAD'					=> 'Upload a module',
-	'MODULE_UPLOAD_EXP'				=> 'Choose the zip file of the module you want to upload:',
-	'MODULE_UPLOAD_GO'				=> 'Upload',
-	'NO_MODULE_UPLOAD'				=> 'Your server configuration does not allow file uploads.',
-	'NO_FILE_B3P'					=> 'No zip file specified.',
-	'MODULE_UPLOADED'				=> 'Module uploaded successfully.',
-	'MODULE_UPLOAD_MKDIR_FAILURE'	=> 'Unable to create a folder.',
-	'MODULE_COPY_FAILURE'			=> 'Unable to copy the following file: %1$s',
-	'MODULE_CORRUPTED'				=> 'The module you are trying to upload seems to be corrupted.',
-	'PORTAL_NEW_FILES'				=> 'New files',
-	'PORTAL_MODULE_SOURCE'			=> 'Source',
-	'PORTAL_MODULE_TARGET'			=> 'Target',
-	'PORTAL_MODULE_STATUS'			=> 'Status',
-	'PORTAL_MODULE_SUCCESS'			=> 'Success',
-	'PORTAL_MODULE_ERROR'			=> 'Error',
 
 	// Install
 	'PORTAL_BASIC_INSTALL'			=> 'Adding basic set of modules',

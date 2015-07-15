@@ -1,15 +1,14 @@
 <?php
 /**
-*  phpBB Extension - marttiphpbb customcode
+* phpBB Extension - marttiphpbb customcode
 * @copyright (c) 2014 marttiphpbb <info@martti.be>
-* @license http://opensource.org/licenses/MIT
+* @license GNU General Public License, version 2 (GPL-2.0)
 */
 
 namespace marttiphpbb\customcode;
 
 use phpbb\extension\base;
 use marttiphpbb\customcode\model\customcode_directory;
-
 
 class ext extends base
 {
@@ -22,9 +21,10 @@ class ext extends base
 		switch ($old_state)
 		{
 			case '': // Empty means nothing has run yet
-				// create directory 
+				// create directory
 				$phpbb_root_path = $this->container->getParameter('core.root_path');
-				$customcode_directory = new customcode_directory($phpbb_root_path);
+				$user = $this->container->get('user');
+				$customcode_directory = new customcode_directory($user, $phpbb_root_path);
 				$customcode_directory->create();
 				return '1';
 				break;
@@ -33,7 +33,6 @@ class ext extends base
 			break;
 		}
 	}
-	
 
 	/**
 	* @param mixed $old_state State returned by previous call of this method
@@ -45,7 +44,8 @@ class ext extends base
 		{
 			case '': // Empty means nothing has run yet
 				$phpbb_root_path = $this->container->getParameter('core.root_path');
-				$customcode_directory = new customcode_directory($phpbb_root_path);
+				$user = $this->container->get('user');
+				$customcode_directory = new customcode_directory($user, $phpbb_root_path);
 				$customcode_directory->remove();
 				return '1';
 				break;
@@ -54,5 +54,4 @@ class ext extends base
 				break;
 		}
 	}
-}	
-
+}

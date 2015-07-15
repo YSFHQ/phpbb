@@ -1045,6 +1045,14 @@ class acp_users
 					}
 				}
 
+				//Begin: Duplicate User IPs
+				if($config['require_ip_check'])
+				{
+					include($phpbb_root_path . 'includes/functions_dupe_ip_check.' . $phpEx);				
+					dupe_usernames($user_row['user_dupe_ip']);					
+				}
+				//End: Duplicate User IPs
+
 				// Posts in Queue
 				$sql = 'SELECT COUNT(post_id) as posts_in_queue
 					FROM ' . POSTS_TABLE . '

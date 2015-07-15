@@ -23,6 +23,12 @@
 	<dd><a href="{U_SHOW_IP}">{REGISTERED_IP}</a></dd>
 	<dd>[ <a href="{U_WHOIS}" onclick="popup(this.href, 700, 500, '_whois'); return false;">{L_WHOIS}</a> ]</dd>
 </dl>
+<!-- IF DUPLICATE_IP_EXISTS -->
+<dl>
+	<dt><label>{L_USERNAMES_DUPE_IP}:</label><br /><span>{L_USERNAMES_DUPE_IP_EXPLAIN}</span></dt>
+	<dd><!-- BEGIN dupe_ip -->{dupe_ip.DUPE_USERNAME}<!-- IF not dupe_ip.S_LAST_ROW -->, <!-- ENDIF --><!-- END dupe_ip --></dd>
+</dl>
+<!-- ENDIF -->
 <!-- ENDIF -->
 <dl>
 	<dt><label>{L_LAST_ACTIVE}{L_COLON}</label></dt>

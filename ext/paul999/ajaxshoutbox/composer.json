@@ -3,22 +3,26 @@
     "type": "phpbb-extension",
     "description": "A simple shoutbox for phpBB 3.1",
     "homepage": "https://www.ajax-shoutbox.com",
-    "version": "1.0.0-BETA1",
-    "time": "2014-11-29",
+    "version": "1.0.2",
+    "time": "2015-03-07",
     "license": "GPL-2.0",
-    "authors": [{
-        "name": "Paul Sohier",
-        "email": "paul@phpbb.com",
-        "homepage": "https://github.com/paul999/",
-        "role": "Lead Developer"
-    }],
+    "authors": [
+        {
+            "name": "Paul Sohier",
+            "email": "paul@phpbb.com",
+            "homepage": "https://github.com/paul999/",
+            "role": "Lead Developer"
+        }
+    ],
     "require": {
         "php": ">=5.3.3",
         "kriswallsmith/buzz": "~0.13"
     },
-    "require-dev":{
+    "require-dev": {
         "phpbb/epv": "dev-master",
-        "phpbb/phpbb": "~3.1.0"
+        "phpbb/phpbb": "~3.1.0",
+        "phing/phing": "2.*",
+        "squizlabs/php_codesniffer": "1.*"
     },
     "extra": {
         "display-name": "Ajax Shoutbox",
@@ -26,9 +30,9 @@
             "phpbb/phpbb": ">=3.1.0,<3.2.*@dev"
         },
         "version-check": {
-            "host": "ajax-shoutbox.com",
-            "directory": "/version",
-            "filename": "ajax.json"
+            "host": "www.phpbb.com",
+            "directory": "/customise/db/extension/ajax_shoutbox",
+            "filename": "version_check"
         }
     }
 }

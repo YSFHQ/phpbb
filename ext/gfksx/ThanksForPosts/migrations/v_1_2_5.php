@@ -12,30 +12,39 @@ namespace gfksx\ThanksForPosts\migrations;
 
 class v_1_2_5 extends \phpbb\db\migration\migration
 {
+	protected $thanks_table_exists;
+	protected $poster_id_field_exists;
+
 	public function effectively_installed()
 	{
-		return (isset($this->config['thanks_for_posts_version']) && version_compare($this->config['thanks_for_posts_version'], '2.0.0', '>='))
+		return (isset($this->config['thanks_for_posts_version']) && version_compare($this->config['thanks_for_posts_version'], '1.2.5', '>='))
 				|| (isset($this->config['thanks_mod_version']) && version_compare($this->config['thanks_mod_version'], '1.2.5', '>='));
 	}
 
 	static public function depends_on()
 	{
-		return array('\phpbb\db\migration\data\v310\dev');
+		return array('\gfksx\ThanksForPosts\migrations\v_0_4_0');
 	}
 
 	public function update_schema()
 	{
-		return array(
-			'add_tables' => array(
-				$this->table_prefix . 'thanks' => array(
-					'COLUMNS'		=> array(
-						'post_id'		=> array('UINT', 0),
-						'poster_id'		=> array('UINT', 0),
-						'user_id'		=> array('UINT', 0),
+		if (!$this->db_tools->sql_table_exists($this->table_prefix . 'thanks'))
+		{
+			return array(
+				'add_tables' => array(
+					$this->table_prefix . 'thanks' => array(
+						'COLUMNS'		=> array(
+							'post_id'		=> array('UINT', 0),
+							'poster_id'		=> array('UINT', 0),
+							'user_id'		=> array('UINT', 0),
+						),
+						'PRIMARY_KEY'	=> array('post_id', 'user_id'),
 					),
-					'PRIMARY_KEY'	=> array('post_id', 'user_id'),
 				),
-			),
+			);
+		}
+
+		return array(
 		);
 	}
 

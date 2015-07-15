@@ -360,7 +360,21 @@ class ucp_register
 				$vars = array('submit', 'cp_data', 'user_row');
 				extract($phpbb_dispatcher->trigger_event('core.ucp_register_user_row_after', compact($vars)));
 
+				
+				//Begin: Duplicate User IPs
+				if($config['require_ip_check'] > CHECK_NONE)
+				{
+					include($phpbb_root_path . 'includes/functions_dupe_ip_check.' . $phpEx); 
+					$dupe_user_ids = duplicate_ip_check($user->ip);
+					$dupe_ip = array (
+									'user_dupe_ip'			=> $dupe_user_ids,
+								);	
+					$user_row = array_merge($user_row, $dupe_ip);
+				}
+				//End: Duplicate User IPs
+				
 				// Register user...
+				
 				$user_id = user_add($user_row, $cp_data);
 
 				// This should not happen, because the required variables are listed above...
@@ -449,6 +463,13 @@ class ucp_register
 						$message = $message . '<br /><br />' . $user->lang[$result];
 					}
 				}
+
+				//Begin: Duplicate User IPs
+				if (!empty($dupe_user_ids) && $config['require_ip_check'] > CHECK_NONE)
+				{
+					notify_admin_dupe_ips($data['username'], $data['email'], $user_row['user_regdate'], $user_id, $dupe_user_ids);
+				}
+				//End: Duplicate User IPs
 
 				$message = $message . '<br /><br />' . sprintf($user->lang['RETURN_INDEX'], '<a href="' . append_sid("{$phpbb_root_path}index.$phpEx") . '">', '</a>');
 				trigger_error($message);

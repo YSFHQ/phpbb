@@ -48,7 +48,7 @@ $lang = array_merge($lang, array(
 
 	'DISABLE_REMOVE_THANKS'		=> 'La suppression des remerciements a été désactivée par l’administrateur',
 
-	'GIVEN'						=> '<strong>A remercié </strong>',
+	'GIVEN'						=> 'A remercié',
 	'GLOBAL_INCORRECT_THANKS'	=> 'Vous ne pouvez pas remercier une annonce globale qui n’est pas liée à un forum en particulier.',
 	'GRATITUDES'				=> 'Liste des remerciements',
 
@@ -74,22 +74,22 @@ $lang = array_merge($lang, array(
 	'NOTIFICATION_TYPE_THANKS_GIVE'		=> 'Quelqu’un vous a remercié pour votre message',
 	'NOTIFICATION_TYPE_THANKS_REMOVE'	=> 'Quelqu’un a retiré son remerciement pour votre message',
 
-	'RECEIVED'					=> '<strong>A été remercié </strong>',
+	'RECEIVED'					=> 'A été remercié',
 	'REMOVE_THANKS'				=> 'Retirer vos remerciements à l’auteur : ',
 	'REMOVE_THANKS_CONFIRM'		=> 'Êtes-vous sûr(e) de vouloir retirer vos remerciements à l’auteur pour son message ?',
 	'REMOVE_THANKS_SHORT'		=> 'Remerciement(s) retiré(s)',
 	'REPUT'						=> 'Classement',
-	'REPUT_TOPLIST'				=> 'Liste Top %d du classement',
-	'RETING_LOGIN_EXPLAIN'		=> 'Vous n’êtes pas autorisé à voir la liste Top du classement.',
-	'RATING_NO_VIEW_TOPLIST'	=> 'Vous n’êtes pas autorisé à voir la liste Top du classement.',
-	'RATING_VIEW_TOPLIST_NO'	=> 'La liste Top du classement est vide ou désactivé par l’administrateur.',
+	'REPUT_TOPLIST'				=> 'Top %d des remerciements',
+	'RETING_LOGIN_EXPLAIN'		=> 'Vous n’êtes pas autorisé à voir le Top du classement.',
+	'RATING_NO_VIEW_TOPLIST'	=> 'Vous n’êtes pas autorisé à voir le Top du classement.',
+	'RATING_VIEW_TOPLIST_NO'	=> 'La liste du Top du classement est vide ou désactivée par l’administrateur.',
 	'RATING_FORUM'				=> 'Forum',
 	'RATING_POST'				=> 'Message',
 	'RATING_TOP_FORUM'			=> 'Classement des forums',
 	'RATING_TOP_POST'			=> 'Classement des messages',
 	'RATING_TOP_TOPIC'			=> 'Classement des sujets',
 	'RATING_TOPIC'				=> 'Sujet',
-	'RETURN_POST'				=> 'Retour',
+//	'RETURN_POST'				=> 'Retour',
 
 	'THANK'						=> 'Heure',
 	'THANK_FROM'				=> 'de',
@@ -117,5 +117,5 @@ $lang = array_merge($lang, array(
 	'THANKS_CUSTOM0_FUNCTION'	=> 'Mettre à jour les valeurs de la table de la basse de données : _thanks',
 	'THANKS_CUSTOM1_FUNCTION'	=> 'Vérifier que l’extension est retirée',
 	'THANKS_CUSTOM2_FUNCTION'	=> 'Vérifier la mise à jour du cache',
-	'TOPLIST'					=> 'Liste du Top du classement des messages',
+	'TOPLIST'					=> 'Top du classement des messages',
 ));

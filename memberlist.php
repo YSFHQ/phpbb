@@ -1521,6 +1521,14 @@ switch ($mode)
 		);
 }
 
+//Begin: Duplicate User IPs
+	if (isset($data['user_dupe_ip']) && $auth->acl_gets('a_') && $config['require_ip_check'])	
+	{
+		include_once($phpbb_root_path . 'includes/functions_dupe_ip_check.' . $phpEx);
+		dupe_usernames($data['user_dupe_ip']);
+	}
+	//End: Duplicate User IPs
+
 // Output the page
 page_header($page_title);
 
