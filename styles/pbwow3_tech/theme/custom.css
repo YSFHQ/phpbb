@@ -1,0 +1,126 @@
+/* Custom CSS for PBWoW 3 Tech
+
+You can customize whatever you want.
+Some defaults are included, like on PBWoW.com
+
+Get all the FontAwesome CSS codes here: https://fortawesome.github.io/Font-Awesome/icons/
+
+*/
+
+/* Special post styles
+--------------------------------------------- */
+
+.blizz .post,
+.blizz #viewprofile .panel:first-of-type { background: #ecebea url("./images/blizz_bg.gif") no-repeat 0 0; }
+.blizz .content { color: #086d97; }
+.blizz .content strong { color: #41aef0; }
+
+.mvp .post,
+.mvp #viewprofile .panel:first-of-type { background: #dbdfda; }
+.mvp .content { color: #038515; }
+.mvp .content strong { color: #63913e; }
+
+
+/* Post profiles
+--------------------------------------------- */
+
+.blizz .postprofile .avatar {
+	background: url("./images/avatar-tr-blizz.png") 100% 0 no-repeat, url("./images/avatar-bl-blizz.png") 0 100% no-repeat;
+}
+.blizz .postprofile .avatar img {
+	border-color: #77c1ff;
+	box-shadow: 0 0 8px rgba(1,93,255,0.5);
+}
+
+.mvp .postprofile .avatar {
+	background: url("./images/avatar-tr-mvp.png") 100% 0 no-repeat, url("./images/avatar-bl-mvp.png") 0 100% no-repeat;
+}
+.mvp .postprofile .avatar img {
+	border-color: #79ad50;
+	box-shadow: 0 0 8px rgba(186,255,0,0.2);
+}
+
+.propass .postprofile .avatar {
+	background: url("./images/avatar-tr-propass.png") 100% 0 no-repeat, url("./images/avatar-bl-propass.png") 0 100% no-repeat;
+}
+.propass .postprofile .avatar img {
+	border-color: #f3a900;
+	box-shadow: 0 0 8px rgba(243,169,0,0.2);
+}
+
+
+/* PBWoW.com specific stuff
+--------------------------------------------- */
+
+.misc-block.advertisement {
+    background: none;
+    text-align: center;
+}
+
+/* ============== YSFHQ CUSTOM THEME =========== */
+
+div#page-header {
+    background: none;
+}
+
+#page-header .navbar {
+    background: none;
+    padding: 0;
+}
+
+div#body-header {
+    background: none;
+}
+
+div#wrap {
+    background: rgba(244, 245, 245, 0.7);
+    max-width: 1010px;
+    box-shadow: 0px 0 50px #000;
+}
+
+body#phpbb {
+    background: #FFF url("https://assets.ysfhq.com/wp-content/gallery/screenshots/image88.png") no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+}
+
+a#logo {
+    background: url("https://assets.ysfhq.com/media/ysfhq_main.png") no-repeat;
+    width: 400px;
+    background-size: contain;
+}
+
+.small-icon>a:before {
+    color: #293578;
+    text-shadow: none !important;
+}
+
+div#page-footer {
+    background: none;
+    border: none;
+}
+
+.post {
+    background: #FAFAFA !important;
+}
+
+div.rules strong {
+    background: #D62E32;
+}
+
+img.postimage {
+    background-color: #FFF !important;
+}
+
+.forum-blocks .row dl {
+    background: #F4F5F5;
+}
+
+.forum-blocks .row dl.unread {
+    background: #FAFAFA;
+}
+
+#recent-topics li.row {
+    background: #F4F5F5 !important;
+}
+
