@@ -112,8 +112,8 @@ img.postimage {
     background-color: #FFF !important;
 }
 
-.forum-blocks .row dl {
-    background: #F4F5F5;
+#qr_postform .panel, .forum-blocks dl, .misc-block, .stat-block p {
+    background: #F4F5F5 !important;
 }
 
 .forum-blocks .row dl.unread {
@@ -122,5 +122,9 @@ img.postimage {
 
 #recent-topics li.row {
     background: #F4F5F5 !important;
+}
+
+.signature {
+    opacity: 1 !important;
 }
 
