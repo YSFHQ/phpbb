@@ -50,7 +50,6 @@ class rule implements rule_interface
 	*
 	* @param \phpbb\db\driver\driver_interface    $db                 Database object
 	* @param string                               $boardrules_table   Name of the table used to store board rules data
-	* @return \phpbb\boardrules\entity\rule
 	* @access public
 	*/
 	public function __construct(\phpbb\db\driver\driver_interface $db, $boardrules_table)
@@ -212,7 +211,7 @@ class rule implements rule_interface
 	* Save the current settings to the database
 	*
 	* This must be called before closing or any changes will not be saved!
-	* If adding a rule (saving for the first time), you must call insert() or an exeception will be thrown
+	* If adding a rule (saving for the first time), you must call insert() or an exception will be thrown
 	*
 	* @return rule_interface $this object for chaining calls; load()->set()->save()
 	* @access public
@@ -490,7 +489,7 @@ class rule implements rule_interface
 
 		// Make sure rule anchors are unique
 		// Test if new page and anchor field has data or...
-		//    if existing page and anchor field has new data not equal to exisiting anchor data
+		//    if existing page and anchor field has new data not equal to existing anchor data
 		if ((!$this->get_id() && $anchor !== '') || ($this->get_id() && $anchor !== '' && $this->get_anchor() !== $anchor))
 		{
 			$sql = 'SELECT 1
@@ -562,7 +561,7 @@ class rule implements rule_interface
 	*
 	* @param int $option_value Value of the option
 	* @param bool $negate Negate (unset) option (Default: False)
-	* @param bool $reparse_message Reparse the message after setting option (Default: True)
+	* @param bool $reparse_message Re-parse the message after setting option (Default: True)
 	* @return null
 	* @access protected
 	*/
@@ -578,14 +577,14 @@ class rule implements rule_interface
 			$this->data['rule_message_bbcode_options'] += $option_value;
 		}
 
-		// If we're unsetting the option and the option is already set
+		// If we're un-setting the option and the option is already set
 		if ($negate && $this->data['rule_message_bbcode_options'] & $option_value)
 		{
 			// Subtract the option from the options
 			$this->data['rule_message_bbcode_options'] -= $option_value;
 		}
 
-		// Reparse the message
+		// Re-parse the message
 		if ($reparse_message && !empty($this->data['rule_message']))
 		{
 			$message = $this->data['rule_message'];

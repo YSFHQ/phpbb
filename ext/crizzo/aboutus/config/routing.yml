@@ -1,6 +1,0 @@
-crizzo_aboutus:
-    pattern: /aboutus
-    defaults: { _controller: crizzo.aboutus.controller:base }
-crizzo_aboutus2:
-    pattern: /aboutus.php
-    defaults: { _controller: crizzo.aboutus.controller:redirect }

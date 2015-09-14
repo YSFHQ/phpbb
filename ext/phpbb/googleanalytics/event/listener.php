@@ -32,7 +32,6 @@ class listener implements EventSubscriberInterface
 	* @param \phpbb\config\config        $config             Config object
 	* @param \phpbb\template\template    $template           Template object
 	* @param \phpbb\user                 $user               User object
-	* @return \phpbb\googleanalytics\event\listener
 	* @access public
 	*/
 	public function __construct(\phpbb\config\config $config, \phpbb\template\template $template, \phpbb\user $user)
@@ -61,11 +60,10 @@ class listener implements EventSubscriberInterface
 	/**
 	* Load Google Analytics js code
 	*
-	* @param object $event The event object
 	* @return null
 	* @access public
 	*/
-	public function load_google_analytics($event)
+	public function load_google_analytics()
 	{
 		$this->template->assign_var('GOOGLEANALYTICS_ID', $this->config['googleanalytics_id']);
 	}
@@ -106,7 +104,6 @@ class listener implements EventSubscriberInterface
 			$event['display_vars'] = $display_vars;
 		}
 	}
-
 
 	/**
 	* Validate the Google Analytics ID
