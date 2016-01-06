@@ -79,7 +79,7 @@ div#wrap {
 }
 
 body#phpbb {
-    background: #FFF url("https://assets.ysfhq.com/wp-content/gallery/screenshots/image88.png") no-repeat;
+    background: #FFF url("/images/background.jpg") no-repeat;
     background-attachment: fixed;
     background-size: cover;
 }
