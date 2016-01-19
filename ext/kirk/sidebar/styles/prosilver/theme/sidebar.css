@@ -1,0 +1,47 @@
+/* Sidebar css
+---------------------------------------- */
+#page-body {
+	width: 75%;
+	float: right;
+}
+
+.page-sidebar {
+	float: left;
+	margin-top: 51px;
+  margin-left: 1%;
+	width: 22%;
+}
+
+.page-sidebar > div {
+  margin-bottom: 15px;
+}
+
+.bg1-sidebar {
+	padding: 5px 0 5px 7px;
+	border-bottom: 1px solid #00608f;
+}
+
+.bg1-sidebar:hover {
+	background-color: #bfd5e3;
+}
+
+.bg2-sidebar {
+	padding: 5px 0 5px 7px;
+	border-bottom: 1px solid #00608f;
+}
+
+.bg2-sidebar:hover {
+	background-color: #cddee9;
+}
+
+@media only screen and (max-width: 650px), only screen and (max-device-width: 650px)
+{
+  .page-sidebar {
+	  display: none;
+  }
+
+  #page-body {
+	  clear: both;
+  	width: 100%;
+  }
+}

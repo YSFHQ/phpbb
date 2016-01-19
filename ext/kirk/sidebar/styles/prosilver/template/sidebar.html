@@ -1,0 +1,37 @@
+<div class="panel bg2">
+  <div class="inner">
+    <div style="text-align: center; padding-top: 6px; margin: 0 auto; font-weight: bold;"><a href="#">Recent Topics</a> (COMING SOON)</div>
+    <hr>
+    <div style="width: 90%;"><a href="#" class="topictitle">Current Projects</a> by <a href="#">Grigor</a></div>
+    <div style="width: 90%;"><a href="#" class="topictitle">Dogfight Generator</a> by <a href="#">Grigor</a></div>
+    <div style="width: 90%;"><a href="#" class="topictitle">747-8 Intercontinental - First Flight</a> by <a href="#" style="color: #00AA00;" class="username-coloured">Lord Flasheart</a></div>
+    <div style="width: 90%;"><a href="#" class="topictitle">F-18 HARV and/or F-16 VISTA "MATV"</a> by <a href="#">Yombat</a></div>
+    <div style="width: 90%;"><a href="#" class="topictitle">Aviation Videos</a> by <a href="#" style="color: #660000;" class="username-coloured">Dragon029</a></div>
+  </div>
+</div>
+
+<div class="panel bg2">
+  <div id="side-search-box">
+    <form action="./search.php" method="post" id="search">
+      <fieldset>
+        <input name="keywords" id="keywords" type="text" maxlength="128" title="Search for keywords" class="inputbox search" onclick="if(this.value=='Search…')this.value='';" onblur="if(this.value=='')this.value='Search…';" value="Search…"><br> 
+        <a href="./search.php" title="View the advanced search options" style="margin: 0 auto; padding-top: 2px;">Advanced search</a>&nbsp;&nbsp;<input class="button2" value="Search" type="submit" style="padding-top: 1px;"><br>
+      </fieldset>
+    </form>
+  </div>
+  <hr>
+  <ul class="sidebar-linklist sidebar-leftside" style="list-style-type: none; line-height: 2;">
+    <li style="text-align: center;"><a href="./app.php/page/serverlist" style="color: #f00; font-style: italic; font-weight: bold;">Online Servers List</a></li>
+    <li><a href="./viewtopic.php?f=284&t=2891">Addon Links</a></li>
+    <li><a href="./viewtopic.php?f=147&t=98">Addon creation programs</a></li>
+    <li><a href="./viewtopic.php?f=147&t=3382">Addon creation tutorial</a></li>
+    <li><a href="./viewtopic.php?f=147&t=4731">Map making tutorial</a></li>
+    <li><a href="./viewtopic.php?f=284&t=6256">Installing Addons</a></li>
+    <hr>
+    <li class="small-icon icon-faq" <!-- IF not S_USER_LOGGED_IN -->data-skip-responsive="true"<!-- ELSE -->data-last-responsive="true"<!-- ENDIF -->><a href="{U_FAQ}" rel="help" title="{L_FAQ_EXPLAIN}" role="menuitem">{L_FAQ}</a></li>
+    <li class="small-icon icon-logout rightside"  data-skip-responsive="true"><a href="{U_LOGIN_LOGOUT}" title="{L_LOGIN_LOGOUT}" accesskey="x" role="menuitem">{L_LOGIN_LOGOUT}</a></li>
+    <!-- IF not S_REGISTERED_USER and (S_REGISTER_ENABLED and not (S_SHOW_COPPA or S_REGISTRATION)) -->
+      <li class="small-icon icon-register rightside" data-skip-responsive="true"><a href="{U_REGISTER}" role="menuitem">{L_REGISTER}</a></li>
+    <!-- ENDIF -->
+  </ul>
+</div>

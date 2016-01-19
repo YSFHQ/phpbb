@@ -94,6 +94,17 @@ a#logo {
     color: #293578;
     text-shadow: none !important;
 }
+/*
+.index-right {
+    float: left !important;
+    width: 202px !important;
+}
+
+.index-left {
+    margin-right: 0 !important;
+    margin-left: 212px;
+}
+*/
 
 div#page-footer {
     background: none;
