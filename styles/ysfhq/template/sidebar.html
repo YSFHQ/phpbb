@@ -10,6 +10,7 @@
             <ul>
             <!-- BEGIN recent_topics -->
             <li>
+                <!-- IF recent_topics.S_UNREAD_TOPIC and not S_IS_BOT --><a href="{recent_topics.U_NEWEST_POST}">{NEWEST_POST_IMG}</a> <!-- ENDIF -->
                 <a href="{recent_topics.U_NEWEST_POST}" class="topictitle">{recent_topics.TOPIC_TITLE}</a>
                 by {recent_topics.LAST_POST_AUTHOR_FULL}
             </li>
