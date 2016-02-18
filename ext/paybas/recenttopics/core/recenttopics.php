@@ -449,7 +449,7 @@ class recenttopics
 
 			$this->template->assign_block_vars($tpl_loopname, $tpl_ary);
 
-			$this->pagination->generate_template_pagination($view_topic_url, $tpl_loopname . '.pagination', 'start', $replies + 1, $this->config['posts_per_page'], 1, true, true);
+			// $this->pagination->generate_template_pagination($view_topic_url, $tpl_loopname . '.pagination', 'start', $replies + 1, $this->config['posts_per_page'], 1, true, true);
 
 			if ($display_parent_forums)
 			{
@@ -495,8 +495,8 @@ class recenttopics
 			$alt_location = false;
 		}
 
-		$pagination_url = append_sid($this->root_path . $this->user->page['page_name'], $append_params);
-		$this->pagination->generate_template_pagination($pagination_url, 'pagination', $tpl_loopname . '_start', $topics_count, $topics_per_page, $start);
+		// $pagination_url = append_sid($this->root_path . $this->user->page['page_name'], $append_params);
+		// $this->pagination->generate_template_pagination($pagination_url, 'pagination', $tpl_loopname . '_start', $topics_count, $topics_per_page, $start);
 
 		$this->template->assign_vars(array(
 			'RT_SORT_START_TIME'                   => ($sort_topics === 'topic_time') ? true : false,
