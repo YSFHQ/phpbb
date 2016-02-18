@@ -1,9 +1,22 @@
 <div class="sidebar">
     <div class="panel">
         <div class="inner">
-            <div style="text-align: center; padding-top: 6px; margin: 0 auto; font-weight: bold;">Recent Topics</div>
+            <div style="text-align: center; padding-top: 6px; margin: 0 auto; font-weight: bold;">
+                <!-- IF S_LOAD_UNREADS --><a href="{U_SEARCH_UNREAD}"><!-- ENDIF -->
+                    Recent Topics
+                <!-- IF S_LOAD_UNREADS --></a><!-- ENDIF -->
+            </div>
             <hr>
-            <p>Coming soon!</p>
+            <ul style="list-style-type: none;">
+            <!-- BEGIN recent_topics -->
+            <li>
+                <a href="{recent_topics.U_NEWEST_POST}" class="topictitle">{recent_topics.TOPIC_TITLE}</a>
+                by {recent_topics.LAST_POST_AUTHOR_FULL}
+            </li>
+            <!-- BEGINELSE -->
+            <p><strong>{L_NO_TOPICS}</strong></p>
+            <!-- END recent_topics -->
+            </ul>
         </div>
     </div>
     <div class="panel">
