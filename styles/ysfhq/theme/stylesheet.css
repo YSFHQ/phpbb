@@ -49,13 +49,16 @@ body {
 }
 */
 
+#sidebar .panel {
+    padding: 10px;
+}
+
 #recent_topics, #recent_topics + .action-bar, .recent-topics {
     display: none;
 }
 
 #sidebar #recent-topics div:first-child {
     text-align: center;
-    padding-top: 6px;
     margin: 0 auto;
     font-weight: bold;
 }
@@ -65,6 +68,10 @@ body {
 }
 #sidebar #recent-topics ul > li {
     padding-bottom: 0.5em;
+}
+
+#sidebar #search-box {
+    margin: 10px 0;
 }
 
 @media screen and (min-width: 960px) {
