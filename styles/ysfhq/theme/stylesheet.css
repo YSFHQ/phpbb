@@ -72,6 +72,11 @@ body {
 
 #sidebar #search-box {
     margin: 10px 0;
+    float: none;
+}
+
+#search-box #keywords {
+    width: calc(100% - 57px);
 }
 
 @media screen and (min-width: 960px) {
@@ -85,9 +90,6 @@ body {
         width: 18%;
         float: left;
         padding-top: 2em;
-    }
-    #sidebar #search-box #keywords {
-        width: 69%;
     }
 }
 @media screen and (max-width: 960px) {
