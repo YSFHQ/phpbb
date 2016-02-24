@@ -90,7 +90,7 @@ body {
 }
 
 #search-box #keywords {
-    width: calc(100% - 57px);
+    width: calc(100% - 60px);
 }
 
 @media screen and (min-width: 960px) {
