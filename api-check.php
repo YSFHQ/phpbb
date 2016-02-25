@@ -10,8 +10,7 @@ $apikey = request_var('apikey', '', true);
 $owner = $auth_api_keys[$apikey];
 
 if (strlen($owner)==0) {
-    header('HTTP/1.1 403 Forbidden');
-    die;
+    die(header('HTTP/1.1 401 Unauthorized'));
 }
 
 header('Content-Type: application/json');
