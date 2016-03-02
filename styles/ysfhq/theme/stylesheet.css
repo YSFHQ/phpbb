@@ -6,16 +6,16 @@
     --------------------------------------------------------------
 */
 
-/*
-@import url("common.css");
-@import url("links.css");
-@import url("content.css");
-@import url("buttons.css");
-@import url("cp.css");
-@import url("forms.css");
-@import url("colours.css");
-@import url("imageset.css");
-*/
+
+@import url("../../prosilver/theme/common.css");
+@import url("../../prosilver/theme/links.css");
+@import url("../../prosilver/theme/content.css");
+@import url("../../prosilver/theme/buttons.css");
+@import url("../../prosilver/theme/cp.css");
+@import url("../../prosilver/theme/forms.css");
+@import url("../../prosilver/theme/colours.css");
+@import url("../../prosilver/theme/imageset.css");
+
 
 body {
     background: url(/images/background.jpg) no-repeat center top fixed;
@@ -33,10 +33,10 @@ body {
     color:#FFFFFF;
     height: 90px;
     background-position: left -2px;
-    background-image: url("./images/ysp_logo.gif"), #0077b1; /* Old browsers */
-    background-image: url("./images/ysp_logo.gif"), -moz-linear-gradient(top,  #0077b1 0%, #027eba 20%, #0683c3 29%, #0990d2 51%, #0d94d8 56%, #0b94d8 58%, #119ee5 76%, #13a3ec 93%, #13a3ec 100%); /* FF3.6-15 */
-    background-image: url("./images/ysp_logo.gif"), -webkit-linear-gradient(top,  #0077b1 0%,#027eba 20%,#0683c3 29%,#0990d2 51%,#0d94d8 56%,#0b94d8 58%,#119ee5 76%,#13a3ec 93%,#13a3ec 100%); /* Chrome10-25,Safari5.1-6 */
-    background-image: url("./images/ysp_logo.gif"), linear-gradient(to bottom,  #0077b1 0%,#027eba 20%,#0683c3 29%,#0990d2 51%,#0d94d8 56%,#0b94d8 58%,#119ee5 76%,#13a3ec 93%,#13a3ec 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    background-image: url("./images/ysfhq_logo.gif"), #0077b1; /* Old browsers */
+    background-image: url("./images/ysfhq_logo.gif"), -moz-linear-gradient(top,  #0077b1 0%, #027eba 20%, #0683c3 29%, #0990d2 51%, #0d94d8 56%, #0b94d8 58%, #119ee5 76%, #13a3ec 93%, #13a3ec 100%); /* FF3.6-15 */
+    background-image: url("./images/ysfhq_logo.gif"), -webkit-linear-gradient(top,  #0077b1 0%,#027eba 20%,#0683c3 29%,#0990d2 51%,#0d94d8 56%,#0b94d8 58%,#119ee5 76%,#13a3ec 93%,#13a3ec 100%); /* Chrome10-25,Safari5.1-6 */
+    background-image: url("./images/ysfhq_logo.gif"), linear-gradient(to bottom,  #0077b1 0%,#027eba 20%,#0683c3 29%,#0990d2 51%,#0d94d8 56%,#0b94d8 58%,#119ee5 76%,#13a3ec 93%,#13a3ec 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
 }
 
 .headerbar a#header-link {
