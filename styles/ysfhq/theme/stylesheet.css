@@ -93,6 +93,11 @@ body {
     width: calc(100% - 60px);
 }
 
+#sidebar #serverlist ul {
+    list-style-type: none;
+    padding-bottom: 1em;
+}
+
 @media screen and (min-width: 960px) {
     div#page-body {
         width: 80%;

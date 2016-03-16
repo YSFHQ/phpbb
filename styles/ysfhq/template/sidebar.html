@@ -46,9 +46,26 @@
 
             <p><strong>Multiplayer</strong><br />
             <a href="https://forum.ysfhq.com/viewtopic.php?f=284&t=7574">Joining A Server</a><br />
-            <a href="https://forum.ysfhq.com/app.php/page/serverlist" style="color: #F00">Online Servers</a><br />
-            <!-- &#8595; [clicking the arrow will show the online servers widget]<br />-->
             <a href="https://forum.ysfhq.com/viewtopic.php?f=24&t=74">Combat Standards</a></p>
+
+            <div id="serverlist">
+              <h3><a href="https://forum.ysfhq.com/app.php/page/serverlist" style="color: #F00">Online Servers</a></h3>
+              <ul></ul>
+              <script>
+              $.getJSON("https://ysflight.org/serverlist/?json=1", function (data) {
+                $.each(data.servers, function (k, server) {
+                  if (server.status=="Online") {
+                    $('#serverlist ul').append(
+                      '<li><a href="ysflight://'+server.ip+'">'
+                      +server.name+'</a> (<span title="Players flying">'
+                      +server.game.players.flying+'</span>/<span title="Total players">'+server.game.players.total+'</span>)'
+                      +' <a href="https://ysflight.org/serverlist/server/'+server.id+'" target="_blank">&#8505;</a></li>'
+                    );
+                  }
+                });
+              });
+              </script>
+            </div>
 
             <p><strong>Game Add-ons</strong><br />
             <a href="https://forum.ysfhq.com/viewtopic.php?f=284&t=6256">Installing</a><br />
