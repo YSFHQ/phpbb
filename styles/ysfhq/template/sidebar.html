@@ -10,8 +10,13 @@
             <ul>
             <!-- BEGIN recent_topics -->
             <li>
-                <!-- IF recent_topics.S_UNREAD_TOPIC and not S_IS_BOT --><a href="{recent_topics.U_NEWEST_POST}">{NEWEST_POST_IMG}</a> <!-- ENDIF -->
+                <!-- IF not S_USER_LOGGED_IN or not recent_topics.S_UNREAD_TOPIC -->
+                <a href="{recent_topics.U_LAST_POST}">{LAST_POST_IMG}</a>
+                <a href="{recent_topics.U_LAST_POST}" class="topictitle">{recent_topics.TOPIC_TITLE}</a>
+                <!-- ELSE -->
+                <a href="{recent_topics.U_NEWEST_POST}">{NEWEST_POST_IMG}</a>
                 <a href="{recent_topics.U_NEWEST_POST}" class="topictitle">{recent_topics.TOPIC_TITLE}</a>
+                <!-- ENDIF -->
                 by {recent_topics.LAST_POST_AUTHOR_FULL}
             </li>
             <!-- BEGINELSE -->
