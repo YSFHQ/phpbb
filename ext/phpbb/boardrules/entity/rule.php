@@ -225,8 +225,13 @@ class rule implements rule_interface
 			throw new \phpbb\boardrules\exception\out_of_bounds('rule_id');
 		}
 
+		// Copy the data array, filtering out the rule_id identifier
+		// so we do not attempt to update the row's identity column.
+		$sql_array = array_diff_key($this->data, array('rule_id' => null));
+
+		// Update the page data in the database
 		$sql = 'UPDATE ' . $this->boardrules_table . '
-			SET ' . $this->db->sql_build_array('UPDATE', $this->data) . '
+			SET ' . $this->db->sql_build_array('UPDATE', $sql_array) . '
 			WHERE rule_id = ' . $this->get_id();
 		$this->db->sql_query($sql);
 
@@ -487,7 +492,7 @@ class rule implements rule_interface
 			throw new \phpbb\boardrules\exception\unexpected_value(array('anchor', 'TOO_LONG'));
 		}
 
-		// Make sure rule anchors are unique
+		// Make sure rule anchors are unique for the current language
 		// Test if new page and anchor field has data or...
 		//    if existing page and anchor field has new data not equal to existing anchor data
 		if ((!$this->get_id() && $anchor !== '') || ($this->get_id() && $anchor !== '' && $this->get_anchor() !== $anchor))
@@ -495,7 +500,8 @@ class rule implements rule_interface
 			$sql = 'SELECT 1
 				FROM ' . $this->boardrules_table . "
 				WHERE rule_anchor = '" . $this->db->sql_escape($anchor) . "'
-					AND rule_id <> " . $this->get_id();
+					AND rule_id <> " . $this->get_id() .
+					($this->get_language() ? ' AND rule_language = ' . $this->get_language() : '');
 			$result = $this->db->sql_query_limit($sql, 1);
 			$row = $this->db->sql_fetchrow($result);
 			$this->db->sql_freeresult($result);
@@ -521,6 +527,23 @@ class rule implements rule_interface
 	public function get_language()
 	{
 		return (isset($this->data['rule_language'])) ? (int) $this->data['rule_language'] : 0;
+	}
+
+	/**
+	 * Set the language identifier
+	 *
+	 * @param int $language language identifier
+	 * @return rule_interface $this object for chaining calls; load()->set()->save()
+	 * @access public
+	 */
+	public function set_language($language)
+	{
+		if (!isset($this->data['rule_language']))
+		{
+			$this->data['rule_language'] = (int) $language;
+		}
+
+		return $this;
 	}
 
 	/**

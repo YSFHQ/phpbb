@@ -78,7 +78,7 @@ $lang = array_merge($lang, array(
 	'REMOVE_THANKS_SHORT'		=> 'Danksagung entfernen',
 	'REPUT'						=> 'Bewertung',
 	'REPUT_TOPLIST'				=> 'Danksagungen Topliste — %d',
-	'RETING_LOGIN_EXPLAIN'		=> 'Sie sind nicht berechtigt, die Topliste zu sehen.',
+	'RATING_LOGIN_EXPLAIN'		=> 'Sie sind nicht berechtigt, die Topliste zu sehen.',
 	'RATING_NO_VIEW_TOPLIST'	=> 'Sie sind nicht berechtigt, die Topliste zu sehen.',
 	'RATING_VIEW_TOPLIST_NO'	=> 'Die Topliste ist leer oder wurde durch den Administrator deaktiviert.',
 	'RATING_FORUM'				=> 'Forum',
@@ -91,7 +91,7 @@ $lang = array_merge($lang, array(
 
 	'THANK'						=> 'Mal',
 	'THANK_FROM'				=> 'von',
-	'THANK_TEXT_1'				=> 'Folgende Benutzer bedankten sich beim Autor',
+	'THANK_TEXT_1'				=> 'Folgende Benutzer bedankten sich beim Autor ',
 	'THANK_TEXT_2'				=> ' für den Beitrag: ',
 	'THANK_TEXT_2PL'			=> ' für den Beitrag (Insgesamt %d):',
 	'THANK_POST'				=> 'Bedanken Sie sich beim Autor des Beitrags: ',
