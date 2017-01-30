@@ -6,16 +6,18 @@
     --------------------------------------------------------------
 */
 
-
+@import url("../../prosilver/theme/normalize.css");
+@import url("../../prosilver/theme/base.css");
+@import url("../../prosilver/theme/utilities.css");
 @import url("../../prosilver/theme/common.css");
 @import url("../../prosilver/theme/links.css");
 @import url("../../prosilver/theme/content.css");
 @import url("../../prosilver/theme/buttons.css");
 @import url("../../prosilver/theme/cp.css");
 @import url("../../prosilver/theme/forms.css");
+@import url("../../prosilver/theme/icons.css");
 @import url("../../prosilver/theme/colours.css");
-@import url("../../prosilver/theme/imageset.css");
-
+@import url("../../prosilver/theme/responsive.css");
 
 body {
     background: url(/images/background.jpg) no-repeat center top fixed;
@@ -54,15 +56,6 @@ body {
     }
 }
 
-/*
-.headerbar {
-    background-image: url("./images/bg_header_new.png");
-    background-size: cover;
-    background-position: 50% 50%;
-    padding: 20px 5px;
-}
-*/
-
 #sidebar .panel {
     padding: 10px;
 }
@@ -82,6 +75,13 @@ body {
 }
 #sidebar #recent-topics ul > li {
     padding-bottom: 0.5em;
+    width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+#sidebar #recent-topics a.topictitle {
+    display: inline;
 }
 
 #sidebar #search-box {
@@ -89,7 +89,7 @@ body {
     float: none;
 }
 
-#search-box #keywords {
+#sidebar #search-box #keywords {
     width: calc(100% - 60px);
 }
 
@@ -111,6 +111,7 @@ body {
         padding-top: 2em;
     }
 }
+
 @media screen and (max-width: 960px) {
     #sidebar {
         display: flex;
