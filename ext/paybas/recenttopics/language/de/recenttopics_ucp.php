@@ -8,7 +8,6 @@
  * @license GNU General Public License, version 2 (GPL-2.0)
  *
  * Based on the original NV Recent Topics by Joas Schilling (nickvergessen)
- *
  */
 
 if (!defined('IN_PHPBB'))
@@ -20,11 +19,16 @@ if (empty($lang) || !is_array($lang))
 	$lang = array();
 }
 
-$lang = array_merge($lang, array(
-	'RT_ENABLE'              => 'Display recent topics',
-	'RT_ALT_LOCATION'        => 'Use alternative display location',
-	'RT_ALT_LOCATION_EXP'    => 'Move recent topics to a different location (usually the bottom, but depends on the style used).',
-	'RT_SORT_START_TIME'     => 'Sort recent topics by topic start time',
-	'RT_SORT_START_TIME_EXP' => 'Instead of sorting them by last post time.',
-	'RT_UNREAD_ONLY'         => 'Only display unread topics in recent topics',
-));
+$lang = array_merge(
+	$lang, array(
+		'RT_ENABLE'              => '«Aktuelle Themen» anzeigen',
+		'RT_LOCATION'            => 'Anzeigelage',
+		'RT_LOCATION_EXP'        => 'Anzeigelage des Blocks «aktuellen Themen»',
+		'RT_SORT_START_TIME'     => 'Nach Themen Startzeit sortieren',
+		'RT_SORT_START_TIME_EXP' => 'Wenn diese Option aktiviert ist, werden die Themen nach dem Datum des ersten Beitrags anstelle des letzten Beitrags sortiert.',
+		'RT_UNREAD_ONLY'         => 'Nur ungelesene Themen anzeigen',
+		'RT_TOP'                 => 'Ansicht oben',
+		'RT_BOTTOM'              => 'Ansicht unten',
+		'RT_SIDE'                => 'Ansicht auf die Seite',
+	)
+);

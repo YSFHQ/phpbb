@@ -1,1 +1,18 @@
-<!-- IF RECENT_TOPICS_DISPLAY and recent_topics_included neq true --><!-- INCLUDE recent_topics_body.html --><!-- DEFINE recent_topics_included = true --><!-- ENDIF -->
+<!-- IF RECENT_TOPICS_DISPLAY and recent_topics_included neq true -->
+<!-- DEFINE recent_topics_included = true -->
+<!-- IF S_LOCATION_TOP -->
+
+<div id="recenttopicstop">
+<!-- INCLUDE recent_topics_bodybottom.html -->
+</div>
+
+<!-- ELSEIF S_LOCATION_SIDE -->
+
+<div id="phpbbsection">
+<div class="index-right">
+<!-- INCLUDE recent_topics_body.html -->
+</div>
+<div class="index-left">
+<!-- ENDIF -->
+
+<!-- ENDIF -->

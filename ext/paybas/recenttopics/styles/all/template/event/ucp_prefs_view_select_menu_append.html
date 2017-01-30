@@ -9,12 +9,15 @@
 		</dd>
 	</dl>
 	<!-- ENDIF -->
-	<!-- IF A_RT_ALT_LOCATION -->
+	<!-- IF A_RT_LOCATION -->
 	<dl>
-		<dt><label for="rt_alt_location0">{L_RT_ALT_LOCATION}{L_COLON}</label><br /><span>{L_RT_ALT_LOCATION_EXP}</span></dt>
+		<dt><label for="rt_location">{L_RT_LOCATION}{L_COLON}</label><br /><span>{L_RT_LOCATION_EXP}</span></dt>
 		<dd>
-			<label for="rt_alt_location1"><input type="radio" name="rt_alt_location" id="rt_alt_location1" value="1"<!-- IF S_RT_ALT_LOCATION --> checked="checked"<!-- ENDIF --> /> {L_YES}</label>
-			<label for="rt_alt_location0"><input type="radio" name="rt_alt_location" id="rt_alt_location0" value="0"<!-- IF not S_RT_ALT_LOCATION --> checked="checked"<!-- ENDIF --> /> {L_NO}</label>
+			<select name="rt_location" class="input" id="rt_location">
+				<!-- BEGIN location_row -->
+				<option value="{location_row.VALUE}"{location_row.SELECTED}>{location_row.OPTION}</option>
+				<!-- END location_row -->
+			</select>
 		</dd>
 	</dl>
 	<!-- ENDIF -->

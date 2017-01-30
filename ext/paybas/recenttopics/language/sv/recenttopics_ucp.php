@@ -2,13 +2,12 @@
 /**
  *
  * @package Recent Topics Extension
- * English translation by PayBas
+ * Danish translation by EverPvP
  *
  * @copyright (c) 2015 PayBas
  * @license GNU General Public License, version 2 (GPL-2.0)
  *
  * Based on the original NV Recent Topics by Joas Schilling (nickvergessen)
- *
  */
 
 if (!defined('IN_PHPBB'))
@@ -20,11 +19,16 @@ if (empty($lang) || !is_array($lang))
 	$lang = array();
 }
 
-$lang = array_merge($lang, array(
-	'RT_ENABLE'              => 'Display recent topics',
-	'RT_ALT_LOCATION'        => 'Use alternative display location',
-	'RT_ALT_LOCATION_EXP'    => 'Move recent topics to a different location (usually the bottom, but depends on the style used).',
-	'RT_SORT_START_TIME'     => 'Sort recent topics by topic start time',
-	'RT_SORT_START_TIME_EXP' => 'Instead of sorting them by last post time.',
-	'RT_UNREAD_ONLY'         => 'Only display unread topics in recent topics',
-));
+$lang = array_merge(
+	$lang, array(
+	'RT_ENABLE'              => 'Visa senaste ämnen',
+	'RT_LOCATION'            => 'kuvert',
+	'RT_LOCATION_EXP'        => 'epot av nya ämnen blockeras',
+	'RT_SORT_START_TIME'     => 'Sortera senaste ämnen i ämnet Submission tid ',
+	'RT_SORT_START_TIME_EXP' => 'Hellre än att sortera dem efter senast skickade ämne ',
+	'RT_UNREAD_ONLY'         => 'Visa bara olästa artiklar i senaste numret',
+	'RT_TOP'                 => 'Titta på toppen',
+	'RT_BOTTOM'              => 'Visa längst ned',
+	'RT_SIDE'                => 'Visa på höger sida',
+	)
+);

@@ -8,7 +8,6 @@
  * @license GNU General Public License, version 2 (GPL-2.0)
  *
  * Based on the original NV Recent Topics by Joas Schilling (nickvergessen)
- *
  */
 
 /**
@@ -40,6 +39,8 @@ if (empty($lang) || !is_array($lang))
 // ’ « » “ ” …
 //
 
-$lang = array_merge($lang, array(
-	'RECENT_TOPICS'	=> 'Sujets récents',
-));
+$lang = array_merge(
+	$lang, array(
+	'RECENT_TOPICS'    => 'Sujets récents',
+	)
+);

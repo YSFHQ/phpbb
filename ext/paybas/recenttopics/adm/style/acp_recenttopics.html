@@ -1,38 +1,71 @@
 <!-- INCLUDE overall_header.html -->
-
 <h1>{L_RECENT_TOPICS}</h1>
 <p>{L_RECENT_TOPICS_EXPLAIN}</p>
-
 <form id="acp_board" method="post" action="{U_ACTION}">
 	<fieldset>
+		<legend>{L_RT_GLOBAL_SETTINGS}</legend>
+		<dl>
+			<dt><label for="rt_enable">{L_INDEX}</label><br /><span>{L_RT_DISPLAY_INDEX}</span></dt>
+			<dd>
+				<label><input type="radio" class="radio" name="rt_enable" value="1" id="rt_enable"<!-- IF RT_INDEX --> checked="checked"<!-- ENDIF -->/> {L_YES}</label>
+				<label><input type="radio" class="radio" name="rt_enable" value="0" <!-- IF not RT_INDEX --> checked="checked"<!-- ENDIF --> /> {L_NO}</label>
+			</dd>
+		</dl>
 		<dl>
 			<dt><label for="rt_number">{L_RT_NUMBER}{L_COLON}</label><br /><span>{L_RT_NUMBER_EXP}</span></dt>
 			<dd><input type="number" id="rt_number" name="rt_number" size="3" min="0" max="999" value="{RT_NUMBER}" /></dd>
 		</dl>
+
 		<dl>
-			<dt><label for="rt_page_number">{L_RT_PAGE_NUMBER}{L_COLON}</label><br /><span>{L_RT_PAGE_NUMBER_EXP}</span></dt>
-			<dd><input type="number" id="rt_page_number" name="rt_page_number" size="3" min="0" max="999" value="{RT_PAGE_NUMBER}" /></dd>
+			<dt>
+				<label>{L_RT_PAGE_NUMBER}:</label><br/><span>{L_RT_PAGE_NUMBER_EXP}</span>
+			</dt>
+			<dd><input type="checkbox" class="checkbox" name="rt_page_number" id="rt_page_number" {RT_PAGE_NUMBER}  />
+			</dd>
 		</dl>
+
 		<dl>
 			<dt><label for="rt_min_topic_level">{L_RT_MIN_TOPIC_LEVEL}{L_COLON}</label><br /><span>{L_RT_MIN_TOPIC_LEVEL_EXP}</span></dt>
-			<dd><input type="number" id="rt_min_topic_level" name="rt_min_topic_level" size="3" min="0" max="3" maxlength="1" value="{RT_MIN_TOPIC_LEVEL}" /></dd>
+			<dd>
+				<select name="rt_min_topic_level" class="input" id="rt_min_topic_level">
+					<!-- BEGIN topiclevel_row -->
+					<option value="{topiclevel_row.VALUE}"{topiclevel_row.SELECTED}>{topiclevel_row.OPTION}</option>
+					<!-- END topiclevel_row -->
+				</select>
+			</dd>
 		</dl>
+
 		<dl>
 			<dt><label for="rt_anti_topics">{L_RT_ANTI_TOPICS}{L_COLON}</label><br /><span>{L_RT_ANTI_TOPICS_EXP}</span></dt>
 			<dd><input type="text" id="rt_anti_topics" name="rt_anti_topics" size="30" value="{RT_ANTI_TOPICS}" /></dd>
-		</dl>
-		<dl>
-			<dt><label for="rt_alt_location">{L_RT_ALT_LOCATION}{L_COLON}</label><br /><span>{L_RT_ALT_LOCATION_EXP}</span></dt>
-			<dd>
-				<label><input type="radio" class="radio" name="rt_alt_location" value="1" id="rt_alt_location"<!-- IF RT_ALT_LOCATION --> checked="checked"<!-- ENDIF -->/> {L_YES}</label>
-				<label><input type="radio" class="radio" name="rt_alt_location" value="0"<!-- IF not RT_ALT_LOCATION --> checked="checked"<!-- ENDIF --> /> {L_NO}</label>
-			</dd>
 		</dl>
 		<dl>
 			<dt><label for="rt_parents">{L_RT_PARENTS}{L_COLON}</label><br /><span>{L_RT_PARENTS_EXP}</span></dt>
 			<dd>
 				<label><input type="radio" class="radio" name="rt_parents" value="1" id="rt_parents"<!-- IF RT_PARENTS --> checked="checked"<!-- ENDIF -->/> {L_YES}</label>
 				<label><input type="radio" class="radio" name="rt_parents" value="0"<!-- IF not RT_PARENTS --> checked="checked"<!-- ENDIF --> /> {L_NO}</label>
+			</dd>
+		</dl>
+	</fieldset>
+
+	<fieldset>
+		<legend>{L_RT_OVERRIDABLE}</legend>
+		<dl>
+			<dt><label for="rt_location">{L_RT_LOCATION}{L_COLON}</label><br /><span>{L_RT_LOCATION_EXP}</span></dt>
+			<dd>
+				<select name="rt_location" class="input" id="rt_location">
+					<!-- BEGIN location_row -->
+					<option value="{location_row.VALUE}"{location_row.SELECTED}>{location_row.OPTION}</option>
+					<!-- END location_row -->
+				</select>
+			</dd>
+		</dl>
+
+		<dl>
+			<dt><label for="rt_sort_start_time">{L_RT_SORT_START_TIME}{L_COLON}</label><br /><span>{L_RT_SORT_START_TIME_EXP}</span></dt>
+			<dd>
+				<label><input type="radio" class="radio" name="rt_sort_start_time" value="1" id="rt_sort_start_time"<!-- IF RT_SORT_START_TIME --> checked="checked"<!-- ENDIF -->/> {L_YES}</label>
+				<label><input type="radio" class="radio" name="rt_sort_start_time" value="0"<!-- IF not RT_SORT_START_TIME --> checked="checked"<!-- ENDIF --> /> {L_NO}</label>
 			</dd>
 		</dl>
 		<dl>
@@ -42,33 +75,29 @@
 				<label><input type="radio" class="radio" name="rt_unread_only" value="0"<!-- IF not RT_UNREAD_ONLY --> checked="checked"<!-- ENDIF --> /> {L_NO}</label>
 			</dd>
 		</dl>
+
 		<dl>
-			<dt><label for="rt_sort_start_time">{L_RT_SORT_START_TIME}{L_COLON}</label><br /><span>{L_RT_SORT_START_TIME_EXP}</span></dt>
+			<dt style="width: 35%;"><label>{L_RT_RESET_DEFAULT}</label><br /><span>{L_RT_RESET_DEFAULT_EXP}</span></dt>
 			<dd>
-				<label><input type="radio" class="radio" name="rt_sort_start_time" value="1" id="rt_sort_start_time"<!-- IF RT_SORT_START_TIME --> checked="checked"<!-- ENDIF -->/> {L_YES}</label>
-				<label><input type="radio" class="radio" name="rt_sort_start_time" value="0"<!-- IF not RT_SORT_START_TIME --> checked="checked"<!-- ENDIF --> /> {L_NO}</label>
+				<input class="button1" type="submit" id="rt_reset_default" name="rt_reset_default" value="{L_RT_RESET_DEFAULT}"  />
 			</dd>
 		</dl>
+
 	</fieldset>
+
+
+	<!-- IF S_RT_NEWSPAGE -->
 	<fieldset>
 		<legend>{L_RT_VIEW_ON}</legend>
 		<dl>
-			<dt><label for="rt_index">{L_INDEX}</label></dt>
-			<dd>
-				<label><input type="radio" class="radio" name="rt_index" value="1" id="rt_index"<!-- IF RT_INDEX --> checked="checked"<!-- ENDIF -->/> {L_YES}</label>
-				<label><input type="radio" class="radio" name="rt_index" value="0" <!-- IF not RT_INDEX --> checked="checked"<!-- ENDIF --> /> {L_NO}</label>
-			</dd>
-		</dl>
-		<!-- IF S_RT_NEWSPAGE -->
-		<dl>
-			<dt><label for="rt_on_newspage">nickvergessen/newspage</label></dt>
+			<dt><label for="rt_on_newspage">{L_RT_NICKVERGESSEN_NEWSPAGE}</label></dt>
 			<dd>
 				<label><input type="radio" class="radio" name="rt_on_newspage" value="1" id="rt_on_newspage"<!-- IF RT_ON_NEWSPAGE --> checked="checked"<!-- ENDIF -->/> {L_YES}</label>
 				<label><input type="radio" class="radio" name="rt_on_newspage" value="0" <!-- IF not RT_ON_NEWSPAGE --> checked="checked"<!-- ENDIF --> /> {L_NO}</label>
 			</dd>
 		</dl>
-		<!-- ENDIF -->
 	</fieldset>
+	<!-- ENDIF -->
 	<fieldset>
 		<legend>{L_ACP_SUBMIT_CHANGES}</legend>
 		<p class="submit-buttons">
