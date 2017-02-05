@@ -1,0 +1,33 @@
+/* This file is style-specific and can be modified in other styles. */
+/* Styling for some features of QuickReply Reloaded. */
+.qr_dropdown {
+	display: block;
+}
+
+.qr_dropdown a {
+	font-size: 11px !important;
+}
+
+.post.hidden_subject .postbody p.author {
+	padding-top: 10px;
+	padding-bottom: 5px;
+}
+
+.quote-icon.qr-quickquote::before {
+	background-position: -122px -21px;
+}
+
+.qr_time {
+	display: none;
+}
+
+/* Temporary fix */
+.icon.fa-quote-left + span {
+	display: inline-block;
+}
+
+/* Fixed form style. */
+
+/* Compact form style. */
+
+/* Fullscreen form style. */

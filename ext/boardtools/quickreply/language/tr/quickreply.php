@@ -21,19 +21,18 @@ if (empty($lang) || !is_array($lang))
 }
 
 $lang = array_merge($lang, array(
-	'QR_BBPOST'                        => 'Gönderinin Kaynağı',
 	'QR_INSERT_TEXT'                   => 'Hızlı Cevap formuna Alıntı ekle',
 	'QR_PROFILE'                       => 'Profile git',
 	'QR_QUICKNICK'                     => 'Kullanıcı adından bahset',
 	'QR_QUICKNICK_TITLE'               => 'Kullanıcı adını Hızlı Cevap formuna aktar',
 	'QR_REPLY_IN_PM'                   => 'ÖM ile cevapla',
 	//begin mod Translit
-	'QR_TRANSLIT_TEXT'                 => 'Translit:',
+	'QR_TRANSLIT_TEXT'                 => 'Translit',
 	'QR_TRANSLIT_TEXT_TO_RU'           => 'to russian',
 	'QR_TRANSLIT_TEXT_TOOLTIP'         => 'For instant view in Russian click the button',
 	//end mod Translit
 	//begin mod CapsLock Transform
-	'QR_TRANSFORM_TEXT'                => 'Büyük/Küçük harf değiştir:',
+	'QR_TRANSFORM_TEXT'                => 'Büyük/Küçük harf değiştir',
 	'QR_TRANSFORM_TEXT_TOOLTIP'        => 'Seçili metnin büyük/küçük harf olarak değiştirmek için bir butona basın',
 	'QR_TRANSFORM_TEXT_LOWER'          => '▼ abc',
 	'QR_TRANSFORM_TEXT_UPPER'          => '▲ ABC',
