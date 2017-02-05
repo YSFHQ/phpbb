@@ -71,7 +71,7 @@ class listener implements EventSubscriberInterface
 	static public function getSubscribedEvents()
 	{
 		return array(
-			'core.index_modify_page_title'           => 'display_rt',
+			'core.page_header_after'                 => 'display_rt',
 			'nickvergessen.newspage.newspage'        => 'display_rt_newspage',
 			'core.acp_manage_forums_request_data'    => 'acp_manage_forums_request_data',
 			'core.acp_manage_forums_initialise_data' => 'acp_manage_forums_initialise_data',
