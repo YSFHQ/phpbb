@@ -41,17 +41,17 @@ body {
     background-image: url("./images/ysfhq_logo.gif"), linear-gradient(to bottom,  #0077b1 0%,#027eba 20%,#0683c3 29%,#0990d2 51%,#0d94d8 56%,#0b94d8 58%,#119ee5 76%,#13a3ec 93%,#13a3ec 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
 }
 
-.headerbar a#header-link {
+#headerbar-link {
     display: block;
-    position: absolute;
-    width: calc(100% - 250px);
     height: 100%;
-    left: 0;
+    position: absolute;
     top: 0;
+    left: 0;
 }
 
 @media screen and (max-width: 700px) {
-    .headerbar a#header-link {
+    #headerbar-link {
+        float: left;
         width: 100%;
     }
 }
