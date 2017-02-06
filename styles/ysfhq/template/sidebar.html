@@ -1,6 +1,6 @@
 <div id="sidebar">
     <div class="panel">
-        <div class="inner" id="recent-topics">
+        <div class="inner recent-topics">
             <div>
                 <!-- IF S_LOAD_UNREADS --><a href="{U_SEARCH_UNREAD}"><!-- ENDIF -->
                     Recent Topics
@@ -11,15 +11,14 @@
             <!-- BEGIN recent_topics -->
             <li>
                 <!-- IF recent_topics.S_UNREAD_TOPIC and not S_IS_BOT -->
-                <a class="unread" href="{recent_topics.U_NEWEST_POST}" title="{recent_topics.TOPIC_FOLDER_IMG_ALT}">
-                    <i class="icon fa-file fa-fw icon-red icon-md" aria-hidden="true"></i><span class="sr-only">{NEW_POST}</span>
+                <a class="unread topictitle" href="{recent_topics.U_NEWEST_POST}" title="{recent_topics.TOPIC_FOLDER_IMG_ALT}">
+                    <i class="icon fa-file fa-fw icon-red icon-md" aria-hidden="true"></i><span class="sr-only">{NEW_POST}</span>{recent_topics.TOPIC_TITLE}
                 </a>
                 <!-- ELSE -->
-                <a href="{recent_topics.U_LAST_POST}" title="{L_VIEW_LATEST_POST}">
-                    <i class="icon fa-external-link-square fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">{L_VIEW_LATEST_POST}</span>
+                <a class="topictitle" href="{recent_topics.U_LAST_POST}" title="{L_VIEW_LATEST_POST}">
+                    <i class="icon fa-external-link-square fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">{L_VIEW_LATEST_POST}</span>{recent_topics.TOPIC_TITLE}
                 </a>
                 <!-- ENDIF -->
-                <a href="{recent_topics.U_LAST_POST}" class="topictitle">{recent_topics.TOPIC_TITLE}</a>
                 by {recent_topics.LAST_POST_AUTHOR_FULL}
             </li>
             <!-- BEGINELSE -->
@@ -36,11 +35,11 @@
                 new google.translate.TranslateElement({pageLanguage: 'en', layout: google.translate.TranslateElement.InlineLayout.SIMPLE, gaTrack: true, gaId: 'UA-29461770-6'}, 'google_translate_element');
             }
             </script>
-            <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
-            <div id="search-box" class="search-box">
-              <form action="./search.php" method="get" id="search">
+            <script async src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+            <div class="search-box">
+              <form action="{U_SEARCH}" method="get">
                 <fieldset>
-                  <input name="keywords" id="keywords" type="search" maxlength="128" title="Search for keywords" class="inputbox search tiny" size="20" value="" placeholder="Search…">
+                  <input name="keywords" type="search" maxlength="128" title="Search for keywords" class="inputbox search tiny" size="20" value="" placeholder="Search…">
                   <button class="button button-search" type="submit" title="Search">
                     <i class="icon fa-search fa-fw" aria-hidden="true"></i><span class="sr-only">Search</span>
                   </button>
@@ -160,8 +159,8 @@
                         </tr>
                     </table>
                     <input type="hidden" name="currency_code" value="USD">
-                    <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_subscribe_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
-                    <img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
+                    <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_subscribe_LG.gif" name="submit" alt="PayPal - The safer, easier way to pay online!">
+                    <img alt="" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
                 </form>
             </div>
             <br>

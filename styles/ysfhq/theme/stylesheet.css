@@ -60,36 +60,40 @@ body {
     padding: 10px;
 }
 
-#recent_topics, #recent_topics + .action-bar, .recent-topics {
+#recenttopicstop, #recenttopicsbottom {
     display: none;
 }
 
-#sidebar #recent-topics div:first-child {
+#sidebar .recent-topics div:first-child {
     text-align: center;
     margin: 0 auto;
     font-weight: bold;
 }
 
-#sidebar #recent-topics ul {
+#sidebar .recent-topics ul {
     list-style-type: none;
 }
-#sidebar #recent-topics ul > li {
+#sidebar .recent-topics ul > li {
     padding-bottom: 0.5em;
     width: 100%;
     overflow: hidden;
     text-overflow: ellipsis;
 }
 
-#sidebar #recent-topics a.topictitle {
+#sidebar .recent-topics a.topictitle {
     display: inline;
 }
 
-#sidebar #search-box {
+#sidebar .recent-topics i.icon {
+    padding-right: 0.25em;
+}
+
+#sidebar .search-box {
     margin: 10px 0;
     float: none;
 }
 
-#sidebar #search-box #keywords {
+#sidebar .search-box input[name="keywords"] {
     width: calc(100% - 60px);
 }
 
