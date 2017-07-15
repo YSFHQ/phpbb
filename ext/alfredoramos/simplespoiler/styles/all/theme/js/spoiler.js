@@ -4,15 +4,13 @@
  * @author Alfredo Ramos <alfredo.ramos@yandex.com>
  * @version 0.1.1
  * @copyright (c) 2016 Alfredo Ramos
- * @license GNU GPL-3.0+
+ * @license GNU GPL-2.0
  */
 
-$(function() {
-	$.fn.initSpoilers = function($options) {
-		// Debug
-		//console.log(this.length);
-		//console.log($options);
+(function($) {
+	'use strict';
 
+	$.fn.initSpoilers = function($options) {
 		// Overwrite options
 		$options = $.extend({
 			showText: 'Show',
@@ -39,4 +37,4 @@ $(function() {
 			});
 		});
 	};
-});
+})(jQuery);

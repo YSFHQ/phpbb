@@ -75,16 +75,22 @@ services:
             - %tables.posts%
     gfksx.ThanksForPosts.notification.type.thanks:
         class: gfksx\ThanksForPosts\notification\thanks
-        scope: prototype
-        parent: notification.type.base
-        calls:
-            - [set_user_loader, [@user_loader]]
-            - [set_notifications_table, [%tables.notifications%]]
+        scope: prototype # scope MUST be prototype for this to work!
+        arguments:
+            - @dbal.conn
+            - @language
+            - @user
+            - @auth
+            - %core.root_path%
+            - %core.php_ext%
+            - %tables.user_notifications%
+            - %tables.notifications%
+            - @user_loader
         tags:
             - { name: notification.type }
     gfksx.ThanksForPosts.notification.type.thanks_remove:
         class: gfksx\ThanksForPosts\notification\thanks_remove
-        scope: prototype
+        scope: prototype # scope MUST be prototype for this to work!
         parent: gfksx.ThanksForPosts.notification.type.thanks
         tags:
             - { name: notification.type }

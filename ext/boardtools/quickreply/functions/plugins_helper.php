@@ -2,7 +2,7 @@
 /**
  *
  * @package       QuickReply Reloaded
- * @copyright (c) 2014 - 2016 Tatiana5 and LavIgor
+ * @copyright (c) 2014 - 2017 Tatiana5 and LavIgor
  * @license       http://opensource.org/licenses/gpl-2.0.php GNU General Public License v2
  *
  */
@@ -40,7 +40,9 @@ class plugins_helper
 	}
 
 	/**
-	 * Assign template variables for extensions if quick reply is enabled.
+	 * Returns template variables for supported extensions for quick reply.
+	 *
+	 * @return array
 	 */
 	public function template_variables_for_extensions()
 	{
@@ -62,6 +64,12 @@ class plugins_helper
 		return $template_variables;
 	}
 
+	/**
+	 * Returns template variables for QuickReply built-in plugins.
+	 *
+	 * @param int $forum_id Current forum ID
+	 * @return array
+	 */
 	public function template_variables_for_plugins($forum_id)
 	{
 		return array(
@@ -73,10 +81,6 @@ class plugins_helper
 
 			// begin mod Translit
 			'S_QR_SHOW_BUTTON_TRANSLIT' => $this->config['qr_show_button_translit'],
-			'QR_FOREIGN_LANG'           => json_encode($this->user->lang['QR_FOREIGN_LANG']),
-			'QR_THIS_LANG'              => json_encode($this->user->lang['QR_THIS_LANG']),
-			'QR_FOREIGN_LANG_CAP'       => json_encode($this->user->lang['QR_FOREIGN_LANG_CAP']),
-			'QR_THIS_LANG_CAP'          => json_encode($this->user->lang['QR_THIS_LANG_CAP']),
 			// end mod Translit
 		);
 	}
@@ -107,7 +111,7 @@ class plugins_helper
 		return (
 			!$this->auth->acl_get('f_qr_change_subject', $forum_id)
 			&& $mode != 'post'
-			&& ($topic_first_post_id != $post_id)
+			&& ($topic_first_post_id != $post_id || $mode == 'quote')
 		);
 	}
 

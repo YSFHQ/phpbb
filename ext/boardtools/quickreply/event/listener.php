@@ -2,7 +2,7 @@
 /**
  *
  * @package       QuickReply Reloaded
- * @copyright (c) 2014 - 2016 Tatiana5 and LavIgor
+ * @copyright (c) 2014 - 2017 Tatiana5 and LavIgor
  * @license       http://opensource.org/licenses/gpl-2.0.php GNU General Public License v2
  *
  */
@@ -142,6 +142,8 @@ class listener implements EventSubscriberInterface
 		$post_list = $event['post_list'];
 		$topic_id = $topic_data['topic_id'];
 
+		$this->user->add_lang_ext('boardtools/quickreply', 'quickreply');
+
 		// Mark post notifications read for this user in this topic
 		$this->helper->notifications_helper->mark_qr_notifications_read($post_list);
 
@@ -215,8 +217,16 @@ class listener implements EventSubscriberInterface
 			));
 		};
 
+		// Whether we need to suppress full quotes in topic review
+		$page_data = array_merge($page_data, array(
+			'S_QR_FULL_QUOTE_ALLOWED' => $this->auth->acl_get('f_qr_full_quote', $forum_id),
+			'S_QR_LAST_QUOTE'         => $this->config['qr_last_quote'],
+		));
+
 		$event['post_data'] = $post_data;
 		$event['page_data'] = $page_data;
+
+		$this->user->add_lang_ext('boardtools/quickreply', 'quickreply');
 	}
 
 	/**
