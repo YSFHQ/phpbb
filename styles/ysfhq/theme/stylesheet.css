@@ -20,9 +20,13 @@
 @import url("../../prosilver/theme/responsive.css");
 
 body {
-    background: url(/images/background.jpg) no-repeat center top fixed;
+    background: url("./images/citationx.jpg") no-repeat center top fixed;
     -webkit-background-size: cover;
     background-size: cover;
+}
+
+.wrap {
+    background-color: rgba(255,255,255,0.75);
 }
 
 #site-description {
@@ -33,12 +37,13 @@ body {
     position: relative;
     background-repeat: no-repeat;
     color:#FFFFFF;
-    height: 90px;
-    background-position: left -2px;
-    background-image: url("./images/ysfhq_logo.gif"), #0077b1; /* Old browsers */
-    background-image: url("./images/ysfhq_logo.gif"), -moz-linear-gradient(top,  #0077b1 0%, #027eba 20%, #0683c3 29%, #0990d2 51%, #0d94d8 56%, #0b94d8 58%, #119ee5 76%, #13a3ec 93%, #13a3ec 100%); /* FF3.6-15 */
-    background-image: url("./images/ysfhq_logo.gif"), -webkit-linear-gradient(top,  #0077b1 0%,#027eba 20%,#0683c3 29%,#0990d2 51%,#0d94d8 56%,#0b94d8 58%,#119ee5 76%,#13a3ec 93%,#13a3ec 100%); /* Chrome10-25,Safari5.1-6 */
-    background-image: url("./images/ysfhq_logo.gif"), linear-gradient(to bottom,  #0077b1 0%,#027eba 20%,#0683c3 29%,#0990d2 51%,#0d94d8 56%,#0b94d8 58%,#119ee5 76%,#13a3ec 93%,#13a3ec 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    height: 94px;
+    background-image: url("./images/ysfhq_banner.png");
+    /*background-position: left -2px;*/
+    /*background-image: url("./images/ysfhq_logo.gif"), #0077b1; /* Old browsers */
+    /*background-image: url("./images/ysfhq_logo.gif"), -moz-linear-gradient(top,  #0077b1 0%, #027eba 20%, #0683c3 29%, #0990d2 51%, #0d94d8 56%, #0b94d8 58%, #119ee5 76%, #13a3ec 93%, #13a3ec 100%); /* FF3.6-15 */
+    /*background-image: url("./images/ysfhq_logo.gif"), -webkit-linear-gradient(top,  #0077b1 0%,#027eba 20%,#0683c3 29%,#0990d2 51%,#0d94d8 56%,#0b94d8 58%,#119ee5 76%,#13a3ec 93%,#13a3ec 100%); /* Chrome10-25,Safari5.1-6 */
+    /*background-image: url("./images/ysfhq_logo.gif"), linear-gradient(to bottom,  #0077b1 0%,#027eba 20%,#0683c3 29%,#0990d2 51%,#0d94d8 56%,#0b94d8 58%,#119ee5 76%,#13a3ec 93%,#13a3ec 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
 }
 
 #headerbar-link {
