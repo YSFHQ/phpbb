@@ -4,3 +4,9 @@ config.php
 /store/*
 *.log
 vendor
+
+styles/ysfhq/theme/images/special_event_banners/*
+styles/ysfhq/theme/images/standard_backgrounds/*
+styles/ysfhq/theme/images/special_event_backgrounds/*
+
+!.gitkeep
