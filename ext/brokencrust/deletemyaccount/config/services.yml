@@ -1,0 +1,6 @@
+services:
+
+    brokencrust.deletemyaccount.listener:
+        class: brokencrust\deletemyaccount\event\listener
+        tags:
+            - { name: event.listener }
