@@ -2,7 +2,7 @@
 
 $base_path = __DIR__.'/styles/ysfhq/theme/images/';
 
-$eventend = new DateTime('2017-09-24T00:00:00Z');
+$eventend = new DateTime('2019-01-21T04:00:00Z');
 $now = new DateTime();
 
 // check if we should use a special event banner
