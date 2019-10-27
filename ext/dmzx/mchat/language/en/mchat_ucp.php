@@ -16,7 +16,7 @@ if (!defined('IN_PHPBB'))
 
 if (empty($lang) || !is_array($lang))
 {
-	$lang = array();
+	$lang = [];
 }
 
 // DEVELOPERS PLEASE NOTE
@@ -34,7 +34,7 @@ if (empty($lang) || !is_array($lang))
 // Some characters for use
 // ’ » “ ” …
 
-$lang = array_merge($lang, array(
+$lang = array_merge($lang, [
 	'MCHAT_PREFERENCES'				=> 'mChat preferences',
 	'MCHAT_NO_SETTINGS'				=> 'You are not authorised to customise any settings.',
 
@@ -45,15 +45,10 @@ $lang = array_merge($lang, array(
 	'MCHAT_STATS_INDEX_EXPLAIN'		=> 'Displays who is chatting below the <em>Who is online</em> section on the index page.',
 	'MCHAT_AVATARS'					=> 'Display avatars',
 	'MCHAT_CAPITAL_LETTER'			=> 'Capital first letter in your messages',
-	'MCHAT_CHAT_AREA'				=> 'Input type',
-	'MCHAT_INPUT_AREA'				=> 'Input field',
-	'MCHAT_TEXT_AREA'				=> 'Text area',
 	'MCHAT_POSTS'					=> 'Display new posts (currently all disabled, can be enabled in the mChat Global Settings section in the ACP)',
 	'MCHAT_DISPLAY_CHARACTER_COUNT'	=> 'Display number of characters when typing a message',
 	'MCHAT_RELATIVE_TIME'			=> 'Display relative time for new messages',
 	'MCHAT_RELATIVE_TIME_EXPLAIN'	=> 'Displays “just now”, “1 minute ago” and so on for each message. Set to <em>No</em> to always display the full date.',
-	'MCHAT_PAUSE_ON_INPUT'			=> 'Pause on input',
-	'MCHAT_PAUSE_ON_INPUT_EXPLAIN'	=> 'Do not update mChat upon entering a message',
 	'MCHAT_MESSAGE_TOP'				=> 'Location of new chat messages',
 	'MCHAT_MESSAGE_TOP_EXPLAIN'		=> 'New messages will appear at the top or at the bottom in the chat.',
 	'MCHAT_LOCATION'				=> 'Location on the index page',
@@ -69,4 +64,4 @@ $lang = array_merge($lang, array(
 	'MCHAT_DATE_FORMAT'				=> 'Date format',
 	'MCHAT_DATE_FORMAT_EXPLAIN'		=> 'The syntax used is identical to the PHP <a href="http://www.php.net/date">date()</a> function.',
 	'MCHAT_CUSTOM_DATEFORMAT'		=> 'Custom…',
-));
+]);

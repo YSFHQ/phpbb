@@ -2,7 +2,7 @@
 
 /**
 * phpBB Extension - marttiphpbb customcode
-* @copyright (c) 2014 marttiphpbb <info@martti.be>
+* @copyright (c) 2014 - 2018 marttiphpbb <info@martti.be>
 * @license GNU General Public License, version 2 (GPL-2.0)
 */
 
@@ -13,27 +13,13 @@ if (!defined('IN_PHPBB'))
 
 if (empty($lang) || !is_array($lang))
 {
-	$lang = array();
+	$lang = [];
 }
 
-// DEVELOPERS PLEASE NOTE
-//
-// All language files should use UTF-8 as their encoding and the files must not contain a BOM.
-//
-// Placeholders can now contain order information, e.g. instead of
-// 'Page %s of %s' you can (and should) write 'Page %1$s of %2$s', this allows
-// translators to re-order the output of data while ensuring it remains correct
-//
-// You do not need this where single placeholders are used, e.g. 'Message %d' is fine
-// equally where a string contains only two placeholders which are used to wrap text
-// in a url you again do not need to specify an order e.g., 'Click %sHERE%s' is fine
-//
-// Some characters you may want to copy&paste:
-// ’ » “ ” …
+$lang = array_merge($lang, [
 
-$lang = array_merge($lang, array(
-
-	'ACP_CUSTOMCODE_INCLUDE_EXAMPLE'			=> 'Per includere i propri file aggiungere prima del nome file  <code>../../../../../../%1$s/</code><p><code>&lt;!-- INCLUDE ../../../../../../%1$s/mio_file.html --></code></p>',
+	'ACP_CUSTOMCODE_INCLUDE_EXAMPLE'			=> 'Per includere i propri file aggiungere prima del nome file (fix this)',
+	'ACP_CUSTOMCODE_EXAMPLE_FILE'				=> 'my_file.html',
 	'ACP_CUSTOMCODE_CREATE_FILE'				=> 'Crea file',
 	'ACP_CUSTOMCODE_DELETE'						=> 'Rimuovi',
 	'ACP_CUSTOMCODE_DELETE_FILE_NAME'			=> 'Rimuovi %s',
@@ -65,11 +51,10 @@ $lang = array_merge($lang, array(
 	'ACP_CUSTOMCODE_FILE_SIZE_FAIL'				=> 'Impossibile ottenere la dimensione del file %s.',
 	'ACP_CUSTOMCODE_EVENT_FILE_INDICATOR'		=> '(E)',
 	'ACP_CUSTOMCODE_SHOW_TEMPLATE_EVENTS_LOCATIONS'	=> 'Mostra le posizioni degli eventi template di Custom code',
-	'ACP_CUSTOMCODE_HIDE_TEMPLATE_EVENTS_LOCATIONS'	=> 'Nascondi le posizioni degli eventi di Custom code',
 	'ACP_CUSTOMCODE_DIRECTORY_NOT_CREATED'		=> 'Impossibile creare la cartella %s',
 	'ACP_CUSTOMCODE_DIRECTORY_NOT_DELETED'		=> 'Impossibile rimuovere la cartella %s',
 	'ACP_CUSTOMCODE_DIRECTORY_LIST_FAIL'		=> 'Impossibile elencare il contenuto della cartella %s',
 	'ACP_CUSTOMCODE_FILE_EXTENSION_NOT_ALLOWED'	=> 'Per motivi di sicurezza, l’estensione file %s non è permessa.',
 	'ACP_CUSTOMCODE_PHP_NOT_ALLOWED'			=> 'Per motivi di sicurezza, l’inclusione di php non è permessa.',
 	'ACP_CUSTOMCODE_INCLUDEPHP_WARNING'			=> 'Attenzione! Per motivi di sicurezza, il codice personalizzato non sarà incluso nei template se è attiva nella board l’inclusione di codice PHP con le istruzioni PHP e INCLUDEPHP. Controllare le proprie %simpostazioni di sicurezza%s per disattivare le istruzioni PHP e INCLUDEPHP.',
-));
+]);

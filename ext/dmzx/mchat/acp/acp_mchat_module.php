@@ -13,14 +13,17 @@ namespace dmzx\mchat\acp;
 
 class acp_mchat_module
 {
+	public $tpl_name;
+	public $page_title;
 	public $u_action;
 
 	public function main($id, $mode)
 	{
-		global $phpbb_container, $user;
+		global $phpbb_container;
 
 		// Add the ACP lang file
-		$user->add_lang_ext('dmzx/mchat', array('mchat_acp', 'mchat_ucp'));
+		$language = $phpbb_container->get('language');
+		$language->add_lang(['mchat_acp', 'mchat_ucp'], 'dmzx/mchat');
 
 		// Set template
 		$this->tpl_name = 'acp_mchat_' . strtolower($mode);

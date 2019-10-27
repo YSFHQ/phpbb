@@ -60,13 +60,11 @@ class release_2_0_6 extends \phpbb\db\migration\migration
 			array('config.add', array('rt_unread_only', 0)),
 			array('config.add', array('rt_alt_location', 0)),
 			array('config.update', array('rt_version', '2.0.6')),
-
 			array('permission.add', array('u_rt_view')),
 			array('permission.add', array('u_rt_enable')),
 			array('permission.add', array('u_rt_alt_location')),
 			array('permission.add', array('u_rt_sort_start_time')),
 			array('permission.add', array('u_rt_unread_only')),
-			
 			array('permission.permission_set', array('ROLE_USER_FULL', 'u_rt_view')),
 			array('permission.permission_set', array('ROLE_USER_FULL', 'u_rt_enable')),
 			array('permission.permission_set', array('ROLE_USER_FULL', 'u_rt_alt_location')),

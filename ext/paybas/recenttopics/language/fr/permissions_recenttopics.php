@@ -1,14 +1,15 @@
 <?php
 /**
- *
- * @package Recent Topics Extension
- * French translation by Galixte (http://www.galixte.com)
- *
- * @copyright (c) 2015 PayBas
- * @license GNU General Public License, version 2 (GPL-2.0)
- *
- * Based on the original NV Recent Topics by Joas Schilling (nickvergessen)
- */
+*
+* Recent Topics extension for the phpBB Forum Software package.
+* French translation by by ForumsFaciles (http://www.forumsfaciles.fr) &  Galixte (http://www.galixte.com) & Sajaki (http://www.avathar.be)
+*
+* @copyright (c) 2015 PayBas
+* @license GNU General Public License, version 2 (GPL-2.0)
+*
+* Based on the original NV Recent Topics by Joas Schilling (nickvergessen)
+*
+*/
 
 /**
 * DO NOT CHANGE
@@ -39,12 +40,12 @@ if (empty($lang) || !is_array($lang))
 // ’ « » “ ” …
 //
 
-$lang = array_merge(
-	$lang, array(
-	'ACL_U_RT_VIEW'            => 'Peut voir les «sujets récents».',
-	'ACL_U_RT_ENABLE'          => 'Peut activer/désactiver les «sujets récents».',
-	'ACL_U_RT_LOCATION'        => 'Peut changer l’emplacement du bloc «sujets récents».',
-	'ACL_U_RT_SORT_START_TIME' => 'Peut modifier le mode de tri des «sujets récents».',
-	'ACL_U_RT_UNREAD_ONLY'     => 'Peut afficher uniquement les sujets non lus dans les «sujets récents».',
+$lang = array_merge($lang, array(
+	'ACL_U_RT_VIEW'            => 'Peut voir la liste des sujets récents.',
+	'ACL_U_RT_ENABLE'          => 'Peut activer/désactiver l’affichage de la liste des sujets récents.',
+	'ACL_U_RT_LOCATION'        => 'Peut modifier l’emplacement de la liste des sujets récents.',
+	'ACL_U_RT_SORT_START_TIME' => 'Peut modifier le mode de tri de la liste des sujets récents.',
+	'ACL_U_RT_UNREAD_ONLY'     => 'Peut afficher uniquement les sujets non lus dans la liste des sujets récents.',
+	'ACL_U_RT_NUMBER'          => 'Peut définir le nombre de sujets par page.',
 	)
 );

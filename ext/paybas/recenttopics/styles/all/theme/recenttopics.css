@@ -1,7 +1,7 @@
 /* Recent Topics
 --------------------------------------------- */
 
-div.phpbbsection. {
+#phpbbsection {
     overflow: hidden;
 }
 
@@ -46,6 +46,7 @@ div.phpbbsection. {
 
 #recent-topics li.row dl {
     padding: 9px 5px 5px 0;
+    position: relative;
 }
 
 #recent-topics li.row dl:after {
@@ -92,4 +93,12 @@ div.phpbbsection. {
 #recent-topics dd.status-icons > span {
     float: right;
     margin-left: 2px;
+}
+
+#recenttopicstop  .action-bar {
+    margin-bottom: 0.5em;
+}
+
+#recenttopicsbottom .forabg + .action-bar {
+    margin-top: 0.5em;
 }

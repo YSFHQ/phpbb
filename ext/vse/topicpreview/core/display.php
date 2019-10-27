@@ -12,6 +12,7 @@ namespace vse\topicpreview\core;
 
 use phpbb\config\config;
 use phpbb\event\dispatcher_interface;
+use phpbb\language\language;
 use phpbb\template\template;
 use phpbb\user;
 use vse\topicpreview\core\trim\trim;
@@ -24,8 +25,14 @@ class display extends base
 	/** @var int default height and width of topic preview avatars */
 	const AVATAR_SIZE = 60;
 
+	/** @var string */
+	const NO_AVATAR = 'no-avatar';
+
 	/** @var dispatcher_interface */
 	protected $dispatcher;
+
+	/** @var language */
+	protected $language;
 
 	/** @var template */
 	protected $template;
@@ -41,14 +48,16 @@ class display extends base
 	 *
 	 * @param config               $config     Config object
 	 * @param dispatcher_interface $dispatcher Event dispatcher object
+	 * @param language             $language   Language object
 	 * @param template             $template   Template object
 	 * @param trim                 $trim       Trim text object
 	 * @param user                 $user       User object
 	 * @param string               $root_path
 	 */
-	public function __construct(config $config, dispatcher_interface $dispatcher, template $template, trim $trim, user $user, $root_path)
+	public function __construct(config $config, dispatcher_interface $dispatcher, language $language, template $template, trim $trim, user $user, $root_path)
 	{
 		$this->dispatcher = $dispatcher;
+		$this->language = $language;
 		$this->template = $template;
 		$this->trim = $trim;
 		$this->root_path = $root_path;
@@ -65,7 +74,7 @@ class display extends base
 		// Load our language file (only needed if showing last post text)
 		if ($this->last_post_enabled())
 		{
-			$this->user->add_lang_ext('vse/topicpreview', 'topic_preview');
+			$this->language->add_lang('topic_preview', 'vse/topicpreview');
 		}
 
 		$this->template->assign_vars(array(
@@ -73,7 +82,7 @@ class display extends base
 			'TOPICPREVIEW_THEME'	=> $this->get_theme(),
 			'TOPICPREVIEW_DELAY'	=> $this->config['topic_preview_delay'],
 			'TOPICPREVIEW_DRIFT'	=> $this->config['topic_preview_drift'],
-			'TOPICPREVIEW_WIDTH'	=> (!empty($this->config['topic_preview_width'])) ? $this->config['topic_preview_width'] : self::PREVIEW_SIZE,
+			'TOPICPREVIEW_WIDTH'	=> !empty($this->config['topic_preview_width']) ? $this->config['topic_preview_width'] : self::PREVIEW_SIZE,
 		));
 	}
 
@@ -164,7 +173,7 @@ class display extends base
 		}
 
 		// If avatar string is empty, fall back to no_avatar.gif
-		return $avatar ?: '<img class="avatar" src="' . $this->root_path . 'styles/' . rawurlencode($this->user->style['style_path']) . '/theme/images/no_avatar.gif" width="' . self::AVATAR_SIZE . '" height="' . self::AVATAR_SIZE . '" alt="' . $this->user->lang('USER_AVATAR') . '" />';
+		return $avatar ?: self::NO_AVATAR;
 	}
 
 	/**

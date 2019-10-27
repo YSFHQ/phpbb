@@ -21,6 +21,7 @@ if (empty($lang) || !is_array($lang))
 
 $lang = array_merge(
 	$lang, array(
-	'RECENT_TOPICS'    => 'Tópicos Recentes',
+	'RECENT_TOPICS'     => 'Tópicos Recentes',
+	'RT_NO_TOPICS'		=> 'Não há novos tópicos a serem exibidos.',
 	)
 );

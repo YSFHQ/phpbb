@@ -1,19 +1,24 @@
 <?php
 /**
- *
- * @package Recent Topics Extension
- * French translation by Galixte (http://www.galixte.com), Sajaki (http://www.avathar.be)
- *
- * @copyright (c) 2015 PayBas
- * @license GNU General Public License, version 2 (GPL-2.0)
- *
- * Based on the original NV Recent Topics by Joas Schilling (nickvergessen)
- */
+*
+* Recent Topics extension for the phpBB Forum Software package.
+* French translation by by ForumsFaciles (http://www.forumsfaciles.fr) &  Galixte (http://www.galixte.com) & Sajaki (http://www.avathar.be)
+*
+* @copyright (c) 2015 PayBas
+* @license GNU General Public License, version 2 (GPL-2.0)
+*
+* Based on the original NV Recent Topics by Joas Schilling (nickvergessen)
+*
+*/
 
+/**
+* DO NOT CHANGE
+*/
 if (!defined('IN_PHPBB'))
 {
 	exit;
 }
+
 if (empty($lang) || !is_array($lang))
 {
 	$lang = array();
@@ -35,16 +40,17 @@ if (empty($lang) || !is_array($lang))
 // ’ « » “ ” …
 //
 
-$lang = array_merge(
-	$lang, array(
-	'RT_ENABLE'              => 'Afficher les «sujets récents»',
-	'RT_LOCATION'            => 'Sélectionner emplacement',
-	'RT_LOCATION_EXP'        => 'Sélectionner emplacement des «sujets récents»',
-	'RT_SORT_START_TIME'     => 'Trier les «sujets récents» selon la date de création du sujet',
-	'RT_SORT_START_TIME_EXP' => 'Trie selon date de création du sujet, (sinon au lieu la date du dernier message).',
-	'RT_UNREAD_ONLY'         => 'Afficher uniquement les sujets non lus dans les « sujets récents »',
-	'RT_TOP'                 => 'Afficher en tête',
-	'RT_BOTTOM'              => 'Afficher en bas',
-	'RT_SIDE'                => 'Afficher sur le coté',
+$lang = array_merge($lang, array(
+	'RT_ENABLE'              => 'Afficher la liste des sujets récents',
+	'RT_TOP'                 => 'Au-dessus de la liste des forums',
+	'RT_BOTTOM'              => 'En dessous de la liste des forums',
+	'RT_SIDE'                => 'Sur le coté droit de la liste des forums',
+	'RT_LOCATION'            => 'Sélectionner l’emplacement de la liste des sujets récents',
+	'RT_LOCATION_EXP'        => 'Permet de sélectionner l’emplacement où afficher la liste des sujets récents.',
+	'RT_NUMBER'              => 'Nombre de sujets récents affichés',
+	'RT_NUMBER_EXP'          => 'Permet de saisir le nombre maximum de sujets récents à afficher par page.',
+	'RT_SORT_START_TIME'     => 'Trier les sujets récents',
+	'RT_SORT_START_TIME_EXP' => 'Permet d’afficher les sujets récents triés selon la date de création du sujet en lieu et place de la date du dernier message.',
+	'RT_UNREAD_ONLY'         => 'Afficher uniquement les sujets non lus dans la liste des sujets récents',
 	)
 );

@@ -22,5 +22,6 @@ if (empty($lang) || !is_array($lang))
 $lang = array_merge(
 	$lang, array(
 	'RECENT_TOPICS'    => 'أحدث المواضيع',
+	'RT_NO_TOPICS'		=> 'لا توجد مواضيع جديدة لعرضها.',
 	)
 );

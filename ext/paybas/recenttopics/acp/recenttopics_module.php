@@ -10,12 +10,14 @@
 
 namespace paybas\recenttopics\acp;
 
+use paybas\recenttopics\core\admin;
+
 /**
  * Class recenttopics_module
  *
  * @package paybas\recenttopics\acp
  */
-class recenttopics_module
+class recenttopics_module extends admin
 {
 	public $u_action;
 
@@ -25,30 +27,44 @@ class recenttopics_module
 	 */
 	public function main($id, $mode)
 	{
-		global $config, $phpbb_extension_manager, $request, $template, $user, $db;
+		global $config, $phpbb_extension_manager, $request, $template, $user, $db, $phpbb_container;
 
-		$user->add_lang(array('acp/common', 'ucp', 'viewforum'));
+		$language = $phpbb_container->get('language');
+		$language->add_lang('acp/common');
+		$language->add_lang('ucp');
+		$language->add_lang('viewforum');
+
 		$this->tpl_name = 'acp_recenttopics';
-		$this->page_title = $user->lang('RECENT_TOPICS');
+		$this->page_title = $language->lang('RECENT_TOPICS');
 
 		$form_key = 'acp_recenttopics';
 		add_form_key($form_key);
+
+		//version check
+		$ext_manager = $phpbb_container->get('ext.manager');
+		$ext_meta_manager = $ext_manager->create_extension_metadata_manager('paybas/recenttopics', $phpbb_container->get('template'));
+		$meta_data  = $ext_meta_manager->get_metadata();
+		$ext_version  = $meta_data['version'];
+		$latest_version  = $this->version_check($meta_data, $request->variable('versioncheck_force', false));
 
 		if ($request->is_set_post('submit'))
 		{
 			if (!check_form_key($form_key))
 			{
-				trigger_error($user->lang('FORM_INVALID') . adm_back_link($this->u_action), E_USER_WARNING);
+				trigger_error($language->lang('FORM_INVALID') . adm_back_link($this->u_action), E_USER_WARNING);
 			}
 
 			/*
 			* acp options for everyone
 			*/
-			$rt_number = $request->variable('rt_number', 5);
-			$config->set('rt_number', $rt_number);
 
+			//enable-disable paging
 			$rt_page_number = $request->variable('rt_page_number', '');
 			$config->set('rt_page_number', $rt_page_number == 'on' ? 1 : 0 );
+
+			// maximum number of pages
+			$rt_page_numbermax = $request->variable('rt_page_numbermax', 0);
+			$config->set('rt_page_numbermax', $rt_page_numbermax);
 
 			$rt_min_topic_level = $request->variable('rt_min_topic_level', 0);
 			$config->set('rt_min_topic_level', $rt_min_topic_level);
@@ -67,6 +83,10 @@ class recenttopics_module
 			/*
 			 *  default positions, modifiable by ucp
 	         */
+			//number of most recent topics shown per page
+			$rt_number = $request->variable('rt_number', 5);
+			$config->set('rt_number', $rt_number);
+
 			$rt_enable = $request->variable('rt_enable', 0);
 			$config->set('rt_index', $rt_enable);
 
@@ -79,32 +99,14 @@ class recenttopics_module
 			$rt_unread_only = $request->variable('rt_unread_only', false);
 			$config->set('rt_unread_only', $rt_unread_only);
 
-			trigger_error($user->lang('CONFIG_UPDATED') . adm_back_link($this->u_action));
-		}
-
-		$sql='';
-		//reset user preferences
-		if ($request->is_set_post('rt_reset_default'))
-		{
-			$rt_unread_only = isset($config['rt_unread_only']) ? ($config['rt_unread_only']=='' ? 0 :$config['rt_unread_only'])  : 0;
-			$rt_sort_start_time = isset($config['rt_sort_start_time']) ?  ($config['rt_sort_start_time']=='' ? 0 : $config['rt_sort_start_time'])  : 0;
-			$rt_enable =  isset($config['rt_index']) ? ($config['rt_index']== '' ? 0 : $config['rt_index']) : 0;
-			$rt_location = $config['rt_location'];
-
-			$sql = 'UPDATE ' . USERS_TABLE . " SET
-			user_rt_enable = '" . (int) $rt_enable . "',
-			user_rt_sort_start_time = '" . (int) $rt_sort_start_time . "',
-			user_rt_unread_only = '" . (int) $rt_unread_only . "',
-			user_rt_location =  '" . $rt_location . "'" ;
-
-			$db->sql_query($sql);
+			trigger_error($language->lang('CONFIG_UPDATED') . adm_back_link($this->u_action));
 		}
 
 		$topic_types = array (
-			0 => $user->lang('POST'),
-			1 => $user->lang('POST_STICKY'),
-			2 => $user->lang('ANNOUNCEMENTS'),
-			3 => $user->lang('GLOBAL_ANNOUNCEMENT'),
+			0 => $language->lang('POST') ,
+			1 => $language->lang('POST_STICKY'),
+			2 => $language->lang('ANNOUNCEMENTS'),
+			3 => $language->lang('GLOBAL_ANNOUNCEMENT'),
 		);
 
 		foreach ($topic_types as $key => $topic_type)
@@ -113,16 +115,16 @@ class recenttopics_module
 				'topiclevel_row',
 				array(
 					'VALUE'    => $key,
-					'SELECTED' => ($config['rt_min_topic_level'] == $key) ? 'selected="selected"' : '',
+					'SELECTED' => ($config['rt_min_topic_level'] == $key) ? ' selected="selected"' : '',
 					'OPTION'   => $topic_type,
 				)
 			);
 		}
 
 		$display_types = array (
-			'RT_TOP'    => $user->lang('RT_TOP'),
-			'RT_BOTTOM' => $user->lang('RT_BOTTOM'),
-			'RT_SIDE'   => $user->lang('RT_SIDE'),
+			'RT_TOP'    => $language->lang('RT_TOP'),
+			'RT_BOTTOM' => $language->lang('RT_BOTTOM'),
+			'RT_SIDE'   => $language->lang('RT_SIDE'),
 		);
 
 		foreach ($display_types as $key => $display_type)
@@ -131,7 +133,7 @@ class recenttopics_module
 				'location_row',
 				array(
 					'VALUE'    => $key,
-					'SELECTED' => ($config['rt_location'] == $key) ? 'selected="selected"' : '',
+					'SELECTED' => ($config['rt_location'] == $key) ? ' selected="selected"' : '',
 					'OPTION'   => $display_type,
 				)
 			);
@@ -139,17 +141,94 @@ class recenttopics_module
 
 		$template->assign_vars(
 			array(
-				'RT_ANTI_TOPICS'     => isset($config['rt_anti_topics']) ? $config['rt_anti_topics'] : '',
-				'RT_NUMBER'          => isset($config['rt_number']) ? $config['rt_number'] : '',
-				'RT_PAGE_NUMBER'     => ((isset($config['rt_page_number']) ? $config['rt_page_number'] : '') == '1') ? 'checked="checked"' : '',
-				'RT_PARENTS'         => isset($config['rt_parents']) ? $config['rt_parents'] : false,
-				'RT_UNREAD_ONLY'     => isset($config['rt_unread_only']) ? $config['rt_unread_only'] : false,
-				'RT_SORT_START_TIME' => isset($config['rt_sort_start_time']) ? $config['rt_sort_start_time'] : false,
+				'U_ACTION'           => $this->u_action,
 				'RT_INDEX'           => isset($config['rt_index']) ? $config['rt_index'] : false,
+				'RT_PAGE_NUMBER'     => ((isset($config['rt_page_number']) ? $config['rt_page_number'] : '') == '1') ? 'checked="checked"' : '',
+				'RT_PAGE_NUMBERMAX'  => isset($config['rt_page_numbermax']) ? $config['rt_page_numbermax'] : '',
+				'RT_ANTI_TOPICS'     => isset($config['rt_anti_topics']) ? $config['rt_anti_topics'] : '',
+				'RT_PARENTS'         => isset($config['rt_parents']) ? $config['rt_parents'] : false,
+				'RT_NUMBER'          => isset($config['rt_number']) ? $config['rt_number'] : '',
+				'RT_SORT_START_TIME' => isset($config['rt_sort_start_time']) ? $config['rt_sort_start_time'] : false,
+				'RT_UNREAD_ONLY'     => isset($config['rt_unread_only']) ? $config['rt_unread_only'] : false,
 				'RT_ON_NEWSPAGE'     => isset($config['rt_on_newspage']) ? $config['rt_on_newspage'] : false,
 				'S_RT_NEWSPAGE'      => $phpbb_extension_manager->is_enabled('nickvergessen/newspage'),
-				'U_ACTION'           => $this->u_action,
+				'S_RT_OK'            => version_compare($ext_version, $latest_version, '=='),
+				'S_RT_OLD'           => version_compare($ext_version, $latest_version, '<'),
+				'S_RT_DEV'           => version_compare($ext_version, $latest_version, '>'),
+				'EXT_VERSION'          => $ext_version,
+				'U_VERSIONCHECK_FORCE' => append_sid($this->u_action . '&amp;versioncheck_force=1'),
+				'RT_LATESTVERSION'     => $latest_version,
 			)
 		);
+
+		//reset user preferences
+		if ($request->is_set_post('rt_reset_default'))
+		{
+			$rt_unread_only = isset($config['rt_unread_only']) ? ($config['rt_unread_only']=='' ? 0 :$config['rt_unread_only'])  : 0;
+			$rt_sort_start_time = isset($config['rt_sort_start_time']) ?  ($config['rt_sort_start_time']=='' ? 0 : $config['rt_sort_start_time'])  : 0;
+			$rt_enable =  isset($config['rt_index']) ? ($config['rt_index']== '' ? 0 : $config['rt_index']) : 0;
+			$rt_location = $config['rt_location'];
+			$rt_number = isset($config['rt_number']) ? ($config['rt_number']=='' ? 0 :$config['rt_number'])  : 5;
+
+			$sql = 'UPDATE ' . USERS_TABLE . ' SET
+			user_rt_enable = ' . (int) $rt_enable . ',
+			user_rt_sort_start_time = ' . (int) $rt_sort_start_time . ',
+			user_rt_unread_only = ' . (int) $rt_unread_only . ',
+			user_rt_number = ' . (int) $rt_number . ",
+			user_rt_location =  '" . $db->sql_escape($rt_location) . "'" ;
+
+			$db->sql_query($sql);
+		}
+
+	}
+
+	/**
+	 * retrieve latest version
+	 *
+	 * @param  bool $force_update Ignores cached data. Defaults to false.
+	 * @param  int  $ttl          Cache version information for $ttl seconds. Defaults to 86400 (24 hours).
+	 * @return bool
+	 */
+	public final function version_check($meta_data, $force_update = false, $ttl = 86400)
+	{
+		global $user, $cache, $phpbb_extension_manager, $path_helper;
+
+		$pemfile = '';
+		$versionurl = ($meta_data['extra']['version-check']['ssl'] == '1' ? 'https://': 'http://') .
+			$meta_data['extra']['version-check']['host'].$meta_data['extra']['version-check']['directory'].'/'.$meta_data['extra']['version-check']['filename'];
+		$ssl = $meta_data['extra']['version-check']['ssl'] == '1' ? true: false;
+		if ($ssl)
+		{
+			//https://davidwalsh.name/php-ssl-curl-error
+			$pemfile = $phpbb_extension_manager->get_extension_path('paybas/recenttopics', true) . 'core/mozilla.pem';
+			if (!(file_exists($pemfile) && is_readable($pemfile)))
+			{
+				$ssl = false;
+			}
+		}
+
+		//get latest productversion from cache
+		$latest_version = $cache->get('recenttopics_versioncheck');
+
+		//if update is forced or cache expired then make the call to refresh latest productversion
+		if ($latest_version === false || $force_update)
+		{
+			$data = parent::curl($versionurl, $pemfile, $ssl, false, false, false);
+			if (0 === count($data) )
+			{
+				$cache->destroy('recenttopics_versioncheck');
+				return false;
+			}
+
+			$response = $data['response'];
+			$latest_version = json_decode($response, true);
+			$latest_version = $latest_version['stable']['3.2']['current'];
+
+			//put this info in the cache
+			$cache->put('recenttopics_versioncheck', $latest_version, $ttl);
+
+		}
+
+		return $latest_version;
 	}
 }

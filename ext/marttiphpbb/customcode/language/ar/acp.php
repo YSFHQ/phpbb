@@ -2,7 +2,7 @@
 
 /**
 * phpBB Extension - marttiphpbb customcode
-* @copyright (c) 2014 marttiphpbb <info@martti.be>
+* @copyright (c) 2014 - 2018 marttiphpbb <info@martti.be>
 * @license GNU General Public License, version 2 (GPL-2.0)
 *
 * Translated By : Bassel Taha Alhitary - www.alhitary.net
@@ -15,27 +15,13 @@ if (!defined('IN_PHPBB'))
 
 if (empty($lang) || !is_array($lang))
 {
-	$lang = array();
+	$lang = [];
 }
 
-// DEVELOPERS PLEASE NOTE
-//
-// All language files should use UTF-8 as their encoding and the files must not contain a BOM.
-//
-// Placeholders can now contain order information, e.g. instead of
-// 'Page %s of %s' you can (and should) write 'Page %1$s of %2$s', this allows
-// translators to re-order the output of data while ensuring it remains correct
-//
-// You do not need this where single placeholders are used, e.g. 'Message %d' is fine
-// equally where a string contains only two placeholders which are used to wrap text
-// in a url you again do not need to specify an order e.g., 'Click %sHERE%s' is fine
-//
-// Some characters you may want to copy&paste:
-// ’ » “ ” …
+$lang = array_merge($lang, [
 
-$lang = array_merge($lang, array(
-
-	'ACP_CUSTOMCODE_INCLUDE_EXAMPLE'			=> 'لإضافة الملفات الخاصة بك , يجب أن يحتوي الملف على <code>../../../../../../%1$s/</code><p><code>&lt;!-- INCLUDE ../../../../../../%1$s/my_file.html --></code></p>',
+	'ACP_CUSTOMCODE_INCLUDE_EXAMPLE'			=> 'لإضافة الملفات الخاصة بك , يجب أن يحتوي الملف على (fix this)',
+	'ACP_CUSTOMCODE_EXAMPLE_FILE'				=> 'my_file.html',
 	'ACP_CUSTOMCODE_CREATE_FILE'				=> 'إنشاء ملف',
 	'ACP_CUSTOMCODE_DELETE'						=> 'حذف',
 	'ACP_CUSTOMCODE_DELETE_FILE_NAME'			=> 'حذف %s',
@@ -67,10 +53,9 @@ $lang = array_merge($lang, array(
 	'ACP_CUSTOMCODE_FILE_SIZE_FAIL'				=> 'فشل في الحصول على حجم الملف من %s.',
 	'ACP_CUSTOMCODE_EVENT_FILE_INDICATOR'		=> '(انجليزي)',
 	'ACP_CUSTOMCODE_SHOW_TEMPLATE_EVENTS_LOCATIONS'	=> 'إظهار أماكن أحداث القالب',
-	'ACP_CUSTOMCODE_HIDE_TEMPLATE_EVENTS_LOCATIONS'	=> 'إخفاء أماكن أحداث القالب',
 	'ACP_CUSTOMCODE_DIRECTORY_NOT_CREATED'		=> 'فشل في إنشاء المجلد %s',
 	'ACP_CUSTOMCODE_DIRECTORY_NOT_DELETED'		=> 'فشل في حذف المجلد %s',
 	'ACP_CUSTOMCODE_DIRECTORY_LIST_FAIL'		=> 'فشل في عرض محتوى المجلد %s',
 	'ACP_CUSTOMCODE_FILE_EXTENSION_NOT_ALLOWED'	=> 'نوع الملف %s الذي تريد إنشائه غير مسموح به لدواعي أمنية.',
 	'ACP_CUSTOMCODE_PHP_NOT_ALLOWED'			=> 'غير مسموح بأن يحتوي الملف على لغة الـ php لدواعي أمنية.',
-));
+]);

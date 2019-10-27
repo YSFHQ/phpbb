@@ -1,14 +1,15 @@
 <?php
 /**
- *
- * @package Recent Topics Extension
- * French translation by ForumsFaciles (http://www.forumsfaciles.fr) &  Galixte (http://www.galixte.com)
- *
- * @copyright (c) 2015 PayBas
- * @license GNU General Public License, version 2 (GPL-2.0)
- *
- * Based on the original NV Recent Topics by Joas Schilling (nickvergessen)
- */
+*
+* Recent Topics extension for the phpBB Forum Software package.
+* French translation by by ForumsFaciles (http://www.forumsfaciles.fr) &  Galixte (http://www.galixte.com) & Sajaki (http://www.avathar.be)
+*
+* @copyright (c) 2015 PayBas
+* @license GNU General Public License, version 2 (GPL-2.0)
+*
+* Based on the original NV Recent Topics by Joas Schilling (nickvergessen)
+*
+*/
 
 /**
 * DO NOT CHANGE
@@ -39,8 +40,8 @@ if (empty($lang) || !is_array($lang))
 // ’ « » “ ” …
 //
 
-$lang = array_merge(
-	$lang, array(
-	'RECENT_TOPICS'    => 'Sujets récents',
+$lang = array_merge($lang, array(
+	'RECENT_TOPICS'     => 'Sujets récents',
+	'RT_NO_TOPICS'		=> 'Il n’y a aucun nouveau sujet à afficher.',
 	)
 );
