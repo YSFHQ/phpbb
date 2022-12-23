@@ -2,10 +2,10 @@
     "name": "brokencrust/deletemyaccount",
     "type": "phpbb-extension",
     "description": "Adds a new UCP tab that allows memebers to delete their own account",
-    "homepage": "https://brokencrust.com/exts/delete-my-account",
-    "version": "1.0.0",
-    "time": "2017-05-21",
-    "license": "GPL-2.0",
+    "homepage": "https://brokencrust.com/#delete-my-account",
+    "version": "1.0.1",
+    "time": "2020-06-15",
+    "license": "GPL-2.0-only",
     "authors": [
         {
             "name": "BrokenCrust",
@@ -16,18 +16,19 @@
     ],
     "require": {
         "php": ">=5.3.5",
-        "composer/installers": "~1.0",
-        "phpbb/phpbb": ">=3.2.0,<3.3.0@dev"
+        "composer/installers": "~1.0.0",
+        "phpbb/phpbb": ">=3.2.0"
     },
     "extra": {
         "display-name": "Delete My Account",
         "soft-require": {
-            "phpbb/phpbb": ">=3.2.0,<3.3.0@dev"
+            "phpbb/phpbb": ">=3.2.0"
         },
         "version-check": {
             "host": "www.phpbb.com",
             "directory": "/customise/db/extension/delete_my_account_2",
-            "filename": "version_check"
+            "filename": "version_check",
+            "ssl": true
         }
     }
 }

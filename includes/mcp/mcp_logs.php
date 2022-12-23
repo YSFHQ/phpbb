@@ -39,12 +39,13 @@ class mcp_logs
 		global $config, $phpbb_container, $phpbb_log;
 
 		$user->add_lang('acp/common');
+		$this->p_master->add_mod_info('acp');
 
 		$action = $request->variable('action', array('' => ''));
 
 		if (is_array($action))
 		{
-			list($action, ) = each($action);
+			$action = key($action);
 		}
 		else
 		{
@@ -178,7 +179,7 @@ class mcp_logs
 		$sql_sort = $sort_by_sql[$sort_key] . ' ' . (($sort_dir == 'd') ? 'DESC' : 'ASC');
 
 		$keywords = $request->variable('keywords', '', true);
-		$keywords_param = !empty($keywords) ? '&amp;keywords=' . urlencode(htmlspecialchars_decode($keywords)) : '';
+		$keywords_param = !empty($keywords) ? '&amp;keywords=' . urlencode(html_entity_decode($keywords, ENT_COMPAT)) : '';
 
 		// Grab log data
 		$log_data = array();

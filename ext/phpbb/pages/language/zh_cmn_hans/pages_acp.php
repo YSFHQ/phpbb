@@ -80,6 +80,7 @@ $lang = array_merge($lang, array(
 	'ACP_PAGES_FORM_TITLE_EXPLAIN'		=> '必填项',
 	'ACP_PAGES_FORM_DESC'				=> '单页描述',
 	'ACP_PAGES_FORM_DESC_EXPLAIN'		=> '只显示在ACP的单页列表中。',
+	'ACP_PAGES_FORM_DESC_DISPLAY'		=> 'Display as link title',
 	'ACP_PAGES_FORM_ROUTE'				=> '单页 URL 路径',
 	'ACP_PAGES_FORM_ROUTE_EXPLAIN'		=> '路径 <strong>route</strong> 是唯一的标识，放在单页 URL 的最后，用于表示单页的链接。 例如 <samp>http://www.phpbb.com/<strong>route</strong></samp>。 字母，数字，连字符号和下划线。这是必填项。',
 	'ACP_PAGES_FORM_CONTENT'			=> '单页内容',
@@ -92,12 +93,14 @@ $lang = array_merge($lang, array(
 	'ACP_PAGES_FORM_LINKS'				=> '单页链接位置',
 	'ACP_PAGES_FORM_LINKS_EXPLAIN'		=> '选择一个或者多个位置，用于显示页面链接，使用 CTRL+CLICK （或者 Mac 的 CMD+CLICK ） 来选择多个项目。 ',
 	'ACP_PAGES_FORM_ICON_FONT'			=> '单页链接图标',
-	'ACP_PAGES_FORM_ICON_FONT_EXPLAIN'	=> '输入一个 <a href="https://fortawesome.github.io/Font-Awesome/icons/" target="_blank">Font Awesome</a> 图标的名字，用于单页链接。留空则使用单页传统的 CSS/GIF 图标。',
+	'ACP_PAGES_FORM_ICON_FONT_EXPLAIN'	=> '输入一个 <strong><a href="%s" target="_blank">Font Awesome</a></strong> 图标的名字，用于单页链接。留空则使用单页传统的 CSS/GIF 图标。',
 	'ACP_PAGES_FORM_DISPLAY'			=> '显示单页',
 	'ACP_PAGES_FORM_DISPLAY_EXPLAIN'	=> '若设置为否，单页将无法访问。 （注：管理员总是能够访问单页，可以预览页面内容。）',
 	'ACP_PAGES_FORM_GUESTS'				=> '游客可访问单页。',
 	'ACP_PAGES_FORM_GUESTS_EXPLAIN'		=> '若设置为否，只有注册用户可以访问此单页。',
 	'ACP_PAGES_FORM_VIEW_PAGE'			=> '单页链接',
+	'ACP_PAGES_TITLE_SWITCH'			=> '首先显示页面标题',
+	'ACP_PAGES_TITLE_SWITCH_EXPLAIN'	=> '浏览器默认在网站标题之后显示页面标题 <samp style="white-space: nowrap">“Site Name - Page Title”</samp>。 启用这个选项会让页面标题显示在网站标题的前面 <samp style="white-space: nowrap">“Page Title - Site Name”</samp>。',
 	'PARSE_HTML'						=> '解析 HTML',
 
 	// Page link location names

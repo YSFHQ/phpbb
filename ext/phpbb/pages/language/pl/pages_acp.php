@@ -79,6 +79,7 @@ $lang = array_merge($lang, array(
 	'ACP_PAGES_FORM_TITLE_EXPLAIN'		=> 'To pole jest wymagane.',
 	'ACP_PAGES_FORM_DESC'				=> 'Opis strony',
 	'ACP_PAGES_FORM_DESC_EXPLAIN'		=> 'To będzie wyświetlane tylko w panel administracyjnym.',
+	'ACP_PAGES_FORM_DESC_DISPLAY'		=> 'Display as link title',
 	'ACP_PAGES_FORM_ROUTE'				=> 'Ścieżka URL strony',
 	'ACP_PAGES_FORM_ROUTE_EXPLAIN'		=> '<strong>Ścieżka</strong> jest unikalnym indentyfikatorem strony, który określa link do strony, np. <samp>http://www.phpbb.com/<strong>route</strong></samp>. Dozwolone są tylko litery, cyfry, myślniki i podkreślenia. To pole jest wymagane.',
 	'ACP_PAGES_FORM_CONTENT'			=> 'Zawartość strony',
@@ -91,12 +92,14 @@ $lang = array_merge($lang, array(
 	'ACP_PAGES_FORM_LINKS'				=> 'Lokalizacja linku do strony',
 	'ACP_PAGES_FORM_LINKS_EXPLAIN'		=> 'Wybierz jedno lub wiele miejsc, w których ma wyświetlać się link do tej strony. Aby zaznaczyć wiele miejsc, kliknij i przytrzymaj przycisk "Ctrl".',
 	'ACP_PAGES_FORM_ICON_FONT'			=> 'Page link icon',
-	'ACP_PAGES_FORM_ICON_FONT_EXPLAIN'	=> 'Enter the name of a <a href="https://fortawesome.github.io/Font-Awesome/icons/" target="_blank">Font Awesome</a> icon to use with the page link. Leave this field blank to use Pages’ traditional CSS/GIF image icons.',
+	'ACP_PAGES_FORM_ICON_FONT_EXPLAIN'	=> 'Enter the name of a <strong><a href="%s" target="_blank">Font Awesome</a></strong> icon to use with the page link. Leave this field blank to use Pages’ traditional CSS/GIF image icons.',
 	'ACP_PAGES_FORM_DISPLAY'			=> 'Wyświetlanie strony',
 	'ACP_PAGES_FORM_DISPLAY_EXPLAIN'	=> 'Jeśli jest ustawione na "nie", strona nie będzie dostępna. <i>(Uwaga: Administratorzy nadal będą mogli uzyskać dostęp do strony, co jest pomocne np. przy ocenie tworzonej strony.)</i>',
 	'ACP_PAGES_FORM_GUESTS'				=> 'Wyświetlanie strony dla gości',
 	'ACP_PAGES_FORM_GUESTS_EXPLAIN'		=> 'Jeśli jest ustawione na "nie", tylko zarejestrowani użytkownicy będą mieli dostęp do strony.',
 	'ACP_PAGES_FORM_VIEW_PAGE'			=> 'Link do strony',
+	'ACP_PAGES_TITLE_SWITCH'			=> 'Display page title first',
+	'ACP_PAGES_TITLE_SWITCH_EXPLAIN'	=> 'By default browsers will display this page’s title after the site name <samp style="white-space: nowrap">“Site Name - Page Title”</samp>. Enabling this option will display this page’s title before the site name <samp style="white-space: nowrap">“Page Title - Site Name”</samp>.',
 	'PARSE_HTML'						=> 'HTML',
 
 	// Page link location names

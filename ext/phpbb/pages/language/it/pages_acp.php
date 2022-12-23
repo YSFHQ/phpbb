@@ -80,6 +80,7 @@ $lang = array_merge($lang, array(
 	'ACP_PAGES_FORM_TITLE_EXPLAIN'		=> 'Questo è un campo obbligatorio.',
 	'ACP_PAGES_FORM_DESC'				=> 'Descrizione Pagina',
 	'ACP_PAGES_FORM_DESC_EXPLAIN'		=> 'Viene visualizzata solo nell´elenco delle pagine in PCA.',
+	'ACP_PAGES_FORM_DESC_DISPLAY'		=> 'Display as link title',
 	'ACP_PAGES_FORM_ROUTE'				=> 'URL percorso pagina',
 	'ACP_PAGES_FORM_ROUTE_EXPLAIN'		=> 'Il <strong>percorso</strong> è un identificativo univoco utilizzato alla fine dell´URL di una pagina per definire il link alla pagina, ad esempio, <samp>http://www.phpbb.com/<strong>route</strong></samp>. Sono ammessi solo lettere, numeri, trattini e underscore. Questo è un campo obbligatorio.',
 	'ACP_PAGES_FORM_CONTENT'			=> 'Contenuto della pagina',
@@ -92,12 +93,14 @@ $lang = array_merge($lang, array(
 	'ACP_PAGES_FORM_LINKS'				=> 'Posizione link alla pagina',
 	'ACP_PAGES_FORM_LINKS_EXPLAIN'		=> 'Selezionare uno o più luoghi in cui il link a questa pagina putrà apparire. Utilizzare Ctrl + clic (o CMD + clic su Mac) per selezionare/deselezionare più di una voce.',
 	'ACP_PAGES_FORM_ICON_FONT'			=> 'Page link icon',
-	'ACP_PAGES_FORM_ICON_FONT_EXPLAIN'	=> 'Enter the name of a <a href="https://fortawesome.github.io/Font-Awesome/icons/" target="_blank">Font Awesome</a> icon to use with the page link. Leave this field blank to use Pages’ traditional CSS/GIF image icons.',
+	'ACP_PAGES_FORM_ICON_FONT_EXPLAIN'	=> 'Enter the name of a <strong><a href="%s" target="_blank">Font Awesome</a></strong> icon to use with the page link. Leave this field blank to use Pages’ traditional CSS/GIF image icons.',
 	'ACP_PAGES_FORM_DISPLAY'			=> 'Visualizza pagina',
 	'ACP_PAGES_FORM_DISPLAY_EXPLAIN'	=> 'Se impostato su no, la pagina non sarà accessibile. (Nota: Gli amministratori saranno ancora in grado di accedere alla pagina, permettendo loro di visualizzare in anteprima privatamente la pagina mentre lo sviluppo è ancora in essere.)',
 	'ACP_PAGES_FORM_GUESTS'				=> 'Permetti visualizzazione pagina agli ospiti',
 	'ACP_PAGES_FORM_GUESTS_EXPLAIN'		=> 'Se impostato su no, solo gli utenti registrati saranno in grado di accedere alla pagina.',
 	'ACP_PAGES_FORM_VIEW_PAGE'			=> 'Link alla pagina',
+	'ACP_PAGES_TITLE_SWITCH'			=> 'Display page title first',
+	'ACP_PAGES_TITLE_SWITCH_EXPLAIN'	=> 'By default browsers will display this page’s title after the site name <samp style="white-space: nowrap">“Site Name - Page Title”</samp>. Enabling this option will display this page’s title before the site name <samp style="white-space: nowrap">“Page Title - Site Name”</samp>.',
 	'PARSE_HTML'						=> 'Analizza HTML',
 
 	// Page link location names

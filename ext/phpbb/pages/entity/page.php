@@ -16,25 +16,27 @@ namespace phpbb\pages\entity;
 class page implements page_interface
 {
 	/**
-	* Data for this entity
-	*
-	* @var array
-	*	page_id
-	*	page_title
-	*	page_description
-	*	page_route
-	*	page_order
-	*	page_content
-	*	page_content_bbcode_uid
-	*	page_content_bbcode_bitfield
-	*	page_content_bbcode_options
-	*	page_content_allow_html
-	*	page_display
-	*	page_display_to_guests
-	*	page_template
-	*	page_icon_font
-	* @access protected
-	*/
+	 * Data for this entity
+	 *
+	 * @var array
+	 *    page_id
+	 *    page_title
+	 *    page_description
+	 *    page_description_display
+	 *    page_route
+	 *    page_order
+	 *    page_content
+	 *    page_content_bbcode_uid
+	 *    page_content_bbcode_bitfield
+	 *    page_content_bbcode_options
+	 *    page_content_allow_html
+	 *    page_display
+	 *    page_display_to_guests
+	 *    page_title_switch
+	 *    page_template
+	 *    page_icon_font
+	 * @access protected
+	 */
 	protected $data;
 
 	/** @var \phpbb\db\driver\driver_interface */
@@ -87,7 +89,7 @@ class page implements page_interface
 	public function load($id = 0, $route = '')
 	{
 		// Load by id if provided, otherwise default to load by page route
-		$sql_where = ($id <> 0) ? 'page_id = ' . (int) $id : "page_route = '" . $this->db->sql_escape($route) . "'";
+		$sql_where = ($id !== 0) ? 'page_id = ' . (int) $id : "page_route = '" . $this->db->sql_escape($route) . "'";
 
 		// Get page from the database
 		$sql = 'SELECT *
@@ -130,9 +132,11 @@ class page implements page_interface
 			'page_order'					=> 'set_order', // call set_order()
 			'page_title'					=> 'set_title', // call set_title()
 			'page_description'				=> 'set_description', // call set_description()
+			'page_description_display'		=> 'set_description_display', // call set_description_display()
 			'page_route'					=> 'set_route', // call set_route()
 			'page_display'					=> 'set_page_display', // call set_page_display()
 			'page_display_to_guests'		=> 'set_page_display_to_guests', // call set_page_display_to_guests()
+			'page_title_switch'				=> 'set_page_title_switch', // call set_page_title_switch()
 			'page_template'					=> 'set_template', // call set_template()
 			'page_icon_font'				=> 'set_icon_font', // call set_icon_font()
 
@@ -336,6 +340,35 @@ class page implements page_interface
 	}
 
 	/**
+	 * Get description display setting
+	 *
+	 * @return bool display description
+	 * @access public
+	 */
+	public function get_description_display()
+	{
+		return isset($this->data['page_description_display']) && $this->data['page_description_display'];
+	}
+
+	/**
+	 * Set description display setting
+	 *
+	 * @param bool $option Description display setting
+	 * @return page_interface $this object for chaining calls; load()->set()->save()
+	 * @access public
+	 */
+	public function set_description_display($option)
+	{
+		// Enforce boolean
+		$option = (bool) $option;
+
+		// Set the page description display on our data array
+		$this->data['page_description_display'] = $option;
+
+		return $this;
+	}
+
+	/**
 	* Get route
 	*
 	* @return string route
@@ -466,7 +499,7 @@ class page implements page_interface
 
 		// Template name should follow pages_*.html naming convention
 		// and contain only letters, numbers, hyphens and underscores
-		if ($template !== '' && !preg_match('/^pages_[A-Za-z0-9-_]+\.html$/', $template))
+		if ($template !== '' && !preg_match('/^pages_[A-Za-z\d\-_]+\.html$/', $template))
 		{
 			throw new \phpbb\pages\exception\unexpected_value(array('template', 'ILLEGAL_CHARACTERS'));
 		}
@@ -508,7 +541,7 @@ class page implements page_interface
 		$name = (string) $name;
 
 		// Validate icon font name
-		if ($name !== '' && !preg_match('/^[a-z]+[a-z0-9-]+$/', $name))
+		if ($name !== '' && !preg_match('/^[a-z]+[a-z\d\-]+$/', $name))
 		{
 			throw new \phpbb\pages\exception\unexpected_value(array('icon_font', 'ILLEGAL_CHARACTERS'));
 		}
@@ -534,8 +567,8 @@ class page implements page_interface
 	public function get_content_for_edit()
 	{
 		// Use defaults if these haven't been set yet
-		$content = isset($this->data['page_content']) ? $this->data['page_content'] : '';
-		$uid = isset($this->data['page_content_bbcode_uid']) ? $this->data['page_content_bbcode_uid'] : '';
+		$content = $this->data['page_content'] ?? '';
+		$uid = $this->data['page_content_bbcode_uid'] ?? '';
 		$options = isset($this->data['page_content_bbcode_options']) ? (int) $this->data['page_content_bbcode_options'] : 0;
 
 		// Generate for edit
@@ -554,9 +587,9 @@ class page implements page_interface
 	public function get_content_for_display($censor_text = true)
 	{
 		// If these haven't been set yet; use defaults
-		$content = isset($this->data['page_content']) ? $this->data['page_content'] : '';
-		$uid = isset($this->data['page_content_bbcode_uid']) ? $this->data['page_content_bbcode_uid'] : '';
-		$bitfield = isset($this->data['page_content_bbcode_bitfield']) ? $this->data['page_content_bbcode_bitfield'] : '';
+		$content = $this->data['page_content'] ?? '';
+		$uid = $this->data['page_content_bbcode_uid'] ?? '';
+		$bitfield = $this->data['page_content_bbcode_bitfield'] ?? '';
 		$options = isset($this->data['page_content_bbcode_options']) ? (int) $this->data['page_content_bbcode_options'] : 0;
 
 		$content_html_enabled = $this->content_html_enabled();
@@ -622,12 +655,12 @@ class page implements page_interface
 	/**
 	* Check if bbcode is enabled on the content
 	*
-	* @return bool
+	* @return int
 	* @access public
 	*/
 	public function content_bbcode_enabled()
 	{
-		return ($this->data['page_content_bbcode_options'] & OPTION_FLAG_BBCODE);
+		return isset($this->data['page_content_bbcode_options']) ? $this->data['page_content_bbcode_options'] & OPTION_FLAG_BBCODE : 0;
 	}
 
 	/**
@@ -661,12 +694,12 @@ class page implements page_interface
 	/**
 	* Check if magic_url is enabled on the content
 	*
-	* @return bool
+	* @return int
 	* @access public
 	*/
 	public function content_magic_url_enabled()
 	{
-		return ($this->data['page_content_bbcode_options'] & OPTION_FLAG_LINKS);
+		return isset($this->data['page_content_bbcode_options']) ? $this->data['page_content_bbcode_options'] & OPTION_FLAG_LINKS : 0;
 	}
 
 	/**
@@ -700,12 +733,12 @@ class page implements page_interface
 	/**
 	* Check if smilies are enabled on the content
 	*
-	* @return bool
+	* @return int
 	* @access public
 	*/
 	public function content_smilies_enabled()
 	{
-		return ($this->data['page_content_bbcode_options'] & OPTION_FLAG_SMILIES);
+		return isset($this->data['page_content_bbcode_options']) ? $this->data['page_content_bbcode_options'] & OPTION_FLAG_SMILIES : 0;
 	}
 
 	/**
@@ -744,7 +777,7 @@ class page implements page_interface
 	*/
 	public function content_html_enabled()
 	{
-		return isset($this->data['page_content_allow_html']) ? (bool) $this->data['page_content_allow_html'] : false;
+		return isset($this->data['page_content_allow_html']) && $this->data['page_content_allow_html'];
 	}
 
 	/**
@@ -789,7 +822,7 @@ class page implements page_interface
 	*/
 	public function get_page_display()
 	{
-		return isset($this->data['page_display']) ? (bool) $this->data['page_display'] : false;
+		return isset($this->data['page_display']) && $this->data['page_display'];
 	}
 
 	/**
@@ -818,7 +851,7 @@ class page implements page_interface
 	*/
 	public function get_page_display_to_guests()
 	{
-		return isset($this->data['page_display_to_guests']) ? (bool) $this->data['page_display_to_guests'] : false;
+		return isset($this->data['page_display_to_guests']) && $this->data['page_display_to_guests'];
 	}
 
 	/**
@@ -840,6 +873,35 @@ class page implements page_interface
 	}
 
 	/**
+	 * Get page title switch setting
+	 *
+	 * @return bool Switch the way the page title is displayed (site name first instead of page name first)
+	 * @access public
+	 */
+	public function get_page_title_switch()
+	{
+		return isset($this->data['page_title_switch']) && $this->data['page_title_switch'];
+	}
+
+	/**
+	 * Set page title switch setting
+	 *
+	 * @param bool $option Page title switch setting
+	 * @return page_interface $this object for chaining calls; load()->set()->save()
+	 * @access public
+	 */
+	public function set_page_title_switch($option)
+	{
+		// Enforce boolean
+		$option = (bool) $option;
+
+		// Set the route on our data array
+		$this->data['page_title_switch'] = $option;
+
+		return $this;
+	}
+
+	/**
 	* Set option helper
 	*
 	* @param int $option_value Value of the option
@@ -851,7 +913,7 @@ class page implements page_interface
 	protected function set_content_option($option_value, $negate = false, $reparse_content = true)
 	{
 		// Set page_content_bbcode_options to 0 if it does not yet exist
-		$this->data['page_content_bbcode_options'] = isset($this->data['page_content_bbcode_options']) ? $this->data['page_content_bbcode_options'] : 0;
+		$this->data['page_content_bbcode_options'] = $this->data['page_content_bbcode_options'] ?? 0;
 
 		// If we're setting the option and the option is not already set
 		if (!$negate && !($this->data['page_content_bbcode_options'] & $option_value))

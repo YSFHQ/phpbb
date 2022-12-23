@@ -36,9 +36,9 @@ $lang = array_merge(
 	'RT_NUMBER'                     => 'عدد المواضيع ',
 	'RT_NUMBER_EXP'                 => 'عدد المواضيع التي تريد عرضها.',
 	'RT_PAGE_NUMBER'                => 'عرض جميع الصفحات ',
-	'RT_PAGE_NUMBER_EXP'            => 'انقر على المربع إذا رغبت في تجاهل الخيار التالي ( الحد الأقصى لعدد الصفحات ).',
+	'RT_PAGE_NUMBER_EXP'            => 'تقوم هذه الوظيفة بالكتابة فوق الحد الأقصى المعين لعدد الصفحات وتعرض جميع الصفحات بغض النظر عن عدد الصفحات التي تم تعيينها بواسطة الخيار.',
 	'RT_PAGE_NUMBERMAX'             => 'الحد الأقصى لعدد الصفحات ',
-	'RT_PAGE_NUMBERMAX_EXP'         => 'تحديد الحد الأقصى لعدد الصفحات التي تريد عرضها ( من 1 إلى 999 ). هذا الخيار لا يعمل في حالة تحديد الخيار السابق ( عرض جميع الصفحات ).',
+	'RT_PAGE_NUMBERMAX_EXP'         => 'تحديد الحد الأقصى لعدد الصفحات التي تريد عرضها . هذا الخيار لا يعمل في حالة تحديد الخيار السابق ( عرض جميع الصفحات ).',
 	'RT_MIN_TOPIC_LEVEL'            => 'نوع المواضيع  ',
 	'RT_MIN_TOPIC_LEVEL_EXP'        => 'تحديد نوع المواضيع التي تريد عرضها. سيتم العرض من الأقل إلى الأكثر.',
 	'RT_ANTI_TOPICS'                => 'المواضيع المُستبعدة ',
@@ -72,7 +72,7 @@ $lang = array_merge(
 	'RT_CHECK_UPDATE'				=> 'اذهب إلى <a href="http://www.avathar.be/bbdkp/index.php">avathar.be</a> للتأكد من توفر تحديثات جديدة.',
 
 	//Donation
-	'RT_DONATE_URL'             => 'http://www.avathar.be/bbdkp/app.php/page/donate',
+	'RT_DONATE_URL'             => 'http://www.avathar.be/forum/app.php/page/donate',
 	'PAYPAL_IMAGE_URL'          => 'https://www.paypalobjects.com/webstatic/en_US/i/btn/png/silver-pill-paypal-26px.png',
 	'PAYPAL_ALT'                => 'التبرع بواسطة PayPal',
 	'RT_DONATE'					=> 'التبرع لدعم الإضافة',

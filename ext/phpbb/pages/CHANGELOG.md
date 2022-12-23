@@ -1,6 +1,26 @@
 # Changelog
 
-## Version 2.x (for phpBB 3.2)
+## Version 3.x (for phpBB 3.3 and later)
+
+### 3.0.0 - 2022-06-17
+
+- Dropped support for phpBB 3.2.x (new minimum requirements: phpBB 3.3.2 and PHP 7.1.3).
+- Hovering the mouse over a page link can now show the page's description (if allowed in the page's settings).
+- Use structured data in the breadcrumb links.
+- Fixed installation failures if default phpBB Admin roles no longer exist.
+
+## Version 2.x (for phpBB 3.2 and later)
+
+### 2.0.5 - 2021-05-28
+
+- Fixed PHP 8 errors.
+- Fixed links to FontAwesome from the Manage Pages ACP settings.
+
+### 2.0.4 - 2020-03-29
+
+- New option to display page's titles before the site name in browser windows.
+- Fixed links to FontAwesome website.
+- Removed Subsilver2 style and support.
 
 ### 2.0.3 - 2018-03-14
 
@@ -46,7 +66,7 @@
 
 ### 1.0.3 - 2015-06-14
 
-- Inaccessible pages will corectly send 404 status codes
+- Inaccessible pages will correctly send 404 status codes
 - Removed edit time limitations when creating pages
 - Removed maximum character limitations when creating pages
 - Fixed an issue that would display unwanted XML characters in phpBB 3.2 environments

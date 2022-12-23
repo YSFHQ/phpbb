@@ -1,12 +1,14 @@
 <?php
 /**
-*
-* Thanks For Posts extension for the phpBB Forum Software package.
-*
-* @copyright (c) 2013 phpBB Limited <https://www.phpbb.com>
-* @license GNU General Public License, version 2 (GPL-2.0)
-*
-*/
+ *
+ * Thanks For Posts.
+ * Adds the ability to thank the author and to use per posts/topics/forum rating system based on the count of thanks.
+ * An extension for the phpBB Forum Software package.
+ *
+ * @copyright (c) 2020, rxu, https://www.phpbbguru.net
+ * @license GNU General Public License, version 2 (GPL-2.0)
+ *
+ */
 
 /**
 * DO NOT CHANGE
@@ -18,7 +20,7 @@ if (!defined('IN_PHPBB'))
 
 if (empty($lang) || !is_array($lang))
 {
-	$lang = array();
+	$lang = [];
 }
 
 // DEVELOPERS PLEASE NOTE
@@ -33,7 +35,7 @@ if (empty($lang) || !is_array($lang))
 // equally where a string contains only two placeholders which are used to wrap text
 // in a url you again do not need to specify an order e.g., 'Click %sHERE%s' is fine
 
-$lang = array_merge($lang, array(
+$lang = array_merge($lang, [
 	'ACP_DELTHANKS'						=> 'Deleted recorded thanks',
 	'ACP_POSTS'							=> 'Total posts',
 	'ACP_POSTSEND'						=> 'Remaining posts with thanks',
@@ -99,7 +101,7 @@ $lang = array_merge($lang, array(
 	'THANKS_PROFILELIST_VIEW'			=> 'List thanks in profile',
 	'THANKS_PROFILELIST_VIEW_EXPLAIN'	=> 'If enabled, a complete list of thanks including number of thanks and which posts a user has been thanked for will be displayed.',
 	'THANKS_REFRESH'					=> 'Update thanks counters',
-	'THANKS_REFRESH_EXPLAIN'			=> 'Here you can update thanks counters after a mass removal of posts/topics/users, splitting/merging of topics, setting/removing Global Announcement, enabling/disabling option "Only for the first post in the topic", changing posts owners and etc. This may take some time.<br /><strong>Important: To work correctly, the refresh counters function needs MySQL version 4.1 or later!<br />Attention!<br /> - Refreshing will erase all thanks for the guest posts!<br /> - Refreshing will erase all thanks for the Global Announcements, if the option `Thanks in Global Announcements` is OFF!<br /> - Refreshing will erase all thanks for all positions excepting the first in the topic, if the option `Only for the first post in the topic` is ON!</strong>',
+	'THANKS_REFRESH_EXPLAIN'			=> 'Here you can update thanks counters after a mass removal of posts/topics/users, splitting/merging of topics, setting/removing Global Announcement, enabling/disabling option ’Only for the first post in the topic’, changing posts owners and etc. This may take some time.<br /><strong>Important: To work correctly, the refresh counters function needs MySQL version 4.1 or later!<br />Attention!<br /> - Refreshing will erase all thanks for the guest posts!<br /> - Refreshing will erase all thanks for the Global Announcements, if the option ’Thanks in Global Announcements’ is OFF!<br /> - Refreshing will erase all thanks for all posts except the first post in the topic, if the option ’Only for the first post in the topic’ is ON!</strong>',
 	'THANKS_REFRESH_MSG'				=> 'This can take a few minutes to complete. All incorrect thanks entries will be deleted! <br /> Action is not reversible!',
 	'THANKS_REFRESHED_MSG'				=> 'Counters updated',
 	'THANKS_REPUT_GRAPHIC'				=> 'Graphic display of the rating',
@@ -131,4 +133,4 @@ $lang = array_merge($lang, array(
 	'TRUNCATE_NO_THANKS'				=> 'Operation canceled',
 	'ALLOW_THANKS_PM_ON'				=> 'Notify me PM if someone thanks my post',
 	'ALLOW_THANKS_EMAIL_ON'				=> 'Notify me e-mail if someone thanks my post',
-));
+]);

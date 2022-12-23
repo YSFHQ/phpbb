@@ -339,9 +339,10 @@ class migrator
 			$depend = $this->get_valid_name($depend);
 
 			// Test all possible namings before throwing exception
-			if ($this->unfulfillable($depend) !== false)
+			$missing = $this->unfulfillable($depend);
+			if ($missing !== false)
 			{
-				throw new \phpbb\db\migration\exception('MIGRATION_NOT_FULFILLABLE', $name, $depend);
+				throw new \phpbb\db\migration\exception('MIGRATION_NOT_FULFILLABLE', $name, $missing);
 			}
 
 			if (!isset($this->migration_state[$depend]) ||
@@ -784,7 +785,7 @@ class migrator
 				{
 					return array(
 						$parameters[0],
-						array($last_result),
+						isset($parameters[1]) ? array_merge($parameters[1], array($last_result)) : array($last_result),
 					);
 				}
 			break;
@@ -948,7 +949,7 @@ class migrator
 	* @param string $name Name of the migration
 	* @return \phpbb\db\migration\migration
 	*/
-	protected function get_migration($name)
+	public function get_migration($name)
 	{
 		$migration = new $name($this->config, $this->db, $this->db_tools, $this->phpbb_root_path, $this->php_ext, $this->table_prefix);
 

@@ -23,7 +23,7 @@ class admin_controller implements admin_interface
 	/** @var ContainerInterface */
 	protected $container;
 
-	/** @var \phpbb\controller\helper $controller_helper */
+	/** @var \phpbb\controller\helper */
 	protected $controller_helper;
 
 	/** @var \phpbb\db\driver\driver_interface */
@@ -145,6 +145,12 @@ class admin_controller implements admin_interface
 			'S_BOARDRULES_ENABLE'					=> (bool) $this->config['boardrules_enable'],
 			'S_BOARDRULES_HEADER_LINK'				=> (bool) $this->config['boardrules_header_link'],
 			'S_BOARDRULES_REQUIRE_AT_REGISTRATION'	=> (bool) $this->config['boardrules_require_at_registration'],
+
+			'BOARDRULES_LIST_STYLE'	=> build_select([
+				'' => 'ACP_BOARDRULES_LIST_STYLE_ORDERED',
+				'disc' => 'ACP_BOARDRULES_LIST_STYLE_BULLET',
+				'none' => 'ACP_BOARDRULES_LIST_STYLE_NONE',
+			], $this->config['boardrules_list_style']),
 		));
 	}
 
@@ -163,10 +169,18 @@ class admin_controller implements admin_interface
 			trigger_error($this->lang->lang('ACP_BOARDRULES_FONT_ICON_INVALID') . adm_back_link($this->u_action), E_USER_WARNING);
 		}
 
+		// Validate list style (since it's injected into HTML)
+		$boardrules_list_style = $this->request->variable('boardrules_list_style', '');
+		if (!in_array($boardrules_list_style, ['', 'none', 'disc']))
+		{
+			$boardrules_list_style = '';
+		}
+
 		$this->config->set('boardrules_font_icon', $boardrules_font_icon);
 		$this->config->set('boardrules_enable', $this->request->variable('boardrules_enable', 0));
 		$this->config->set('boardrules_header_link', $this->request->variable('boardrules_header_link', 0));
 		$this->config->set('boardrules_require_at_registration', $this->request->variable('boardrules_require_at_registration', 0));
+		$this->config->set('boardrules_list_style', $boardrules_list_style);
 	}
 
 	/**
@@ -194,7 +208,7 @@ class admin_controller implements admin_interface
 			foreach ($rows as $row)
 			{
 				$this->template->assign_block_vars('options', array(
-					'S_LANG_DEFAULT'	=> $row['lang_iso'] == $this->config['default_lang'],
+					'S_LANG_DEFAULT'	=> $row['lang_iso'] === $this->config['default_lang'],
 
 					'LANG_ISO'			=> $row['lang_iso'],
 					'LANG_LOCAL_NAME'	=> $row['lang_local_name'],
@@ -383,9 +397,9 @@ class admin_controller implements admin_interface
 
 		// Grab the form data's message parsing options (possible values: 1 or 0)
 		$message_parse_options = array(
-			'bbcode'	=> ($submit || $preview) ? $data['bbcode'] : $entity->message_bbcode_enabled(),
-			'magic_url'	=> ($submit || $preview) ? $data['magic_url'] : $entity->message_magic_url_enabled(),
-			'smilies'	=> ($submit || $preview) ? $data['smilies'] : $entity->message_smilies_enabled(),
+			'bbcode'	=> ($submit || $preview) ? $data['bbcode'] : ($entity->get_id() ? $entity->message_bbcode_enabled() : 1),
+			'magic_url'	=> ($submit || $preview) ? $data['magic_url'] : ($entity->get_id() ? $entity->message_magic_url_enabled() : 1),
+			'smilies'	=> ($submit || $preview) ? $data['smilies'] : ($entity->get_id() ? $entity->message_smilies_enabled() : 1),
 		);
 
 		// Set the message parse options in the entity
@@ -709,7 +723,7 @@ class admin_controller implements admin_interface
 				'RULE_ID'			=> $rule_menu_item->get_id(),
 				'RULE_TITLE'		=> $padding . $rule_menu_item->get_title(),
 
-				'S_DISABLED'		=> ($rule_menu_item->get_left_id() > $entity->get_left_id()) && ($rule_menu_item->get_right_id() < $entity->get_right_id()) || ($rule_menu_item->get_id() == $entity->get_id()),
+				'S_DISABLED'		=> ($rule_menu_item->get_left_id() > $entity->get_left_id() && $rule_menu_item->get_right_id() < $entity->get_right_id()) || $rule_menu_item->get_id() == $entity->get_id(),
 				'S_RULE_PARENT'		=> $rule_menu_item->get_id() == $parent_id,
 			));
 		}

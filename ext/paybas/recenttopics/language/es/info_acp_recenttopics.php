@@ -36,9 +36,9 @@ $lang = array_merge(
 	'RT_NUMBER'                     => 'Temas Recientes',
 	'RT_NUMBER_EXP'                 => 'Número de temas a mostrar.',
 	'RT_PAGE_NUMBER'                => 'Páginas de temas recientes',
-	'RT_PAGE_NUMBER_EXP'            => 'Activar esta opción desactivará la paginación de la lista de temas recientes',
+	'RT_PAGE_NUMBER_EXP'            => 'Esta función sobrescribe el número máximo de páginas establecido y muestra todas las páginas sin importar cuántas páginas haya establecido la opción.',
 	'RT_PAGE_NUMBERMAX'		=> 'Número máximo de páginas',
-	'RT_PAGE_NUMBERMAX_EXP'		=> 'Definir el número máximo de páginas (1-999)',
+	'RT_PAGE_NUMBERMAX_EXP'		=> 'Definir el número máximo de páginas',
 	'RT_MIN_TOPIC_LEVEL'            => 'Nivel de tema mínimo',
 	'RT_MIN_TOPIC_LEVEL_EXP'        => 'Determina el nivel de tema mínimo para poder se mostrado. Solo mostrará temas del nivel especificado y superior.',
 	'RT_ANTI_TOPICS'                => 'Temas excluidos',
@@ -72,7 +72,7 @@ $lang = array_merge(
 	'RT_CHECK_UPDATE'				=> 'Visita <a href="http://www.avathar.be/bbdkp/index.php">avathar.be</a> para comprobar si hay actualizaciones disponibles.',
 
 	//Donation
-	'RT_DONATE_URL'             => 'http://www.avathar.be/bbdkp/app.php/page/donate',
+	'RT_DONATE_URL'             => 'http://www.avathar.be/forum/app.php/page/donate',
 	'PAYPAL_IMAGE_URL'          => 'https://www.paypalobjects.com/webstatic/en_US/i/btn/png/silver-pill-paypal-26px.png',
 	'PAYPAL_ALT'                => 'Donar usando PayPal',
 	'RT_DONATE'					=> 'Donar a RecentTopics',

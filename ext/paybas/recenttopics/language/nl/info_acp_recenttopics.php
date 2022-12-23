@@ -52,9 +52,9 @@ $lang = array_merge(
 		'RT_NUMBER'                     => 'Aantal recente onderwerpen',
 		'RT_NUMBER_EXP'                 => 'Maximum aantal onderwerpen per pagina.',
 		'RT_PAGE_NUMBER'                => 'Toon alle pagina’s',
-		'RT_PAGE_NUMBER_EXP'            => 'Aanvinken om alle pagina’s weer te geven.',
+		'RT_PAGE_NUMBER_EXP'            => 'Deze functie overschrijft het ingestelde maximale aantal pagina’s en toont alle pagina’s, ongeacht het aantal pagina’s dat door de optie is ingesteld.',
 		'RT_PAGE_NUMBERMAX'             => 'Maximum aantal pagina’s',
-		'RT_PAGE_NUMBERMAX_EXP'         => 'Stel het maximum aantal pagina’s in (1-999).',
+		'RT_PAGE_NUMBERMAX_EXP'         => 'Stel het maximum aantal pagina’s in.',
 		'RT_MIN_TOPIC_LEVEL'            => 'Onderwerptypes',
 		'RT_MIN_TOPIC_LEVEL_EXP'        => 'Stel het minimum weer te geven onderwerptype in.',
 		'RT_ANTI_TOPICS'                => 'Uitgesloten onderwerpen',
@@ -88,7 +88,7 @@ $lang = array_merge(
 		'RT_CHECK_UPDATE'				=> 'Bezoek <a href="http://www.avathar.be/bbdkp/index.php">avathar.be</a> voor nieuwere versies.',
 
 		//Donatiies
-		'RT_DONATE_URL'             => 'http://www.avathar.be/bbdkp/app.php/page/donate',
+		'RT_DONATE_URL'             => 'http://www.avathar.be/forum/app.php/page/donate',
 		'PAYPAL_IMAGE_URL'          => 'https://www.paypalobjects.com/webstatic/en_US/i/btn/png/silver-pill-paypal-26px.png',
 		'PAYPAL_ALT'                => 'Doe een donatie via PayPal',
 		'RT_DONATE'					=> 'donatie aan RecentTopics',

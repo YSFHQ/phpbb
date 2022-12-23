@@ -1,5 +1,36 @@
 ### Changelog
+- 2.2.15 (05/04/2021)
+  - [FIX] #142 Compatible with PHP 8 
+  
+- 2.2.14 (01/08/2020)
+  - [FIX] align prosilver display of Post Order to pbWow to display first post. 
+  - [FIX] Add topic_posted table so the image of "_mine" displays.
+    
+- 2.2.13 (29/06/2020)
+  - [FIX] better description for RT_PAGE_NUMBER_EXP
+  - [FIX] code improvements
+  - [FIX] #125 page selector was always on page 1 when show all pages was acivated. 
 
+- 2.2.12 (28/03/2020)
+  - [FIX] #123 Reset user settings issue
+  - [NEW] Ukrainian Language for Recent Topics, by Phobos-7
+  
+- 2.2.11 (21/03/2020)
+  - [CHG] #120 don't show "Re: " in front of last reply text, new php event topictitle_remove_re
+  - [CHG] #119 Fetching last page doesnt work to enable "all" pages 
+  
+- 2.2.10 (21/03/2020)
+  - [CHG] #120 don't show "Re: " in front of last reply text. 
+  
+- 2.2.9 (15/03/2020)
+  - [CHG] support for style we_clearblue 3.2.9
+  - [CHG] support for style pbwow 3.2.9  
+  - [CHG] #115 in rightpane view, last author name is also shown 
+  - [FIX] #116 topic link and text now refer to last reply, or else the topic post.  
+  - [CHG] add php 7.2 to travis tests
+  - [FIX] code fixes: use sql_build_array, cast int on request_var, don't use http_exception class
+  - [CHG] compatible with Collapsible Categories v2
+  - [CHG] Add 2 phpBB core template events viewforum_body_last_post_author_username_prepend + viewforum_body_last_post_author_username_append
 
 - 2.2.8 (12/08/2018)
   - [FIX] #82 special page fix

@@ -10,66 +10,28 @@
 
 namespace paybas\recenttopics\controller;
 
+use phpbb\config\config;
+use phpbb\controller\helper;
 use phpbb\language\language;
+use paybas\recenttopics\core\recenttopics;
+use Symfony\Component\HttpFoundation\Response;
 
 class page_controller implements page_interface
 {
 	/**
-	 * @var \phpbb\auth\auth
-	 */
-	protected $auth;
-	/**
 	 * @var \phpbb\config\config
 	 */
 	protected $config;
+
 	/**
 	 * @var \phpbb\controller\helper
 	 */
 	protected $helper;
+
 	/**
-	 * @var \phpbb\template\template
+	 * @var language
 	 */
-	protected $template;
-	/**
-	 * @var \phpbb\db\driver\driver_interface
-	 */
-	protected $db;
-	/**
-	 * @var \phpbb\request\request
-	 */
-	protected $request;
-	/**
-	 * @var \phpbb\user
-	 */
-	protected $user;
-	/**
-	 * @var string
-	 */
-	protected $phpEx;
-	/**
-	 * @var \phpbb\pagination
-	 */
-	protected $pagination;
-	/**
-	 * @var \phpbb\extension\manager
-	 */
-	protected $phpbb_extension_manager;
-	/**
-	 * @var string
-	 */
-	protected $ext_path;
-	/**
-	 * @var string
-	 */
-	protected $ext_path_web;
-	/**
-	 * @var string
-	 */
-	protected $ext_path_images;
-	/**
-	 * @var string
-	 */
-	protected $root_path;
+	protected $language;
 
 	/* @var recenttopics */
 	protected $rt_functions;
@@ -80,77 +42,39 @@ class page_controller implements page_interface
 	protected $response;
 
 	/**
-	 * @var language
-	 */
-	protected $language;
-
-	/**
 	 * page constructor.
 	 *
-	 * @param \phpbb\config\config              $config
-	 * @param \phpbb\controller\helper          $helper
-	 * @param \phpbb\auth\auth                  $auth
-	 * @param \phpbb\template\template          $template
-	 * @param \phpbb\db\driver\driver_interface $db
-	 * @param \phpbb\request\request            $request
-	 * @param \phpbb\user                       $user
-	 * @param \phpbb\pagination                 $pagination
-	 * @param $php_ext
-	 * @param \phpbb\path_helper                $path_helper
-	 * @param \phpbb\extension\manager          $phpbb_extension_manager
-	 * @param $root_path
-	 * @param \paybas\recenttopics\core\recenttopics $functions
-	 * @param \phpbb\language\language $language
+	 * @param \phpbb\config\config              			$config
+	 * @param \phpbb\controller\helper          			$helper
+	 * @param \phpbb\language\language 						$language
+	 * @param \paybas\recenttopics\core\recenttopics		$functions
+	 * @param \Symfony\Component\HttpFoundation\Response	$response
 	 */
 	public function __construct(
-		\phpbb\config\config $config,
-		\phpbb\controller\helper $helper,
-		\phpbb\auth\auth $auth,
-		\phpbb\template\template $template,
-		\phpbb\db\driver\driver_interface $db,
-		\phpbb\request\request $request,
-		\phpbb\user $user,
-		\phpbb\pagination $pagination,
-		$php_ext,
-		\phpbb\path_helper $path_helper,
-		\phpbb\extension\manager $phpbb_extension_manager,
-		$root_path,
-		\paybas\recenttopics\core\recenttopics $functions,
-		\phpbb\language\language $language
+		config $config,
+		helper $helper,
+		language $language,
+		recenttopics $functions,
+		Response $response
 	)
 	{
 		$this->config       = $config;
 		$this->helper       = $helper;
-		$this->auth         = $auth;
-		$this->template     = $template;
-		$this->db           = $db;
-		$this->request      = $request;
-		$this->user         = $user;
-		$this->pagination   = $pagination;
-		$this->php_ext      = $php_ext;
-		$this->path_helper  = $path_helper;
-		$this->phpbb_extension_manager = $phpbb_extension_manager;
-		$this->ext_path     = $this->phpbb_extension_manager->get_extension_path('paybas/recenttopics', true);
-		$this->ext_path_web = $this->path_helper->get_web_root_path($this->ext_path);
-		$this->root_path  = $root_path;
-		$this->rt_functions = $functions;
 		$this->language = $language;
+		$this->rt_functions = $functions;
+		$this->response = $response;
 	}
 
 	/**
 	 * Display the page app.php/rt/
 	 *
 	 * @return \Symfony\Component\HttpFoundation\Response A Symfony Response object
-	 * @throws http_exception
 	 * @access public
 	*/
 	public function display()
 	{
-		$page = "recent_topics_page.html";
-
-		global $phpbb_container;
-		$this->language = $phpbb_container->get('language');
-		$this->language->add_lang('info_acp_recenttopics', 'paybas/recenttopics');
+		$page = "paybas/recent_topics_page.html";
+		$this->language->add_lang(['info_acp_recenttopics', 'recenttopics'], 'paybas/recenttopics');
 
 		if (isset($this->config['rt_index']) && $this->config['rt_index'])
 		{
@@ -158,14 +82,7 @@ class page_controller implements page_interface
 		}
 
 		// Load the requested page by route
-		try
-		{
-			$this->response = $this->helper->render($page, $this->language->lang('RECENT_TOPICS'));
-		}
-		catch (\phpbb\pages\exception\base $e)
-		{
-			throw new http_exception(404, 'PAGE_NOT_AVAILABLE', array($page));
-		}
+		$this->response = $this->helper->render($page, $this->language->lang('RECENT_TOPICS'));
 
 		return $this->response;
 	}

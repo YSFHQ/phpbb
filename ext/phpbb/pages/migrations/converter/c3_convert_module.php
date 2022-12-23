@@ -13,7 +13,7 @@ namespace phpbb\pages\migrations\converter;
 /**
 * Converter stage 3: Convert module
 */
-class c3_convert_module extends \phpbb\db\migration\migration
+class c3_convert_module extends \phpbb\db\migration\container_aware_migration
 {
 	/**
 	* Assign migration file dependencies for this migration
@@ -22,7 +22,7 @@ class c3_convert_module extends \phpbb\db\migration\migration
 	* @static
 	* @access public
 	*/
-	static public function depends_on()
+	public static function depends_on()
 	{
 		return array('\phpbb\pages\migrations\converter\c1_convert_table');
 	}
@@ -55,10 +55,13 @@ class c3_convert_module extends \phpbb\db\migration\migration
 	*/
 	public function update_data()
 	{
+		// use module tool explicitly since module.exists does not work in 'if'
+		$module_tool = $this->container->get('migrator.tool.module');
+
 		return array(
 			// Remove old ACP_PAGES module if it exists
 			array('if', array(
-				array('module.exists', array('acp', false, 'ACP_PAGES')),
+				$module_tool->exists('acp', false, 'ACP_PAGES', true),
 				array('module.remove', array('acp', false, 'ACP_PAGES')),
 			)),
 		);

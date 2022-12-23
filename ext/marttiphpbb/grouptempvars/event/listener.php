@@ -1,80 +1,75 @@
 <?php
 /**
 * phpBB Extension - marttiphpbb grouptempvars
-* @copyright (c) 2015 marttiphpbb <info@martti.be>
+* @copyright (c) 2015 - 2020 marttiphpbb <info@martti.be>
 * @license GNU General Public License, version 2 (GPL-2.0)
 */
 
 namespace marttiphpbb\grouptempvars\event;
 
+use phpbb\event\data as event;
 use phpbb\db\driver\factory as db;
-use phpbb\template\twig\twig as template;
 use phpbb\user;
-
-/**
-* @ignore
-*/
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
-/**
-* Event listener
-*/
 class listener implements EventSubscriberInterface
 {
-	/* @var db */
 	protected $db;
-
-	/* @var template */
-	protected $template;
-
-	/* @var user */
 	protected $user;
+	protected $user_group_table;
+	protected $groups = [];
 
-	/**
-	 * @param db $db
-	 * @param template $template
-	 * @param user $user
-	*/
 	public function __construct(
 		db $db,
-		template $template,
-		user $user
+		user $user,
+		string $user_group_table
 	)
 	{
 		$this->db = $db;
-		$this->template = $template;
 		$this->user = $user;
+		$this->user_group_table = $user_group_table;
 	}
 
-	static public function getSubscribedEvents()
+	static public function getSubscribedEvents():array
 	{
-		return array(
-			'core.page_footer'		=> 'core_page_footer',
-		);
+		return [
+			'core.user_setup'
+				=> 'core_user_setup',
+			'core.twig_environment_render_template_before'
+				=> 'core_twig_environment_render_template_before',
+		];
 	}
 
-	public function core_page_footer($event)
+	public function core_user_setup(event $event):void
 	{
-		$template_vars = array();
 		$user_id = $this->user->data['user_id'];
 
-		$sql = 'SELECT group_id 
-			FROM ' . USER_GROUP_TABLE . '
-			WHERE user_id = ' . $user_id . '
-				AND user_pending = 0';
+		$sql = 'select group_id
+			from ' . $this->user_group_table . '
+			where user_id = ' . $user_id . '
+				and user_pending = 0';
 
 		$result = $this->db->sql_query($sql);
 
 		while ($group_id = $this->db->sql_fetchfield('group_id'))
 		{
-			$template_vars['S_GROUP_' . $group_id] = true;
+			$this->groups[$group_id] = true;
 		}
 
 		$this->db->sql_freeresult($result);
+	}
 
-		if (sizeof($template_vars))
+	public function core_twig_environment_render_template_before(event $event):void
+	{
+		$context = $event['context'];
+
+		$context['marttiphpbb_grouptempvars'] = $this->groups;
+
+		foreach($this->groups as $group_id => $bool)
 		{
-			$this->template->assign_vars($template_vars);
+			$context['S_GROUP_' . $group_id] = true;
 		}
+
+		$event['context'] = $context;
 	}
 }

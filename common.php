@@ -12,7 +12,7 @@
 */
 
 /**
-* Minimum Requirement: PHP 5.4.0
+* Minimum Requirement: PHP 7.1.3
 */
 
 if (!defined('IN_PHPBB'))
@@ -96,6 +96,8 @@ include($phpbb_root_path . 'includes/functions_compatibility.' . $phpEx);
 require($phpbb_root_path . 'includes/constants.' . $phpEx);
 require($phpbb_root_path . 'includes/utf/utf_tools.' . $phpEx);
 
+// Registered before building the container so the development environment stay capable of intercepting
+// the container builder exceptions.
 if (PHPBB_ENVIRONMENT === 'development')
 {
 	\phpbb\debug\debug::enable();
@@ -129,9 +131,16 @@ catch (InvalidArgumentException $e)
 	}
 }
 
+if ($phpbb_container->getParameter('debug.error_handler'))
+{
+	\phpbb\debug\debug::enable();
+}
+
 $phpbb_class_loader->set_cache($phpbb_container->get('cache.driver'));
 $phpbb_class_loader_ext->set_cache($phpbb_container->get('cache.driver'));
 
+$phpbb_container->get('dbal.conn')->set_debug_sql_explain($phpbb_container->getParameter('debug.sql_explain'));
+$phpbb_container->get('dbal.conn')->set_debug_load_time($phpbb_container->getParameter('debug.load_time'));
 require($phpbb_root_path . 'includes/compatibility_globals.' . $phpEx);
 
 register_compatibility_globals();

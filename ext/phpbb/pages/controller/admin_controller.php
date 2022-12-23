@@ -129,11 +129,12 @@ class admin_controller implements admin_interface
 	}
 
 	/**
-	* Add a page
-	*
-	* @return void
-	* @access public
-	*/
+	 * Add a page
+	 *
+	 * @return void
+	 * @access public
+	 * @throws \phpbb\pages\exception\out_of_bounds
+	 */
 	public function add_page()
 	{
 		// Initiate a page entity
@@ -151,12 +152,13 @@ class admin_controller implements admin_interface
 	}
 
 	/**
-	* Edit a page
-	*
-	* @param int $page_id The page identifier to edit
-	* @return void
-	* @access public
-	*/
+	 * Edit a page
+	 *
+	 * @param int $page_id The page identifier to edit
+	 * @return void
+	 * @access public
+	 * @throws \phpbb\pages\exception\out_of_bounds
+	 */
 	public function edit_page($page_id)
 	{
 		// Initiate and load the page entity
@@ -175,12 +177,13 @@ class admin_controller implements admin_interface
 	}
 
 	/**
-	* Process page data to be added or edited
-	*
-	* @param \phpbb\pages\entity\page_interface $entity The page entity object
-	* @return void
-	* @access protected
-	*/
+	 * Process page data to be added or edited
+	 *
+	 * @param \phpbb\pages\entity\page_interface $entity The page entity object
+	 * @return void
+	 * @access protected
+	 * @throws \phpbb\pages\exception\out_of_bounds
+	 */
 	protected function add_edit_page_data($entity)
 	{
 		// Create an array to collect errors that will be output to the user
@@ -200,6 +203,7 @@ class admin_controller implements admin_interface
 			'page_title'				=> $this->request->variable('page_title', '', true),
 			'page_route'				=> $this->request->variable('page_route', ''),
 			'page_description'			=> $this->request->variable('page_description', '', true),
+			'page_description_display'	=> $this->request->variable('page_description_display', false),
 			'page_content'				=> $this->request->variable('page_content', '', true),
 			'bbcode'					=> $this->request->variable('parse_bbcode', false),
 			'magic_url'					=> $this->request->variable('parse_magic_url', false),
@@ -211,6 +215,7 @@ class admin_controller implements admin_interface
 			'page_icon_font'			=> $this->request->variable('page_icon_font', ''),
 			'page_display'				=> $this->request->variable('page_display', 0),
 			'page_display_to_guests'	=> $this->request->variable('page_guest_display', 0),
+			'page_title_switch'			=> $this->request->variable('page_title_switch', 0),
 		);
 
 		// Grab the form data's message parsing options (possible values: 1 or 0)
@@ -248,12 +253,14 @@ class admin_controller implements admin_interface
 				'set_title'						=> $data['page_title'],
 				'set_route'						=> $data['page_route'],
 				'set_description'				=> $data['page_description'],
+				'set_description_display'		=> $data['page_description_display'],
 				'set_content'					=> $data['page_content'],
 				'set_template'					=> $data['page_template'],
 				'set_order'						=> $data['page_order'],
 				'set_icon_font'					=> $data['page_icon_font'],
 				'set_page_display'				=> $data['page_display'],
 				'set_page_display_to_guests'	=> $data['page_display_to_guests'],
+				'set_page_title_switch'			=> $data['page_title_switch'],
 
 			);
 
@@ -343,6 +350,8 @@ class admin_controller implements admin_interface
 
 			'S_PAGES_DISPLAY'			=> $entity->get_page_display(),
 			'S_PAGES_GUEST_DISPLAY'		=> $entity->get_page_display_to_guests(),
+			'S_PAGES_TITLE_SWITCH'		=> $entity->get_page_title_switch(),
+			'S_PAGES_DESC_DISPLAY'		=> $entity->get_description_display(),
 
 			'S_PARSE_BBCODE_CHECKED'	=> $entity->content_bbcode_enabled(),
 			'S_PARSE_SMILIES_CHECKED'	=> $entity->content_smilies_enabled(),

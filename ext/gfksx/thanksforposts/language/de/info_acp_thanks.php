@@ -1,12 +1,14 @@
 <?php
 /**
-*
-* Thanks For Posts extension for the phpBB Forum Software package.
-*
-* @copyright (c) 2013 phpBB Limited <https://www.phpbb.com>
-* @license GNU General Public License, version 2 (GPL-2.0)
-*
-*/
+ *
+ * Thanks For Posts.
+ * Adds the ability to thank the author and to use per posts/topics/forum rating system based on the count of thanks.
+ * An extension for the phpBB Forum Software package.
+ *
+ * @copyright (c) 2020, rxu, https://www.phpbbguru.net
+ * @license GNU General Public License, version 2 (GPL-2.0)
+ *
+ */
 
 /**
 * DO NOT CHANGE
@@ -18,7 +20,7 @@ if (!defined('IN_PHPBB'))
 
 if (empty($lang) || !is_array($lang))
 {
-	$lang = array();
+	$lang = [];
 }
 
 // DEVELOPERS PLEASE NOTE
@@ -33,7 +35,7 @@ if (empty($lang) || !is_array($lang))
 // equally where a string contains only two placeholders which are used to wrap text
 // in a url you again do not need to specify an order e.g., 'Click %sHERE%s' is fine
 
-$lang = array_merge($lang, array(
+$lang = array_merge($lang, [
 	'ACP_DELTHANKS'						=> 'Entfernte Danksagungen',
 	'ACP_POSTS'							=> 'Beiträge insgesamt',
 	'ACP_POSTSEND'						=> 'Verbleibende Beiträge mit Danksagungen',
@@ -99,7 +101,7 @@ $lang = array_merge($lang, array(
 	'THANKS_PROFILELIST_VIEW'			=> 'Danksagunsliste im Profil anzeigen',
 	'THANKS_PROFILELIST_VIEW_EXPLAIN'	=> 'Falls aktiviert, wird eine Liste aller Danksagungen, inklusive der Anzahl der Danksagungen und für welche Beiträge der Benutzer Danksagungen erhalten hat, angezeigt.',
 	'THANKS_REFRESH'					=> 'Danksagungszähler aktualisieren',
-	'THANKS_REFRESH_EXPLAIN'			=> 'Hier kannst du die Danksagungszähler aktualisieren, falls viele Beiträge, Themen oder Benutzt gelöscht wurden, Themen geteilt oder zusammengeführt wurden, globale Ankündigungen erstellt oder gelöscht wurden, die Einstellung "Nur für den ersten Beitrag in einem Thema" geändert wurde, Autoren von Themen geändert wurden, usw. Dies kann eine Weile dauern.<br /><strong>Hinweis: Damit diese Funktion richtig funkntioniert, wird MySQL in der Version 4.1 oder höher benötigt!<br />Achtung:<br /> - Das Aktualisieren wird alle Danksagungen in Gastbeiträgen löschen!<br /> - Das Aktualisieren wird alle Danksagungen in globalen Ankündigungen löschen, falls die Einstellung "Danksagungen in globalen Ankündigungen aktivieren" deaktiviert ist!<br /> - Das Aktualisieren wird alle Danksagungen, außer im ersten Beitrag eines Themas löschen, falls die Einstellung "Nur für den ersten Beitrag in einem Thema" aktiviert ist!</strong>',
+	'THANKS_REFRESH_EXPLAIN'			=> 'Hier kannst du die Danksagungszähler aktualisieren, falls viele Beiträge, Themen oder Benutzer gelöscht wurden, Themen geteilt oder zusammengeführt wurden, globale Ankündigungen erstellt oder gelöscht wurden, die Einstellung "Nur für den ersten Beitrag in einem Thema" geändert wurde, Autoren von Themen geändert wurden, usw. Dies kann eine Weile dauern.<br /><strong>Hinweis: Damit diese Funktion richtig funkntioniert, wird MySQL in der Version 4.1 oder höher benötigt!<br />Achtung:<br /> - Das Aktualisieren wird alle Danksagungen in Gastbeiträgen löschen!<br /> - Das Aktualisieren wird alle Danksagungen in globalen Ankündigungen löschen, falls die Einstellung "Danksagungen in globalen Ankündigungen aktivieren" deaktiviert ist!<br /> - Das Aktualisieren wird alle Danksagungen, außer im ersten Beitrag eines Themas löschen, falls die Einstellung "Nur für den ersten Beitrag in einem Thema" aktiviert ist!</strong>',
 	'THANKS_REFRESH_MSG'				=> 'Dies kann einige Minuten dauern. Alle ungültigen Danksagungen werden gelöscht!<br />Diese Aktion ist nicht umkehrbar!',
 	'THANKS_REFRESHED_MSG'				=> 'Danksagungszähler aktualisiert.',
 	'THANKS_REPUT_GRAPHIC'				=> 'Grafische Darstellung von Bewertungen',
@@ -131,4 +133,4 @@ $lang = array_merge($lang, array(
 	'TRUNCATE_NO_THANKS'				=> 'Aktion wurde abgebrochen',
 	'ALLOW_THANKS_PM_ON'				=> 'Mich mittels Privater Nachricht benachrichtigen, wenn sich jemand bei mir bedankt.',
 	'ALLOW_THANKS_EMAIL_ON'				=> 'Mich mittels E-Mail benachrichtigen, wenn sich jemand bei mir bedankt.',
-));
+]);

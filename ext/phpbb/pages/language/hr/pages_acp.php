@@ -80,6 +80,7 @@ $lang = array_merge($lang, array(
 	'ACP_PAGES_FORM_TITLE_EXPLAIN'		=> 'Polje je obvezno.',
 	'ACP_PAGES_FORM_DESC'				=> 'Opis stranice',
 	'ACP_PAGES_FORM_DESC_EXPLAIN'		=> 'Bit će prikazan samo na popisu stranica u AF.',
+	'ACP_PAGES_FORM_DESC_DISPLAY'		=> 'Display as link title',
 	'ACP_PAGES_FORM_ROUTE'				=> 'Usmjerna putanja stranice',
 	'ACP_PAGES_FORM_ROUTE_EXPLAIN'		=> '<strong>Route</strong> je unikatni identifikator koji se koristi na kraju URLa stranice (a) za definiranje linka (do) stranice, npr. <samp>http://www.phpbb.com/<strong>route</strong></samp>.<br />Dopuštena su samo slova, brojevi, minusnice i podvlaknice.<br />Polje je obvezno.',
 	'ACP_PAGES_FORM_CONTENT'			=> 'Sadržaj stranice',
@@ -92,12 +93,14 @@ $lang = array_merge($lang, array(
 	'ACP_PAGES_FORM_LINKS'				=> 'Lokacije linkova stranice',
 	'ACP_PAGES_FORM_LINKS_EXPLAIN'		=> 'Izaberi jednu odnosno odaberi više lokacija na kojima će link na stranicu biti prikazan.<br />Za o(do)značavanje više od jedne stavke, koristi CTRL+KLIK (CMD+KLIK na Macu).',
 	'ACP_PAGES_FORM_ICON_FONT'			=> 'Page link icon',
-	'ACP_PAGES_FORM_ICON_FONT_EXPLAIN'	=> 'Enter the name of a <a href="https://fortawesome.github.io/Font-Awesome/icons/" target="_blank">Font Awesome</a> icon to use with the page link. Leave this field blank to use Pages’ traditional CSS/GIF image icons.',
+	'ACP_PAGES_FORM_ICON_FONT_EXPLAIN'	=> 'Enter the name of a <strong><a href="%s" target="_blank">Font Awesome</a></strong> icon to use with the page link. Leave this field blank to use Pages’ traditional CSS/GIF image icons.',
 	'ACP_PAGES_FORM_DISPLAY'			=> 'Prikaži stranicu',
 	'ACP_PAGES_FORM_DISPLAY_EXPLAIN'	=> 'Ukoliko je onemogućeno, stranica će biti nedostupna [svima osim administratori(ca)ma koji/e će joj (i dalje) moći pristupati i uređivati ju].',
 	'ACP_PAGES_FORM_GUESTS'				=> 'Prikaži stranicu gostima',
 	'ACP_PAGES_FORM_GUESTS_EXPLAIN'		=> 'Ukoliko je onemogućeno, stranica će biti vidljiva samo registriranim korisnicima/ama.',
 	'ACP_PAGES_FORM_VIEW_PAGE'			=> 'Link stranice',
+	'ACP_PAGES_TITLE_SWITCH'			=> 'Display page title first',
+	'ACP_PAGES_TITLE_SWITCH_EXPLAIN'	=> 'By default browsers will display this page’s title after the site name <samp style="white-space: nowrap">“Site Name - Page Title”</samp>. Enabling this option will display this page’s title before the site name <samp style="white-space: nowrap">“Page Title - Site Name”</samp>.',
 	'PARSE_HTML'						=> 'Parsiraj HTML',
 
 	// Page link location names
