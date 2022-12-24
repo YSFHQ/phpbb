@@ -19,7 +19,7 @@ if (!defined('IN_PHPBB'))
 }
 
 // Report all errors, except notices and deprecation messages
-$level = E_ALL & ~E_NOTICE & ~E_DEPRECATED;
+$level = E_ALL & ~E_NOTICE & ~E_DEPRECATED & ~E_WARNING;
 error_reporting($level);
 
 /**
