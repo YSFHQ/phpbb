@@ -498,7 +498,7 @@ class manager
 	* @return bool Depending on whether or not the extension is enabled
 	*/
 	public function is_enabled($name)
-  {
+	{
 		return isset($this->extensions[$name]['ext_active']) && $this->extensions[$name]['ext_active'];
 	}
 
@@ -509,7 +509,7 @@ class manager
 	* @return bool Depending on whether or not the extension is disabled
 	*/
 	public function is_disabled($name)
-  {
+	{
 		return isset($this->extensions[$name]['ext_active']) && !$this->extensions[$name]['ext_active'];
 	}
 

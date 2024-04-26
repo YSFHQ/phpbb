@@ -169,6 +169,11 @@ $lang = array_merge($lang, array(
 		1	=> '%d character',
 		2	=> '%d characters',
 	),
+	// Special version to be used when describing ranges e.g. "min x characters and max y characters"
+	'CHARACTERS_XY'			=> array(
+		1	=> '%d character',
+		2	=> '%d characters',
+	),
 	'COLLAPSE_VIEW'			=> 'Collapse view',
 	'CLOSE_WINDOW'			=> 'Close window',
 	'CODE'					=> 'Code',
@@ -678,6 +683,10 @@ $lang = array_merge($lang, array(
 	'RETURN_TOPIC'				=> '%sReturn to the topic last visited%s',
 	'RETURN_TO'					=> 'Return to “%s”',
 	'RETURN_TO_INDEX'			=> 'Return to Board Index',
+
+	'ROUTE_NOT_FOUND'				=> 'The requested route “%s” could not be found.',
+	'ROUTE_INVALID_MISSING_PARAMS'	=> 'Invalid or missing parameters passed for route “%s”.',
+
 	'FEED'						=> 'Feed',
 	'FEED_NEWS'					=> 'News',
 	'FEED_TOPICS_ACTIVE'		=> 'Active Topics',
