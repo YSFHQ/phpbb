@@ -1597,6 +1597,20 @@ navbar_header_username_prepend
 * Since: 3.1.0-RC1
 * Purpose: Add text and HTMl before the username shown in the navbar.
 
+notification_dropdown_footer_after
+===
+* Locations:
+    + styles/prosilver/template/notification_dropdown.html
+* Since: 3.3.12
+* Purpose: Add content after notifications list footer.
+
+notification_dropdown_footer_before
+===
+* Locations:
+    + styles/prosilver/template/notification_dropdown.html
+* Since: 3.3.12
+* Purpose: Add content before notifications list footer.
+
 overall_footer_after
 ===
 * Locations:
@@ -2500,6 +2514,13 @@ ucp_agreement_terms_before
 * Since: 3.1.0-b3
 * Purpose: Add content before the terms of agreement text at user registration
 
+ucp_footer_content_after
+===
+* Locations:
+    + styles/prosilver/template/ucp_footer.html
+* Since: 3.3.12-RC1
+* Purpose: Add optional elements after tab panels content in UCP
+
 ucp_friend_list_after
 ===
 * Locations:
@@ -2513,6 +2534,13 @@ ucp_friend_list_before
     + styles/prosilver/template/ucp_zebra_friends.html
 * Since: 3.1.0-a4
 * Purpose: Add optional elements before list of friends in UCP
+
+ucp_header_content_before
+===
+* Locations:
+    + styles/prosilver/template/ucp_header.html
+* Since: 3.3.12-RC1
+* Purpose: Add optional elements before tab panels content in UCP
 
 ucp_header_friends_offline_username_full_append
 ===
@@ -2583,6 +2611,34 @@ ucp_main_subscribed_topic_title_after
     + styles/prosilver/template/ucp_main_subscribed.html
 * Since: 3.3.8-RC1
 * Purpose: Add content right after the topic title viewing UCP subscribed topics
+
+ucp_notifications_content_after
+===
+* Locations:
+    + styles/prosilver/template/ucp_notifications.html
+* Since: 3.3.12-RC1
+* Purpose: Add optional elements after UCP notification options tab content
+
+ucp_notifications_content_before
+===
+* Locations:
+    + styles/prosilver/template/ucp_notifications.html
+* Since: 3.3.12-RC1
+* Purpose: Add optional elements before UCP notification options tab content
+
+ucp_notifications_form_after
+===
+* Locations:
+    + styles/prosilver/template/ucp_notifications.html
+* Since: 3.3.12-RC1
+* Purpose: Add optional elements after HTMP form in UCP notification options tab
+
+ucp_notifications_form_before
+===
+* Locations:
+    + styles/prosilver/template/ucp_notifications.html
+* Since: 3.3.12-RC1
+* Purpose: Add optional elements before HTMP form in UCP notificationoptions tab
 
 ucp_pm_history_post_buttons_after
 ===
@@ -3157,6 +3213,13 @@ viewtopic_body_footer_before
 * Since: 3.1.0-a1
 * Purpose: Add content to the bottom of the View topic screen below the posts
 and quick reply, directly before the jumpbox in Prosilver.
+
+viewtopic_body_online_list_after
+===
+* Locations:
+    + styles/prosilver/template/viewtopic_body.html
+* Since: 3.3.12-RC1
+* Purpose: Add content after the online users list
 
 viewtopic_body_online_list_before
 ===

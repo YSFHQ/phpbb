@@ -1,6 +1,7 @@
 cache
 config.php
 /files/*
+/images/avatars/upload/*
 /store/*
 *.log
 vendor
