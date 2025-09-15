@@ -14,7 +14,11 @@ if ($eventend > $now) {
 
 // get the list of files in the dir
 chdir($base_path);
-$custom_images = glob('*.{jpg,png,gif}', GLOB_BRACE);
+$custom_images = array_merge(
+    glob('*.jpg'),
+    glob('*.png'),
+    glob('*.gif')
+);
 
 // choose a random file in the list
 $file_path = $custom_images[mt_rand(0, count($custom_images) - 1)];
