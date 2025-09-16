@@ -90,8 +90,21 @@ switch ($search_id)
 	break;
 }
 
+$search_auth_check_override = false;
+/**
+* This event allows you to override search auth checks
+*
+* @event core.search_auth_check_override
+* @var	bool	search_auth_check_override	Whether or not the search auth check overridden
+* @since 3.3.14-RC1
+*/
+$vars = [
+	'search_auth_check_override',
+];
+extract($phpbb_dispatcher->trigger_event('core.search_auth_check_override', compact($vars)));
+
 // Is user able to search? Has search been disabled?
-if (!$auth->acl_get('u_search') || !$auth->acl_getf_global('f_search') || !$config['load_search'])
+if (!$search_auth_check_override && (!$auth->acl_get('u_search') || !$auth->acl_getf_global('f_search') || !$config['load_search']))
 {
 	$template->assign_var('S_NO_SEARCH', true);
 	trigger_error('NO_SEARCH');
@@ -684,10 +697,10 @@ if ($keywords || $author || $author_id || $search_id || $submit)
 	$hilit = str_replace(' ', '|', $hilit);
 
 	$u_hilit = urlencode(html_entity_decode(str_replace('|', ' ', $hilit), ENT_COMPAT));
-	$u_show_results = '&amp;sr=' . $show_results;
+	$u_show_results = 'sr=' . $show_results;
 	$u_search_forum = implode('&amp;fid%5B%5D=', $search_forum);
 
-	$u_search = append_sid("{$phpbb_root_path}search.$phpEx", $u_sort_param . $u_show_results);
+	$u_search = append_sid("{$phpbb_root_path}search.$phpEx", (($u_sort_param) ? $u_sort_param . '&amp;' : '') . $u_show_results);
 	$u_search .= ($search_id) ? '&amp;search_id=' . $search_id : '';
 	$u_search .= ($u_hilit) ? '&amp;keywords=' . urlencode(html_entity_decode($keywords, ENT_COMPAT)) : '';
 	$u_search .= ($search_terms != 'all') ? '&amp;terms=' . $search_terms : '';

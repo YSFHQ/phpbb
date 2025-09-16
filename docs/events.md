@@ -94,6 +94,20 @@ acp_ext_list_enabled_title_after
 * Since: 3.1.11-RC1
 * Purpose: Add text after enabled extensions section title.
 
+acp_ext_list_not_installed_name_after
+===
+* Location: adm/style/acp_ext_list.html
+* Since: 3.3.14-RC1
+* Changed: 3.3.14 Renamed from acp_ext_list_available_name_after
+* Purpose: Add content after the name of not installed extensions in the list
+
+acp_ext_list_not_installed_title_after
+===
+* Location: adm/style/acp_ext_list.html
+* Since: 3.3.14-RC1
+* Changed: 3.3.14 Renamed from acp_ext_list_available_title_after
+* Purpose: Add text after not installed extensions section title.
+
 acp_forums_custom_settings
 ===
 * Location: adm/style/acp_forums.html
@@ -183,6 +197,24 @@ acp_group_types_prepend
 * Location: adm/style/acp_groups.html
 * Since: 3.2.9-RC1
 * Purpose: Add additional group type options to group settings (prepend the list)
+
+acp_groups_add_user_options_after
+===
+* Location: adm/style/acp_groups.html
+* Since: 3.3.13-RC1
+* Purpose: Add content after options for adding user to group in the ACP
+
+acp_groups_add_user_options_before
+===
+* Location: adm/style/acp_groups.html
+* Since: 3.3.13-RC1
+* Purpose: Add content before options for adding user to group in the ACP
+
+acp_groups_add_user_usernames_before
+===
+* Location: adm/style/acp_groups.html
+* Since: 3.3.13-RC1
+* Purpose: Add content before usernames option for adding user to group in the ACP
 
 acp_groups_find_username_append
 ===
@@ -2534,6 +2566,20 @@ ucp_friend_list_before
     + styles/prosilver/template/ucp_zebra_friends.html
 * Since: 3.1.0-a4
 * Purpose: Add optional elements before list of friends in UCP
+
+ucp_group_settings_after
+===
+* Locations:
+    + styles/prosilver/template/ucp_groups_manage.html
+* Since: 3.3.13-RC1
+* Purpose: Add content after options for managing a group in the UCP
+
+ucp_group_settings_before
+===
+* Locations:
+    + styles/prosilver/template/ucp_groups_manage.html
+* Since: 3.3.13-RC1
+* Purpose: Add content before options for managing a group in the UCP
 
 ucp_header_content_before
 ===
