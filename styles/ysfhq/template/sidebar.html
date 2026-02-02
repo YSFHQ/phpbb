@@ -66,17 +66,17 @@
             <div id="serverlist">
               <h3><a href="https://forum.ysfhq.com/app.php/page/serverlist" style="color: #F00">Online Servers</a></h3>
               <ul></ul>
-              <p><a href="https://ysflight.org/serverlist/server/create">+ Add your server</a></p>
+              <p><a href="https://servers.ysfhq.com/server/create">+ Add your server</a></p>
               <script>
               document.addEventListener("DOMContentLoaded", function(event) {
-              $.getJSON("https://ysflight.org/serverlist/?json=1", function (data) {
+              $.getJSON("https://servers.ysfhq.com/?json=1", function (data) {
                 $.each(data.servers, function (k, server) {
                   if (server.status=="Online") {
                     $('#serverlist ul').append(
                       '<li><a href="ysflight://'+server.ip+'">'
                       +server.name+'</a> (<span title="Players flying">'
                       +server.game.players.flying+'</span>/<span title="Total players">'+server.game.players.total+'</span>)'
-                      +' <a href="https://ysflight.org/serverlist/server/'+server.id+'" target="_blank">&#8505;</a></li>'
+                      +' <a href="https://servers.ysfhq.com/server/'+server.id+'" target="_blank">&#8505;</a></li>'
                     );
                   }
                 });
