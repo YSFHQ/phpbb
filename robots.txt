@@ -1,0 +1,10 @@
+User-agent: *
+Disallow: /search.php
+Disallow: /memberlist.php
+Disallow: /viewonline.php
+Disallow: /ucp.php
+Disallow: /posting.php
+Disallow: /*?sid=
+Disallow: /*&sid=
+Crawl-delay: 10
+
