@@ -635,6 +635,12 @@ gen_forum_auth_level('topic', $forum_id, $topic_data['forum_status']);
 
 // Quick mod tools
 $allow_change_type = ($auth->acl_get('m_', $forum_id) || ($user->data['is_registered'] && $user->data['user_id'] == $topic_data['topic_poster'])) ? true : false;
+$source_type_permission = [
+	POST_ANNOUNCE	=> 'f_announce',
+	POST_GLOBAL		=> 'f_announce_global',
+	POST_STICKY		=> 'f_sticky',
+];
+$has_source_type_permission = $topic_data['topic_type'] == POST_NORMAL || $auth->acl_get($source_type_permission[$topic_data['topic_type']], $forum_id);
 
 $s_quickmod_action = append_sid(
 	"{$phpbb_root_path}mcp.$phpEx",
@@ -661,10 +667,10 @@ $quickmod_array = array(
 	'merge'					=> array('MERGE_POSTS', $auth->acl_get('m_merge', $forum_id)),
 	'merge_topic'		=> array('MERGE_TOPIC', $auth->acl_get('m_merge', $forum_id)),
 	'fork'					=> array('FORK_TOPIC', $auth->acl_get('m_move', $forum_id)),
-	'make_normal'		=> array('MAKE_NORMAL', ($allow_change_type && $auth->acl_gets('f_sticky', 'f_announce', 'f_announce_global', $forum_id) && $topic_data['topic_type'] != POST_NORMAL)),
-	'make_sticky'		=> array('MAKE_STICKY', ($allow_change_type && $auth->acl_get('f_sticky', $forum_id) && $topic_data['topic_type'] != POST_STICKY)),
-	'make_announce'	=> array('MAKE_ANNOUNCE', ($allow_change_type && $auth->acl_get('f_announce', $forum_id) && $topic_data['topic_type'] != POST_ANNOUNCE)),
-	'make_global'		=> array('MAKE_GLOBAL', ($allow_change_type && $auth->acl_get('f_announce_global', $forum_id) && $topic_data['topic_type'] != POST_GLOBAL)),
+	'make_normal'		=> array('MAKE_NORMAL', ($allow_change_type && $has_source_type_permission && $topic_data['topic_type'] != POST_NORMAL)),
+	'make_sticky'		=> array('MAKE_STICKY', ($allow_change_type && $has_source_type_permission && $auth->acl_get('f_sticky', $forum_id) && $topic_data['topic_type'] != POST_STICKY)),
+	'make_announce'	=> array('MAKE_ANNOUNCE', ($allow_change_type && $has_source_type_permission && $auth->acl_get('f_announce', $forum_id) && $topic_data['topic_type'] != POST_ANNOUNCE)),
+	'make_global'	=> array('MAKE_GLOBAL', ($allow_change_type && $has_source_type_permission && $auth->acl_get('f_announce_global', $forum_id) && $topic_data['topic_type'] != POST_GLOBAL)),
 	'topic_logs'			=> array('VIEW_TOPIC_LOGS', $auth->acl_get('m_', $forum_id)),
 );
 
@@ -1927,6 +1933,7 @@ for ($i = 0, $end = count($post_list); $i < $end; ++$i)
 	}
 
 	$force_edit_allowed = $force_delete_allowed = $force_softdelete_allowed = false;
+	$warn_allowed = true;
 
 	$s_cannot_edit = !$auth->acl_get('f_edit', $forum_id) || $user->data['user_id'] != $poster_id;
 	$s_cannot_edit_time = $config['edit_time'] && $row['post_time'] <= time() - ($config['edit_time'] * 60);
@@ -1957,8 +1964,10 @@ for ($i = 0, $end = count($post_list); $i < $end; ++$i)
 	* @var	bool	s_cannot_delete_locked		User can not delete the post because it's locked
 	* @var	bool	s_cannot_delete_time		User can not delete the post because edit_time has passed
 	* @var	bool	force_softdelete_allowed	Allow the user to ыoftdelete the post (all permissions and conditions are ignored)
+	* @var	bool	warn_allowed				Controls whether warning is allowed (default: true)
 	* @since 3.1.0-b4
 	* @changed 3.1.11-RC1 Added force_softdelete_allowed var
+	* @changed 3.3.16-RC1 Added warn_allowed var
 	*/
 	$vars = array(
 		'row',
@@ -1973,6 +1982,7 @@ for ($i = 0, $end = count($post_list); $i < $end; ++$i)
 		's_cannot_delete_locked',
 		's_cannot_delete_time',
 		'force_softdelete_allowed',
+		'warn_allowed',
 	);
 	extract($phpbb_dispatcher->trigger_event('core.viewtopic_modify_post_action_conditions', compact($vars)));
 
@@ -2081,7 +2091,7 @@ for ($i = 0, $end = count($post_list); $i < $end; ++$i)
 		'U_NEXT_POST_ID'	=> ($i < $i_total && isset($rowset[$post_list[$i + 1]])) ? $rowset[$post_list[$i + 1]]['post_id'] : '',
 		'U_PREV_POST_ID'	=> $prev_post_id,
 		'U_NOTES'			=> ($auth->acl_getf_global('m_')) ? append_sid("{$phpbb_root_path}mcp.$phpEx", 'i=notes&amp;mode=user_notes&amp;u=' . $poster_id, true, $user->session_id) : '',
-		'U_WARN'			=> ($auth->acl_get('m_warn') && $poster_id != $user->data['user_id'] && $poster_id != ANONYMOUS) ? append_sid("{$phpbb_root_path}mcp.$phpEx", 'i=warn&amp;mode=warn_post&amp;p=' . $row['post_id'], true, $user->session_id) : '',
+		'U_WARN'			=> ($warn_allowed && $auth->acl_get('m_warn') && $poster_id != $user->data['user_id'] && $poster_id != ANONYMOUS) ? append_sid("{$phpbb_root_path}mcp.$phpEx", 'i=warn&amp;mode=warn_post&amp;p=' . $row['post_id'], true, $user->session_id) : '',
 
 		'POST_ID'			=> $row['post_id'],
 		'POST_NUMBER'		=> $i + $start + 1,
